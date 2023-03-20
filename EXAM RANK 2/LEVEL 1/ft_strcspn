@@ -1,0 +1,54 @@
+Assignment name	: ft_strcspn
+Expected files	: ft_strcspn.c
+Allowed functions: None
+---------------------------------------------------------------
+
+Reproduce exactly the behavior of the function strcspn
+(man strcspn).
+
+The function should be prototyped as follows:
+
+size_t	ft_strcspn(const char *s, const char *reject);
+
+----------------------------------------------------------------
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == '\0')
+		return ((char *)s);
+	return (NULL);
+}
+
+size_t	ft_strcspn(const char *s, const char *reject)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (ft_strchr(reject, s[i]))
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+------------------------------------------------------------------
+
+#include <stdio.h>
+size_t	ft_strcspn(const char *s, const char *reject);
+
+int main(int argc, char **argv)
+{
+    if (argc == 3)
+        printf("ft_strcspn(\"%s\", \"%s\") = %zu\n", argv[1], argv[2], ft_strcspn(argv[1], argv[2]));
+    return(0);
+}
+
+-------------------------------------------------------------------
