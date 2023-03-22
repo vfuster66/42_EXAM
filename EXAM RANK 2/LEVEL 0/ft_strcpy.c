@@ -1,38 +1,40 @@
-Assignment name  : ft_strcpy
+/*Assignment name  : ft_strcpy
 Expected files   : ft_strcpy.c
 Allowed functions: 
---------------------------------------------------------------------------------
+-------------------------------
 
-/* Reproduce the behavior of the function strcpy (man strcpy).
+Reproduce the behavior of the function strcpy (man strcpy).
 
 Your function must be declared as follows:
 
-char    *ft_strcpy(char *s1, char *s2); */
+char    *ft_strcpy(char *s1, char *s2);
 
+-------------------------------*/
 
-#include <stdio.h>
+#include <unistd.h>
 
-char	*ft_strcpy(char *dst, const char *src)
+char	*ft_strcpy(char *s1, char *s2)
 {
-	size_t i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
+    int i = 0;
+    while ((s1[i] = s2[i]))
+        i++;
+    return (s1);
 }
 
-int	main(void)
-{
-	char src[] = "Hello World!";
-	char dst[13];
+/*----------------------------------
 
-	ft_strcpy(dst, src);
-	printf("Source : %s\n", src);
-	printf("Destination : %s\n", dst);
-	return (0);
+#include <unistd.h>
+
+char	*ft_strcpy(char *s1, char *s2);
+
+int main()
+{
+    char s1[13];
+    char s2[] = "Hello, World!";
+    
+    ft_strcpy(s1, s2);
+    write(1, s1, sizeof(s1));
+    return 0;
 }
+
+-----------------------------------*/

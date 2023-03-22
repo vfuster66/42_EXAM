@@ -1,16 +1,14 @@
-Assignment name  : ulstr
+/*Assignment name  : ulstr
 Expected files   : ulstr.c
 Allowed functions: write
---------------------------------
+-------------------------------
 
-Write a program that takes a string 
-and reverses the case of all its letters.
+Write a program that takes a string and reverses the case of all its letters.
 Other characters remain unchanged.
 
 You must display the result followed by a '\n'.
 
-If the number of arguments is not 1, 
-the program displays '\n'.
+If the number of arguments is not 1, the program displays '\n'.
 
 Examples :
 
@@ -23,18 +21,18 @@ $>./ulstr "3:21 Ba  tOut  moUn ki Ka di KE m'en Ka fe fot" | cat -e
 $>./ulstr | cat -e
 $
 
----------------------------------
+-----------------------------*/
 
 #include <unistd.h>
 
 int	main(int ac, char **av)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ac == 2)
 	{
-		while (av[1][i])
+		while (av[1][i] != '\0')
 		{
 			if (av[1][i] >= 'a' && av[1][i] <= 'z')
 				av[1][i] -= 32;
@@ -42,9 +40,8 @@ int	main(int ac, char **av)
 				av[1][i] += 32;
 			write(1, &av[1][i], 1);
 			i++;
-		}
+		}	
 	}
 	write(1, "\n", 1);
-	return (0);
 }
 
