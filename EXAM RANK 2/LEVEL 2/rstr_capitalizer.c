@@ -45,18 +45,18 @@ void    rstr_capitalizer(char *str)
     }
 }
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
     int i;
 
-    if (argc == 1)
+    if (ac == 1)
         write(1, "\n", 1);
     else
     {
         i = 1;
-        while (i < argc)
+        while (i < ac)
         {
-            rstr_capitalizer(argv[i]);
+            rstr_capitalizer(av[i]);
             write(1, "\n", 1);
             i += 1;
         }

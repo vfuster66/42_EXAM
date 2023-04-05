@@ -84,19 +84,19 @@ void	ft_putnbr(int nb)
 	write(1, &c, 1);
 }
 
-int		main(int argc, char **argv)
+int		main(int ac, char **av)
 {
 	int	i;
 	int	sum;
 
-	if (argc != 2)
+	if (ac != 2)
 	{
 		write(1, "0\n", 2);
 		return (0);
 	}
 	i = 2;
 	sum = 0;
-	while (i <= ft_atoi(argv[1]))
+	while (i <= ft_atoi(av[1]))
 	{
 		if (ft_isprime(i))
 			sum += i;

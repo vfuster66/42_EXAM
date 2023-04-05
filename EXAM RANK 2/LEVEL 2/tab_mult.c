@@ -39,54 +39,50 @@ $>
 
 ------------------------------------*/
 
+#include <stdlib.h>
 #include <unistd.h>
 
-int		ft_atoi(char *str)
+void ft_putnbr(int nb)
 {
-	int n = 0;
-
-	while (*str >= '0' && *str <= '9')
-	{
-		n = n * 10;
-		n = n + *str - '0';
-		++str;
-	}
-	return (n);
+    if (nb >= 10)
+        ft_putnbr(nb / 10);
+    char c = nb % 10 + '0';
+    write(1, &c, 1);
 }
 
-void	ft_putnbr(int n)
+int ft_atoi(char *str)
 {
-	if (n >= 10)
-		ft_putnbr(n / 10);
-
-	char c = (n % 10) + '0';
-	write(1, &c, 1);
+    int result = 0;
+    while (*str >= '0' && *str <= '9')
+    {
+        result = result * 10 + (*str - '0');
+        str++;
+    }
+    return result;
 }
 
-void	tab_mult(char *str)
+void print_table(int n, int i)
 {
-	int n;
-	int i = 1;
-
-	n = ft_atoi(str);
-	while (i <= 9)
-	{
-		ft_putnbr(i);
-		write(1, " x ", 3);
-		ft_putnbr(n);
-		write(1, " = ", 3);
-		ft_putnbr(i * n);
-		write(1, "\n", 1);
-		++i;
-	}
+    if (i <= 9)
+    {
+        ft_putnbr(i);
+        write(1, " x ", 3);
+        ft_putnbr(n);
+        write(1, " = ", 3);
+        ft_putnbr(n * i);
+        write(1, "\n", 1);
+        print_table(n, i + 1);
+    }
 }
 
-int		main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	if (argc == 2)
-		tab_mult(argv[1]);
-	else
-		write(1, "\n", 1);
-	return (0);
+    if (argc != 2)
+    {
+        write(1, "\n", 1);
+        return 0;
+    }
+    int n = ft_atoi(argv[1]);
+    print_table(n, 1);
+    return 0;
 }
-

@@ -53,19 +53,20 @@ void rstr_capitalizer(char *str)
     write(1, "\n", 1);
 }
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-    if (argc == 1)
+    int i = 1;
+    if (ac == 1)
     {
         write(1, "\n", 1);
         return (0);
     }
-
-    for (int i = 1; i < argc; i++)
+    while (i < ac)
     {
-        rstr_capitalizer(argv[i]);
+        rstr_capitalizer(av[i]);
+        i++;
     }
-
     return (0);
 }
+
 

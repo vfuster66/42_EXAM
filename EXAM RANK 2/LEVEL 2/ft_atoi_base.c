@@ -30,18 +30,13 @@ int ft_atoi_base(const char *str, int str_base)
     int sign = 1;
     int i = 0;
 
-    // Vérification de la base
     if (str_base < 2 || str_base > 16)
         return 0;
-
-    // Vérification du signe
     if (str[0] == '-')
     {
         sign = -1;
         i++;
     }
-
-    // Conversion de chaque chiffre de la chaîne en base 10
     while (str[i] != '\0')
     {
         if (str[i] >= '0' && str[i] <= '9')

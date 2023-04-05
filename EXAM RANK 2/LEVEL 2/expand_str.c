@@ -39,37 +39,31 @@ $>
 
 #include <unistd.h>
 
-int word_len(char *str)
+int is_space(char c)
 {
-	int i = 0;
-	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t')
-		i++;
-	return (i);
+    return (c == ' ' || c == '\t');
 }
 
-void expand_str(char *str)
+int main(int ac, char **av)
 {
-	int len;
-	int first_word = 1;
-	
-	while (*str != '\0')
-	{
-		while (*str == ' ' || *str == '\t')
-			str++;
-		len = word_len(str);
-		if (len > 0 && !first_word)
-			write(1, "   ", 3);
-		first_word = 0;
-		write(1, str, len);
-		str += len;
-	}
+    if (ac != 2)
+    {
+        write(1, "\n", 1);
+        return 0;
+    }
+    int i = 0;
+    while (is_space(av[1][i]))
+        i++;
+    while (av[1][i])
+    {
+        if (!is_space(av[1][i]))
+            write(1, &av[1][i], 1);
+        else if (!is_space(av[1][i + 1]) && av[1][i + 1])
+            write(1, "   ", 3);
+        i++;
+    }
+    write(1, "\n", 1);
+    return 0;
 }
 
-int main(int argc, char **argv)
-{
-	if (argc == 2)
-		expand_str(argv[1]);
-	write(1, "\n", 1);
-	return (0);
-}
 

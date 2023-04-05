@@ -42,10 +42,10 @@ void	print_hex(int n)
     write(1, &hex_digits[n % 16], 1);
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
-    if (argc == 2)
-        print_hex(ft_atoi(argv[1]));
+    if (ac == 2)
+        print_hex(ft_atoi(av[1]));
     write(1, "\n", 1);
     return (0);
 }

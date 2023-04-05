@@ -26,30 +26,49 @@ $
 
 -----------------------------------*/
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <unistd.h>
 
-void	ft_pgcd(int a, int b)
+void ft_putnbr(int nb)
 {
-	int	n;
-
-	n = a;
-	while (n > 0)
-	{
-		if (a % n == 0 && b % n == 0)
-		{
-			printf("%d", n);
-			return ;
-		}
-		--n;
-	}
+    if (nb >= 10)
+        ft_putnbr(nb / 10);
+    char c = nb % 10 + '0';
+    write(1, &c, 1);
 }
 
-int		main(int argc, char **argv)
+int ft_atoi(char *str)
 {
-	if (argc == 3)
-		ft_pgcd(atoi(argv[1]), atoi(argv[2]));
-	printf("\n");
-	return (0);
+    int result = 0;
+    while (*str >= '0' && *str <= '9')
+    {
+        result = result * 10 + (*str - '0');
+        str++;
+    }
+    return result;
 }
 
+int main(int ac, char **av)
+{
+    if (ac != 3)
+    {
+        write(1, "\n", 1);
+        return 0;
+    }
+    int a = ft_atoi(av[1]);
+    int b = ft_atoi(av[2]);
+    while (a != 0 && b != 0)
+    {
+        if (a > b)
+            a = a % b;
+	    else
+            b = b % a;
+    }
+    int pgcd;
+    if (a == 0)
+        pgcd = b;
+    else
+        pgcd = a;
+    ft_putnbr(pgcd);
+    write(1, "\n", 1);
+    return 0;
+}

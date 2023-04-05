@@ -29,28 +29,30 @@ $>
 
 #include <unistd.h>
 
-void	hidenp(char *probe, char *target)
+int main(int ac, char **av)
 {
-	while (*probe)
-	{
-		while (*probe != *target && *target)
-			target++;
-		if (!*target)
-		{
-			write(1, "0", 1);
-			return;
-		}
-		target++;
-		probe++;
-	}
-	write(1, "1", 1);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+    	if (ac != 3)
+    	{
+        	write(1, "\n", 1);
+        	return (0);
+    	}
+    	while (av[1][i] != '\0' && av[2][j] != '\0')
+    {
+        if (av[1][i] == av[2][j])
+            i++;
+        j++;
+    }
+    if (av[1][i] == '\0')
+        write(1, "1\n", 2);
+    else
+        write(1, "0\n", 2);
+
+    return (0);
 }
 
-int		main(int argc, char **argv)
-{
-	if (argc == 3)
-		hidenp(argv[1], argv[2]);
-	write(1, "\n", 1);
-	return (0);
-}
 
