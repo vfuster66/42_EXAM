@@ -30,46 +30,39 @@ $>
 
 #include <unistd.h>
 
-int check(int c, char *str, int index)
-{
-	int i = 0;
-	while(i < index)
-	{
-		if (str[i] == c)
-			return 0;
-		i++;
-	}
-	return 1;
-}
-
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {	
 	int	i;
-	int	j;
-	int	k;
+	int	seen[256];
 	
 	i = 0;
-	j = 0;
-	k = 0;
-	if (argc != 3)
+	while (i < 256)
+	{
+		seen[i] = 0;
+		i++;
+	}
+	if (ac != 3)
 	{
 		write(1, "\n", 1);
 		return 0;
 	}
-	while(argv[1][i] != '\0')
-		i++;
-	while(argv[2][j] != '\0')
+	while(av[1][i])
 	{
-		argv[1][i] = argv[2][j];
+		if (!seen [(unsigned char)av[1][i]])
+		{
+			seen[(unsigned char)av[1][i]] = 1;
+			write(1, &av[1][i], 1);
+		}
 		i++;
-		j++;
 	}
-	i--;
-	while(k <= i)
+	while (av[2][i])
 	{
-		if(check(argv[1][k], argv[1], k) == 1) 
-			write (1, &argv[1][k], 1); 
-		k++;
+		if (!seen[(unsigned char)av[2][i]])
+		{
+			seen[(unsigned char)av[2][i]];
+			write(1, &av[2][i], 1);
+		}
+		i++;
 	}
 	write(1, "\n", 1);
 	return 0;

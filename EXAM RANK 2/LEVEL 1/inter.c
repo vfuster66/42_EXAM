@@ -26,63 +26,37 @@ $
 
 #include <unistd.h>
 
-int	ft_strlen(char *str)
+int main(int ac, char **av)
 {
     int i;
+    int ascii[256];
 
     i = 0;
-    while (str[i])
-        i++;
-    return (i);
-}
-
-int	ft_char_in_str(char c, char *str, int len)
-{
-    int i;
-
-    i = 0;
-    while (i < len)
+    while (i < 256)
     {
-        if (str[i] == c)
-            return (1);
+        ascii[i] = 0;
         i++;
     }
-    return (0);
-}
-
-void	ft_inter(char *s1, char *s2)
-{
-    int	i;
-    int	j;
-    int	k;
-
-    i = 0;
-    while (s1[i])
+    if (ac != 3)
     {
-        j = 0;
-        while (s2[j])
+        write(1, "\n", 1);
+        return 0;
+    }
+       while (av[2][i])
+    {
+        ascii[(unsigned char)av[2][i]] = 1;
+        i++;
+    }
+    i = 0;
+    while (av[1][i])
+    {
+        if (ascii[(unsigned char)av[1][i]] == 1)
         {
-            if (s1[i] == s2[j] && !ft_char_in_str(s1[i], s1, i))
-            {
-                k = 0;
-                while (k < j && s2[k] != s2[j])
-                    k++;
-                if (k == j)
-                    write(1, &s1[i], 1);
-            }
-            j++;
+            write(1, &av[1][i], 1);
+            ascii[(unsigned char)av[1][i]] = 2;
         }
         i++;
     }
+        write(1, "\n", 1);
+    return 0;
 }
-
-int	main(int argc, char **argv)
-{
-	if (argc == 3)
-	{
-		ft_inter(argv[1], argv[2]);
-	}
-	write(1, "\n", 1);
-	return (0);
-}
-

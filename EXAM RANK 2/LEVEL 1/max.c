@@ -25,15 +25,15 @@ int max(int *tab, unsigned int len)
         return (0);
 
     res = *tab;
-    unsigned int i = 1;
-
+    unsigned int i;
+    
+    i = 1;
     while (i < len)
     {
         if (res < *(tab + i))
             res = *(tab + i);
         i++;
     }
-
     return (res);
 }
 
@@ -62,6 +62,5 @@ int main(void)
 
     return (0);
 }
-
 
 -------------------------------------*/
