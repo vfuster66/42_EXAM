@@ -16,7 +16,7 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
-	while (*str++)
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -35,7 +35,6 @@ int	main(void)
 
 	len = ft_strlen(str);
 	printf("Length of \"%s\" = %d\n", str, len);
-
 	return (0);
 }
 

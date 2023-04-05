@@ -32,27 +32,26 @@ $>
 
 #include <unistd.h>
 
-int     main(int argc, char **argv)
+int     main(int ac, char **av)
 {
         int i;
         int j;
         int k;
-        char *str;
+    
         i = 0;
-        if (argc == 2)
+        if (ac == 2)
         {
-                str = argv[1];
-                while (str[i] != '\0')
+                while (av[1][i])
                 {
                         k = 1;
-                        if (str[i] >= 'A' && str[i] <= 'Z')
-                                k = str[i] - 64;
-                        if (str[i] >= 'a' && str[i] <= 'z')
-                                k = str[i] - 96;
+                        if (av[1][i] >= 'A' && av[1][i] <= 'Z')
+                                k = av[1][i] - 64;
+                        if (av[1][i] >= 'a' && av[1][i] <= 'z')
+                                k = av[1][i] - 96;
                         j = 0;
                         while (j < k)
                         {
-                                write(1, &str[i], 1);
+                                write(1, &av[1][i], 1);
                                 j++;
                         }
                         i++;

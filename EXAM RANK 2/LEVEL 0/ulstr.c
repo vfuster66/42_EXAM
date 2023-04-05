@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 	i = 0;
 	if (ac == 2)
 	{
-		while (av[1][i] != '\0')
+		while (av[1][i])
 		{
 			if (av[1][i] >= 'a' && av[1][i] <= 'z')
 				av[1][i] -= 32;
@@ -43,5 +43,6 @@ int	main(int ac, char **av)
 		}	
 	}
 	write(1, "\n", 1);
+	return (0);
 }
 

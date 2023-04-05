@@ -32,20 +32,13 @@ void    ft_swap(int *a, int *b);
 
 int	main(void)
 {
-	int	*a;
-	int	*b;
-	int	n1;
-	int	n2;
+	int	x = 5;
+	int	y = 10;
 
-	n1 = 9;
-	n2 = 6;
-	a = &n1;
-	b = &n2;
-	printf("Value of n1 is: %u and the value of n2 is: %u.", *a, *b);
-	ft_swap(a, b);
-	printf("\n");
-	printf("Now the value of n1 is: %u and the value of n2 is: %u.", *a, *b);
-	printf("\n");
+	printf("Avant swap: x = %d, y = %d\n", x, y);
+	ft_swap(&x, &y);
+	printf("Apres swap: x = %d, y = %d\n", x, y);
+	return (0);
 }
 
 -----------------------*/

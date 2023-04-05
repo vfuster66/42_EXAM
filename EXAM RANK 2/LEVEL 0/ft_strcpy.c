@@ -13,12 +13,18 @@ char    *ft_strcpy(char *s1, char *s2);
 
 #include <unistd.h>
 
-char	*ft_strcpy(char *s1, char *s2)
+char	*ft_strcpy(char *dest, char *src)
 {
-    int i = 0;
-    while ((s1[i] = s2[i]))
+    int i;
+
+    i = 0;
+    while (src[i])
+    {
+        dest[i] = src[i];
         i++;
-    return (s1);
+    }
+    dest[i] = '\0';
+    return (dest);
 }
 
 /*----------------------------------
@@ -29,12 +35,13 @@ char	*ft_strcpy(char *s1, char *s2);
 
 int main()
 {
-    char s1[13];
-    char s2[] = "Hello, World!";
+    char src[] = "Hello World!";
+    char dest[20];
     
-    ft_strcpy(s1, s2);
-    write(1, s1, sizeof(s1));
-    return 0;
+    printf("Source : %s\n", src);
+    ft_strcpy(dest, src);
+    printf("Destination : %s\n", dest);
+    return (0);
 }
 
 -----------------------------------*/
