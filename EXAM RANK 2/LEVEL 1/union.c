@@ -46,6 +46,7 @@ int main(int ac, char **av)
 		write(1, "\n", 1);
 		return 0;
 	}
+	i = 0;
 	while(av[1][i])
 	{
 		if (!seen [(unsigned char)av[1][i]])
@@ -55,11 +56,12 @@ int main(int ac, char **av)
 		}
 		i++;
 	}
+	i = 0;
 	while (av[2][i])
 	{
 		if (!seen[(unsigned char)av[2][i]])
 		{
-			seen[(unsigned char)av[2][i]];
+			seen[(unsigned char)av[2][i]] = 1;
 			write(1, &av[2][i], 1);
 		}
 		i++;
