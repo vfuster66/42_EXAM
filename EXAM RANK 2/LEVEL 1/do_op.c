@@ -43,7 +43,7 @@ int ft_atoi(const char *str)
         sign = -1;
         i = 1;
     }
-    while (str[i] != '\0')
+    while (str[i])
     {
         result = result * 10 + (str[i] - '0');
         i++;
