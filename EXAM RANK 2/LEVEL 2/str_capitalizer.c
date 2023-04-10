@@ -30,36 +30,37 @@ $>
 
 #include <unistd.h>
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
     int i = 1;
-    if (argc == 1)
+    if (ac == 1)
     {
         write(1, "\n", 1);
         return (0);
     }
 
-    while (i < argc)
+    while (i < ac)
     {
         int j = 0;
-        while (argv[i][j])
+        while (av[i][j])
         {
-            if ((argv[i][j] >= 'a' && argv[i][j] <= 'z') || (argv[i][j] >= 'A' && argv[i][j] <= 'Z'))
+            if ((av[i][j] >= 'a' && av[i][j] <= 'z') || (av[i][j] >= 'A' && av[i][j] <= 'Z'))
             {
-                if (j == 0 || !((argv[i][j - 1] >= 'a' && argv[i][j - 1] <= 'z') || (argv[i][j - 1] >= 'A' && argv[i][j - 1] <= 'Z')))
+                if (j == 0 || !((av[i][j - 1] >= 'a' && av[i][j - 1] <= 'z') || (av[i][j - 1] >= 'A'
+                                                                                 && av[i][j - 1] <= 'Z')))
                 {
-                    if (argv[i][j] >= 'a' && argv[i][j] <= 'z')
-                        argv[i][j] = argv[i][j] - 32;
+                    if (av[i][j] >= 'a' && av[i][j] <= 'z')
+                        av[i][j] = av[i][j] - 32;
                 }
                 else
                 {
-                    if (argv[i][j] >= 'A' && argv[i][j] <= 'Z')
-                        argv[i][j] = argv[i][j] + 32;
+                    if (av[i][j] >= 'A' && av[i][j] <= 'Z')
+                        av[i][j] = av[i][j] + 32;
                 }
             }
             j++;
         }
-        write(1, argv[i], j);
+        write(1, av[i], j);
         write(1, "\n", 1);
         i++;
     }
