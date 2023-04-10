@@ -50,36 +50,56 @@ int     *ft_rrange(int start, int end)
     return (result);
 }
 
-/*-------------------------------------
+/*-----------------------------------------
 
 #include <stdio.h>
-#include <stdlib.h>
 
-int *ft_rrange(int start, int end);
+int     *ft_rrange(int start, int end);
 
-int main()
+int     main(void)
 {
-    int start = -1;
-    int end = 2;
-    int *arr = ft_rrange(start, end);
-    int size = abs(start - end) + 1;
+    int     *result;
+    int     i;
 
-    if (arr == NULL)
+    // Test case 1
+    result = ft_rrange(1, 3);
+    i = 0;
+    while (i < 3)
     {
-        printf("Error: Memory allocation failed.\n");
-        return 1;
-    }
-
-    printf("Array of %d integers, starting at %d and ending at %d:\n", size, start, end);
-
-    for (int i = 0; i < size; i++)
-    {
-        printf("%d ", arr[i]);
+        printf("%d ", result[i]);
+        i++;
     }
     printf("\n");
+    free(result);
 
-    free(arr);
-    return 0;
+    // Test case 2
+    result = ft_rrange(2, -1);
+    i = 0;
+    while (i < 4)
+    {
+        printf("%d ", result[i]);
+        i++;
+    }
+    printf("\n");
+    free(result);
+
+    // Test case 3
+    result = ft_rrange(0, 0);
+    printf("%d\n", result[0]);
+    free(result);
+
+    // Test case 4
+    result = ft_rrange(-3, 0);
+    i = 0;
+    while (i < 4)
+    {
+        printf("%d ", result[i]);
+        i++;
+    }
+    printf("\n");
+    free(result);
+
+    return (0);
 }
 
 ---------------------------------------*/
