@@ -50,86 +50,49 @@ int		*ft_range(int start, int end)
 /*-------------------------
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int		*ft_range(int start, int end);
 
 int		main(void)
 {
 	int		*range;
-	int		size;
 	int		i;
 
 	range = ft_range(1, 3);
-	if (range == NULL)
-	{
-		printf("Error: Memory allocation failed\n");
-		return (1);
-	}
-	size = 3;
 	i = 0;
-	while (i < size)
+	while (i < 3)
 	{
 		printf("%d ", range[i]);
 		i++;
 	}
-	free(range);
-	range = NULL;
 	printf("\n");
+	free(range);
 
 	range = ft_range(-1, 2);
-	if (range == NULL)
-	{
-		printf("Error: Memory allocation failed\n");
-		return (1);
-	}
-	size = 4;
 	i = 0;
-	while (i < size)
+	while (i < 4)
 	{
 		printf("%d ", range[i]);
 		i++;
 	}
-	free(range);
-	range = NULL;
 	printf("\n");
+	free(range);
 
 	range = ft_range(0, 0);
-	if (range == NULL)
-	{
-		printf("Error: Memory allocation failed\n");
-		return (1);
-	}
-	size = 1;
-	i = 0;
-	while (i < size)
-	{
-		printf("%d ", range[i]);
-		i++;
-	}
+	printf("%d\n", range[0]);
 	free(range);
-	range = NULL;
-	printf("\n");
 
 	range = ft_range(0, -3);
-	if (range == NULL)
-	{
-		printf("Error: Memory allocation failed\n");
-		return (1);
-	}
-	size = 4;
 	i = 0;
-	while (i < size)
+	while (i < 4)
 	{
 		printf("%d ", range[i]);
 		i++;
 	}
-	free(range);
-	range = NULL;
 	printf("\n");
+	free(range);
 
 	return (0);
 }
-
 
 ----------------------------*/
