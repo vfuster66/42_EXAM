@@ -53,33 +53,36 @@ unsigned int lcm(unsigned int a, unsigned int b)
 
 unsigned int lcm(unsigned int a, unsigned int b);
 
-int main() {
-    unsigned int a = 12;
-    unsigned int b = 18;
+int main(void)
+{
+    unsigned int a, b;
+    unsigned int result;
 
-    unsigned int result = lcm(a, b);
-    if (result == 0) {
-        printf("Error: at least one parameter is zero.\n");
-    } else {
-        printf("lcm(%u, %u) = %u\n", a, b, result);
-    }
-
-    a = 24;
-    b = 36;
-
+    // Test case 1
+    a = 12;
+    b = 18;
     result = lcm(a, b);
-    if (result == 0) {
-        printf("Error: at least one parameter is zero.\n");
-    } else {
-        printf("lcm(%u, %u) = %u\n", a, b, result);
-    }
+    printf("LCM of %u and %u is %u\n", a, b, result);
 
-    a = 10;
-    b = -5;
-
+    // Test case 2
+    a = 7;
+    b = 13;
     result = lcm(a, b);
+    printf("LCM of %u and %u is %u\n", a, b, result);
 
-    return 0;
+    // Test case 3
+    a = 0;
+    b = 5;
+    result = lcm(a, b);
+    printf("LCM of %u and %u is %u\n", a, b, result);
+
+    // Test case 4
+    a = 16;
+    b = 0;
+    result = lcm(a, b);
+    printf("LCM of %u and %u is %u\n", a, b, result);
+
+    return (0);
 }
 
 ------------------------------------*/
