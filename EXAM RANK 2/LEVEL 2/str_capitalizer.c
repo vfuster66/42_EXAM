@@ -30,40 +30,37 @@ $>
 
 #include <unistd.h>
 
-int is_letter(char c)
-{
-    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
-}
-
-void rstr_capitalizer(char *str)
-{
-    int i = 0;
-    while (str[i])
-    {
-        if (is_letter(str[i]))
-        {
-            if (i == 0 || !is_letter(str[i - 1]))
-                str[i] = (str[i] >= 'a' && str[i] <= 'z') ? str[i] - 32 : str[i];
-            else
-                str[i] = (str[i] >= 'A' && str[i] <= 'Z') ? str[i] + 32 : str[i];
-        }
-        i++;
-    }
-    write(1, str, i);
-    write(1, "\n", 1);
-}
-
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
     int i = 1;
-    if (ac == 1)
+    if (argc == 1)
     {
         write(1, "\n", 1);
         return (0);
     }
-    while (i < ac)
+
+    while (i < argc)
     {
-        rstr_capitalizer(av[i]);
+        int j = 0;
+        while (argv[i][j])
+        {
+            if ((argv[i][j] >= 'a' && argv[i][j] <= 'z') || (argv[i][j] >= 'A' && argv[i][j] <= 'Z'))
+            {
+                if (j == 0 || !((argv[i][j - 1] >= 'a' && argv[i][j - 1] <= 'z') || (argv[i][j - 1] >= 'A' && argv[i][j - 1] <= 'Z')))
+                {
+                    if (argv[i][j] >= 'a' && argv[i][j] <= 'z')
+                        argv[i][j] = argv[i][j] - 32;
+                }
+                else
+                {
+                    if (argv[i][j] >= 'A' && argv[i][j] <= 'Z')
+                        argv[i][j] = argv[i][j] + 32;
+                }
+            }
+            j++;
+        }
+        write(1, argv[i], j);
+        write(1, "\n", 1);
         i++;
     }
     return (0);
