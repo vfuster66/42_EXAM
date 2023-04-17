@@ -49,7 +49,7 @@ int main(int ac, char **av)
         printf("\n");
         return 0;
     }
-    n = atoi(argv[1]);
+    n = atoi(av[1]);
     if (n == 1)
     {
         printf("1\n");
