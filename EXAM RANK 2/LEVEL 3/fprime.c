@@ -34,56 +34,39 @@ $
 
 --------------------------------*/
 
-#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-void    ft_putnbr(int nb)
+void    fprime(int n)
 {
-    if (nb >= 10)
-        ft_putnbr(nb / 10);
-    char c = nb % 10 + '0';
-    write(1, &c, 1);
-}
-
-void    ft_putnbr_factor(int nb)
-{
-    int     i;
-
-    i = 2;
-    while (i <= nb)
-    {
-        if (nb % i == 0)
+        int i = 2;
+        while (i <= n)
         {
-            ft_putnbr(i);
-            nb /= i;
-            if (nb > 1)
-                write(1, "*", 1);
-            i = 1;
+                if (n % i == 0)
+                {
+                        printf("%d", i);
+                        n /= i;
+                        if (n > 1)
+                                printf("*");
+                        i = 1;
+                }
+                i++;
         }
-        i++;
-    }
-    write(1, "\n", 1);
-}
-
-int     ft_atoi(char *str)
-{
-    int     nb;
-
-    nb = 0;
-    while (*str >= '0' && *str <= '9')
-    {
-        nb = nb * 10 + (*str - '0');
-        str++;
-    }
-    return (nb);
+        printf("\n");
 }
 
 int     main(int ac, char **av)
 {
-    if (ac != 2)
-        write(1, "\n", 1);
-    else
-        ft_putnbr_factor(ft_atoi(av[1]));
-    return (0);
+        if (ac != 2)
+                printf("\n");
+        else
+        {
+                int n = atoi(av[1]);
+                if (n == 1)
+                        printf("1\n");
+                else
+                        fprime(n);
+        }
+        return 0;
 }
-
 

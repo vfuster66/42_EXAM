@@ -50,22 +50,14 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
         if (cmp(curr->data, data_ref) == 0)
         {
             if (prev == NULL)
-            {
                 *begin_list = curr->next;
-            }
             else
-            {
                 prev->next = curr->next;
-            }
             free(curr);
             if (prev == NULL)
-            {
                 curr = *begin_list;
-            }
             else
-            {
                 curr = prev->next;
-            }
         }
         else
         {
