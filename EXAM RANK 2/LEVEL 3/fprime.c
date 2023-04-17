@@ -39,23 +39,23 @@ $
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-    if (argc != 2)
+    int n;
+    int i;
+    
+    if (ac != 2)
     {
         printf("\n");
         return 0;
     }
-
-    int n = atoi(argv[1]);
-
+    n = atoi(argv[1]);
     if (n == 1)
     {
         printf("1\n");
         return 0;
     }
-
-    int i = 2;
+    i = 2;
     while (i <= n)
     {
         if (n % i == 0)
@@ -70,7 +70,6 @@ int main(int argc, char **argv)
         }
         i++;
     }
-
     printf("\n");
     return 0;
 }
