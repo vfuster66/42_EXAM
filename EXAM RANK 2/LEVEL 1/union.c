@@ -33,12 +33,12 @@ $>
 int main(int ac, char **av)
 {	
 	int	i;
-	int	seen[256];
+	int	ascii[256];
 	
 	i = 0;
 	while (i < 256)
 	{
-		seen[i] = 0;
+		ascii[i] = 0;
 		i++;
 	}
 	if (ac != 3)
@@ -49,9 +49,9 @@ int main(int ac, char **av)
 	i = 0;
 	while(av[1][i])
 	{
-		if (!seen [(unsigned char)av[1][i]])
+		if (!ascii [(unsigned char)av[1][i]])
 		{
-			seen[(unsigned char)av[1][i]] = 1;
+			ascii[(unsigned char)av[1][i]] = 1;
 			write(1, &av[1][i], 1);
 		}
 		i++;
@@ -59,9 +59,9 @@ int main(int ac, char **av)
 	i = 0;
 	while (av[2][i])
 	{
-		if (!seen[(unsigned char)av[2][i]])
+		if (!ascii[(unsigned char)av[2][i]])
 		{
-			seen[(unsigned char)av[2][i]] = 1;
+			ascii[(unsigned char)av[2][i]] = 1;
 			write(1, &av[2][i], 1);
 		}
 		i++;
