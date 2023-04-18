@@ -12,30 +12,28 @@ size_t	ft_strspn(const char *s, const char *accept);
 
 --------------------------------------*/
 
-#include <stdlib.h>
+#include <stddef.h>
 
-size_t	ft_strspn(const char *s, const char *accept)
+size_t ft_strspn(const char *s, const char *accept)
 {
-	size_t	count = 0;
-	const char	*p;
-
-	while (*s)
-	{
-		p = accept;
-		while (*p)
-		{
-			if (*s == *p)
-			{
-				count++;
-				break;
-			}
-			p++;
-		}
-		if (!*p)
-			break;
-		s++;
-	}
-	return count;
+    size_t	i;
+    size_t	j;
+    
+    i = 0;
+    while (s[i])
+    {
+        j = 0;
+        while (accept[j])
+        {
+            if (s[i] == accept[j])
+                break;
+            j++;
+        }
+        if (!accept[j])
+            return i;
+        i++;
+    }
+    return i;
 }
 
 /*-------------------------------------
@@ -45,18 +43,23 @@ size_t	ft_strspn(const char *s, const char *accept)
 
 size_t	ft_strspn(const char *s, const char *accept);
 
-int	main(void)
+int main(void)
 {
-	const char	s[] = "Hello, world!";
-	const char	accept[] = "elH";
-	size_t		len;
+    const char *s = "Hello, world!";
+    const char *accept = "eloH wrd";
 
-	len = ft_strspn(s, accept);
-	printf("s = \"%s\"\n", s);
-	printf("accept = \"%s\"\n", accept);
-	printf("Length of prefix matching accept: %zu\n", len);
+    size_t ft_result = ft_strspn(s, accept);
+    size_t std_result = strspn(s, accept);
 
-	return (0);
+    printf("ft_strspn result: %zu\n", ft_result);
+    printf("strspn result: %zu\n", std_result);
+
+    if (ft_result == std_result)
+        printf("Both functions returned the same result.\n");
+    else
+        printf("The results differ.\n");
+
+    return 0;
 }
 
 -------------------------------------*/

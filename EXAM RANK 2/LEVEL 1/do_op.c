@@ -34,58 +34,77 @@ $
 
 int ft_atoi(const char *str)
 {
-    int sign = 1;
-    int result = 0;
-    int i = 0;
+	int	sign;
+	int	result;
+	int	i;
 
-    if (str[0] == '-')
-    {
-        sign = -1;
-        i = 1;
-    }
-    while (str[i])
-    {
-        result = result * 10 + (str[i] - '0');
-        i++;
-    }
-    return (sign * result);
+	sign = 1;
+	result = 0;
+	i = 0;
+	if (str[0] == '-')
+	{
+		sign = -1;
+		i = 1;
+	}
+	while (str[i] != '\0')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return sign * result;
 }
 
 void	ft_putnbr(int n) 
 {
-    char c;
-    if (n < 0)
-    {
-        write(1, "-", 1);
-        n = -n;
-    }
-    if (n >= 10)
-        ft_putnbr(n / 10);
-    c = n % 10 + '0';
-    write(1, &c, 1);
+	char c;
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+	{
+		c = n + '0';
+		write(1, &c, 1);
+	}
 }
 
-int main(int ac, char **av) 
+int main(int argc, char **argv) 
 {
-    if (ac != 4) 
+    if (argc != 4) 
     {
         write(1, "\n", 1);
         return 0;
     }
-    int op1 = ft_atoi(av[1]);
-    int op2 = ft_atoi(av[3]);
-    char op = av[2][0];
+    int op1 = ft_atoi(argv[1]);
+    int op2 = ft_atoi(argv[3]);
+    char op = argv[2][0];
     int result;
-    if (op == '+')
+    if (op == '+') 
+    {
         result = op1 + op2;
-    else if (op == '-')
+    }
+    else if (op == '-') 
+    {
         result = op1 - op2;
+    }
     else if (op == '*') 
+    {
         result = op1 * op2;
-    else if (op == '/')
+    } 
+    else if (op == '/') 
+    {
         result = op1 / op2;
+    }
     else if (op == '%') 
+    {
         result = op1 % op2;
+    } 
     else
     {
         write(1, "\n", 1);
@@ -95,5 +114,4 @@ int main(int ac, char **av)
     write(1, "\n", 1);
     return 0;
 }
-
 
