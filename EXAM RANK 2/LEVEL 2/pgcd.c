@@ -26,49 +26,33 @@ $
 
 -----------------------------------*/
 
-#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-void ft_putnbr(int nb)
+int     main(int ac, char **av)
 {
-    if (nb >= 10)
-        ft_putnbr(nb / 10);
-    char c = nb % 10 + '0';
-    write(1, &c, 1);
+        int     a;
+        int     b;
+
+        if (ac != 3)
+        {
+                printf("\n");
+                return (0);
+        }
+        a = atoi(av[1]);
+        b = atoi(av[2]);
+        while (a != b)
+        {
+                if (a > b)
+                {
+                        a = a - b;
+                }
+                else
+                {
+                        b = b - a;
+                }
+        }
+        printf("%d\n", a);
+        return (0);
 }
 
-int ft_atoi(char *str)
-{
-    int result = 0;
-    while (*str >= '0' && *str <= '9')
-    {
-        result = result * 10 + (*str - '0');
-        str++;
-    }
-    return result;
-}
-
-int main(int ac, char **av)
-{
-    if (ac != 3)
-    {
-        write(1, "\n", 1);
-        return 0;
-    }
-    int a = ft_atoi(av[1]);
-    int b = ft_atoi(av[2]);
-    while (a != 0 && b != 0)
-    {
-        if (a > b)
-            a = a % b;
-	    else
-            b = b % a;
-    }
-    int pgcd;
-    if (a == 0)
-        pgcd = b;
-    else
-        pgcd = a;
-    ft_putnbr(pgcd);
-    write(1, "\n", 1);
-    return 0;
-}
