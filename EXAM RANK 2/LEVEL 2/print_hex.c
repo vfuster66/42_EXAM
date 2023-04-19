@@ -23,30 +23,38 @@ $
 
 #include <unistd.h>
 
-int	ft_atoi(char *str)
+int     ft_atoi(char *str)
 {
-    int n = 0;
-    while (*str != '\0')
-    {
-        n = n * 10 + (*str - '0');
-        ++str;
-    }
-    return (n);
+        int     i;
+        int     result;
+
+        i = 0;
+        result = 0;
+        while (str[i])
+            result = result * 10 + str[i] - '0';
+        i++;
+        return (result);
 }
 
-void	print_hex(int n)
+void    ft_print_hex(int n)
 {
-    char hex_digits[] = "0123456789abcdef";
-    if (n >= 16)
-        print_hex(n / 16);
-    write(1, &hex_digits[n % 16], 1);
+        char    hex[] = "0123456789abcdef";
+        if (n >= 16)
+                ft_print_hex(n / 16);
+        write(1, &hex[n % 16], 1);
 }
 
-int	main(int ac, char **av)
+int     main(int ac, char **av)
 {
-    if (ac == 2)
-        print_hex(ft_atoi(av[1]));
-    write(1, "\n", 1);
-    return (0);
+        int     n;
+
+        if (ac == 2)
+        {
+                n = ft_atoi(av[1]);
+                if (n >= 0)
+                        ft_print_hex(n);
+        }
+        write(1, "\n", 1);
+        return (0);
 }
 
