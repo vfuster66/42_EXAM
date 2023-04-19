@@ -24,86 +24,76 @@ $>
 
 -----------------------------*/
 
-#include <stdlib.h>
 #include <unistd.h>
 
-int		ft_isprime(int nb)
+void    ft_putnbr(int n)
 {
-	int	i;
+    char    c;
 
-	if (nb <= 1)
-		return (0);
-	i = 2;
-	while (i * i <= nb)
-	{
-		if (nb % i == 0)
-			return (0);
-		i++;
-	}
-	return (1);
+    if (n > 9)
+    {
+        ft_putnbr(n / 10);
+        ft_putnbr(n % 10);
+    }
+    else
+    {
+        c = n + '0';
+        write(1, &c, 1);
+    }
 }
 
-int		ft_atoi(char *str)
+int     ft_atoi(char *str)
 {
-	int i;
-	int sign;
-	int result;
+    int     i;
+    int     result;
 
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || \
-			str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = (result * 10) + (str[i] - '0');
-		i++;
-	}
-	return (result * sign);
+    i = 0;
+    result = 0;
+    while (str[i])
+    {
+        result = result * 10 + str[i] - '0';
+        i++;
+    }
+    return (result);
 }
 
-void	ft_putnbr(int nb)
+int     ft_is_prime(int n)
 {
-	char	c;
+    int     i;
 
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		nb *= -1;
-	}
-	if (nb >= 10)
-		ft_putnbr(nb / 10);
-	c = (nb % 10) + '0';
-	write(1, &c, 1);
+    if (n <= 1)
+        return (0);
+    i = 2;
+    while (i * i <= n)
+    {
+        if (n % i == 0)
+            return (0);
+        i++;
+    }
+    return (1);
 }
 
-int		main(int ac, char **av)
+int     main(int ac, char **av)
 {
-	int	i;
-	int	sum;
+    int     i;
+    int     result;
 
-	if (ac != 2)
-	{
-		write(1, "0\n", 2);
-		return (0);
-	}
-	i = 2;
-	sum = 0;
-	while (i <= ft_atoi(av[1]))
-	{
-		if (ft_isprime(i))
-			sum += i;
-		i++;
-	}
-	ft_putnbr(sum);
-	write(1, "\n", 1);
-	return (0);
+    if (ac != 2)
+    {
+        write(1, "0\n", 2);
+        return (0);
+    }
+    i = 2;
+    result = 0;
+    while (i <= ft_atoi(av[1]))
+    {
+        if (ft_is_prime(i))
+            result += i;
+        i++;
+    }
+    ft_putnbr(result);
+    write(1, "\n", 1);
+    return (0);
 }
+
 
