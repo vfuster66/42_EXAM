@@ -39,7 +39,7 @@ $>
 
 #include <unistd.h>
 
-int		main(int ac, char const *av[])
+int		main(int ac, char const **av)
 {
 	int		i;
 	int		flag;
