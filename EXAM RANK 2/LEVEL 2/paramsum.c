@@ -22,34 +22,26 @@ $>
 
 #include <unistd.h>
 
-int main(int ac, char **av)
+int		main(int argc, const char *argv[])
 {
-	if (ac < 2)
+	int nbr = argc - 1;
+	char c;
+
+	if (nbr < 0)
 	{
-		write(1, "\n", 1);
-		return (0);
+		write(1, "-", 1);
+		nbr = -nbr;
 	}
-    	int i = 1;
-    	int count = 0;
-    	while (av[i] != NULL)
-    	{
-        	i++;
-        	count++;
-    	}
-    	char count_str[20];
-    	int j = 0;
-    	while (count > 0)
-    	{
-        	count_str[j] = count % 10 + '0';
-        	count /= 10;
-        	j++;
-    	}
-    	if (j == 0)
-    	{
-        	count_str[j] = '0';
-        	j++;
-    	}
-    	count_str[j] = '\n';
-    	write(1, count_str, j + 1);
-    	return 0;
+	if (nbr >= 10)
+	{
+		main(nbr / 10, argv);
+		main(nbr % 10, argv);
+	}
+	else
+	{
+		c = nbr + '0';
+		write(1, &c, 1);
+	}
+	write(1, "\n", 1);
+	return (0);
 }
