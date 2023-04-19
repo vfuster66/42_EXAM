@@ -14,47 +14,41 @@ char	*ft_itoa(int nbr);
 
 #include <stdlib.h>
 
-int		absolute_value(int nbr)
-{
-	if (nbr < 0)
-		return (-nbr);
-	return (nbr);
-}
-
-int		get_len(int nbr)
-{
-	int len = 0;
-	if (nbr <= 0)
-		len++;
-	while (nbr != 0)
-	{
-		len++;
-		nbr /= 10;
-	}
-	return (len);
-}
-
 char	*ft_itoa(int nbr)
 {
-	char *result;
-	int len;
+    char	*str;
+    int	len;
+    int	sign;
+    int	temp;
 
-	len = get_len(nbr);
-	result = malloc(sizeof(char) * (len + 1));
-	result[len] = '\0';
-
-	if (nbr < 0)
-		result[0] = '-';
-	else if (nbr == 0)
-		result[0] = '0';
-
-	while (nbr != 0)
-	{
-		len--;
-		result[len] = absolute_value(nbr % 10) + '0';
-		nbr /= 10;
-	}
-	return (result);
+    if (nbr == 0)
+        return ("0");
+    len = 0;
+    sign = 0;
+    if (nbr < 0)
+    {
+        sign = 1;
+        nbr = -nbr;
+    }
+    temp = nbr;
+    while (temp > 0)
+    {
+        temp /= 10;
+        len++;
+    }
+    if (sign)
+        len++;
+    str = (char *)malloc(sizeof(char) * (len + 1));
+    str[len] = '\0';
+    while (len > 0)
+    {
+        len--;
+        str[len] = (nbr % 10) + '0';
+        nbr /= 10;
+    }
+    if (sign)
+        str[0] = '-';
+    return (str);
 }
 
 /*---------------------------------------
