@@ -22,24 +22,25 @@ $>
 
 #include <unistd.h>
 
-int		main(int argc, const char *argv[])
+int		main(int ac, const char **av)
 {
-	int nbr = argc - 1;
+	int n; 
 	char c;
-
-	if (nbr < 0)
+	
+	n = = ac - 1;
+	if (n < 0)
 	{
 		write(1, "-", 1);
-		nbr = -nbr;
+		n = -n;
 	}
-	if (nbr >= 10)
+	if (n >= 10)
 	{
-		main(nbr / 10, argv);
-		main(nbr % 10, argv);
+		main(n / 10, av);
+		main(n % 10, av);
 	}
 	else
 	{
-		c = nbr + '0';
+		c = n + '0';
 		write(1, &c, 1);
 	}
 	write(1, "\n", 1);
