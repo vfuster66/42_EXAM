@@ -28,25 +28,25 @@ $>
 -------------------------------------*/
 
 #include <unistd.h> // For write
-int      main(int argc, char const *argv[])
+int      main(int ac, char const *av[])
 {
         int i;
-        int flg;
-        if (argc == 2)
+        int flag;
+        if (ac == 2)
         {
                 i = 0;
-                while (argv[1][i] == ' ' || argv[1][i] == '\t')
+                while (av[1][i] == ' ' || av[1][i] == '\t')
                         i += 1;
-                while (argv[1][i])
+                while (av[1][i])
                 {
-                        if (argv[1][i] == ' ' || argv[1][i] == '\t')
-                                flg = 1;
-                        if (!(argv[1][i] == ' ' || argv[1][i] == '\t'))
+                        if (av[1][i] == ' ' || av[1][i] == '\t')
+                                flag = 1;
+                        if (!(av[1][i] == ' ' || av[1][i] == '\t'))
                         {
-                                if (flg)
+                                if (flag)
                                         write(1, " ", 1);
-                                flg = 0;
-                                write(1, &argv[1][i], 1);
+                                flag = 0;
+                                write(1, &av[1][i], 1);
                         }
                         i += 1;
                 }
