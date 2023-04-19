@@ -37,47 +37,32 @@ $>
 
 -------------------------------------*/
 
-#include <unistd.h>
-
-int skip_whitespace(char *str, int i)
+#include <unistd.h> // For write
+int      main(int argc, char const *argv[])
 {
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	return (i);
+        int i;
+        int flg;
+        if (argc == 2)
+        {
+                i = 0;
+                while (argv[1][i] == ' ' || argv[1][i] == '\t')
+                        i += 1;
+                while (argv[1][i])
+                {
+                        if (argv[1][i] == ' ' || argv[1][i] == '\t')
+                                flg = 1;
+                        if (!(argv[1][i] == ' ' || argv[1][i] == '\t'))
+                        {
+                                if (flg)
+                                        write(1, " ", 1);
+                                flg = 0;
+                                write(1, &argv[1][i], 1);
+                        }
+                        i += 1;
+                }
+        }
+        write(1, "\n", 1);
+        return (0);
 }
 
-int ft_wordlen(char *str)
-{
-	int i = 0;
-	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t')
-		i++;
-	return (i);
-}
-
-void epur_str(char *str)
-{
-	int i = 0;
-	int first_word = 1;
-	int word_len;
-	
-	i = skip_whitespace(str, i);
-	while (str[i] != '\0')
-	{
-		if (!first_word)
-			write(1, " ", 1);
-		word_len = ft_wordlen(str + i);
-		write(1, str + i, word_len);
-		i += word_len;
-		first_word = 0;
-		i = skip_whitespace(str, i);
-	}
-}
-
-int main(int ac, char **av)
-{
-	if (ac == 2)
-		epur_str(av[1]);
-	write(1, "\n", 1);
-	return (0);
-}
 
