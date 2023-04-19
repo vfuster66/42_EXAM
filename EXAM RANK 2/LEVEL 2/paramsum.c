@@ -27,7 +27,7 @@ int		main(int ac, const char **av)
 	int n; 
 	char c;
 	
-	n = = ac - 1;
+	n = ac - 1;
 	if (n < 0)
 	{
 		write(1, "-", 1);
