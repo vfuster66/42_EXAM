@@ -16,96 +16,75 @@ char    **ft_split(char *str);
 -------------------------------*/
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-int		ft_wordlen(char *str)
+void *ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int len = 0;
-	while (str[len] && str[len] != ' ' && str[len] != '\t' && str[len] != '\n')
-		++len;
-	return (len);
-}
+    unsigned char *d = dest;
+    const unsigned char *s = src;
 
-char	*word_dupe(char *str)
-{
-	int i = 0;
-	int len = ft_wordlen(str);
-	char *word = malloc(sizeof(char) * (len + 1));
-	
-	word[len] = '\0';
-	while (i < len)
-	{
-		word[i] = str[i];
-		++i;
-	}
-	return (word);
-}
+    while (n--)
+        *d++ = *s++;
 
-void	fill_words(char **array, char *str)
-{
-	int i = 0;
-	while (*str)
-	{
-		if (*str != ' ' && *str != '\t' && *str != '\n')
-		{
-			array[i++] = word_dupe(str);
-			str += ft_wordlen(str);
-		}
-		else
-			++str;
-	}
-}
-
-int		count_words(char *str)
-{
-	int count = 0;
-	while (*str)
-	{
-		if (*str != ' ' && *str != '\t' && *str != '\n')
-		{
-			++count;
-			str += ft_wordlen(str);
-		}
-		else
-			++str;
-	}
-	return (count);
+    return dest;
 }
 
 char	**ft_split(char *str)
 {
-	int num_words = count_words(str);
-	char **array = malloc(sizeof(char *) * (num_words + 1));
-	
-	array[num_words] = NULL;
-	fill_words(array, str);
-	return (array);
+    char	**result;
+    int	i;
+    int	j;
+    int	k;
+
+    result = (char **)malloc(sizeof(char *) * (strlen(str) + 1));
+    i = 0;
+    j = 0;
+    while (str[i] != '\0')
+    {
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+            i++;
+        if (str[i] == '\0')
+            break;
+        k = i;
+        while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+            i++;
+        result[j] = (char *)malloc(sizeof(char) * (i - k + 1));
+        if (!result[j])
+            return (NULL);
+        memcpy(result[j], str + k, i - k);
+        result[j][i - k] = '\0';
+        j++;
+    }
+    result[j] = NULL;
+    return (result);
 }
 
 /*-----------------------------------
-
 #include <stdio.h>
 #include <stdlib.h>
 
-int ft_wordlen(char *str);
-char *word_dupe(char *str);
-void fill_words(char **array, char *str);
-int count_words(char *str);
 char **ft_split(char *str);
 
-int main()
+int main(void)
 {
-    char *str = "This is a test string";
+    char str[] = "Hello, World! How are you today?";
     char **words = ft_split(str);
-    int i = 0;
 
-    while (words[i] != NULL)
+    if (words == NULL)
     {
-        printf("Word %d: %s\n", i, words[i]);
+        printf("Erreur: la fonction ft_split a renvoyé NULL.\n");
+        return 1;
+    }
+
+    for (int i = 0; words[i] != NULL; i++)
+    {
+        printf("%s\n", words[i]);
         free(words[i]);
-        i++;
     }
 
     free(words);
+
     return 0;
 }
 
