@@ -31,28 +31,35 @@ $>
 
 int main(int ac, char **av)
 {
+	// variable pour itérer sur la chaîne av[1]
 	int	i;
+	// variable pour itérer sur la chaîne av[2]
 	int	j;
 
 	i = 0;
 	j = 0;
-    	if (ac != 3)
-    	{
-        	write(1, "\n", 1);
-        	return (0);
-    	}
-    	while (av[1][i] != '\0' && av[2][j] != '\0')
-    {
-        if (av[1][i] == av[2][j])
-            i++;
-        j++;
-    }
-    if (av[1][i] == '\0')
-        write(1, "1\n", 2);
-    else
-        write(1, "0\n", 2);
-
-    return (0);
+	// vérifie si le nombre d'arguments est correct
+	if (ac != 3)
+	{
+		write(1, "\n", 1);
+		return (0);
+	}
+	// parcourt les deux chaînes jusqu'à la fin
+	while (av[1][i] != '\0' && av[2][j] != '\0')
+	{
+		// si les caractères actuels des deux chaînes sont identiques
+		if (av[1][i] == av[2][j])
+			// on passe au caractère suivant de av[1]
+			i++;
+		// on passe au caractère suivant de av[2]
+		j++;
+	}
+	// si la fin de la chaîne av[1] a été atteinte
+	if (av[1][i] == '\0')
+		// la sous-chaîne est contenue dans la chaîne, on affiche 1
+		write(1, "1\n", 2);
+	else
+		// la sous-chaîne n'est pas contenue dans la chaîne, on affiche 0
+		write(1, "0\n", 2);
+	return (0);
 }
-
-
