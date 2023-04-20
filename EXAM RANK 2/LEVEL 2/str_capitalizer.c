@@ -30,41 +30,53 @@ $>
 
 #include <unistd.h>
 
-int main(int ac, char **av)
+int   main(int ac, char **av)
 {
-    int i = 1;
-    if (ac == 1)
+   int   i;
+   int   j;
+   
+   i = 1;
+   // Si le programme est lancé sans argument
+   if (ac == 1) 
+   {
+      // Écrit une nouvelle ligne et quitte
+      write(1, "\n", 1);
+      return (0);
+   }
+   // Boucle sur les arguments fournis en ligne de commande
+   while (i < ac)
     {
-        write(1, "\n", 1);
-        return (0);
-    }
-
-    while (i < ac)
-    {
-        int j = 0;
-        while (av[i][j])
-        {
-            if ((av[i][j] >= 'a' && av[i][j] <= 'z') || (av[i][j] >= 'A' && av[i][j] <= 'Z'))
+      j = 0;
+      // Boucle sur les caractères du ième argument
+      while (av[i][j])
+      {
+         // Si le caractère est une lettre
+         if ((av[i][j] >= 'a' && av[i][j] <= 'z') || (av[i][j] >= 'A' && av[i][j] <= 'Z'))
+         {
+            // Si le caractère est le premier caractère du mot ou s'il est précédé d'un caractère non alphabétique
+            if (j == 0 || !((av[i][j - 1] >= 'a' && av[i][j - 1] <= 'z') || (av[i][j - 1] >= 'A' && av[i][j - 1] <= 'Z')))
             {
-                if (j == 0 || !((av[i][j - 1] >= 'a' && av[i][j - 1] <= 'z') || (av[i][j - 1] >= 'A'
-                                                                                 && av[i][j - 1] <= 'Z')))
-                {
-                    if (av[i][j] >= 'a' && av[i][j] <= 'z')
-                        av[i][j] = av[i][j] - 32;
-                }
-                else
-                {
-                    if (av[i][j] >= 'A' && av[i][j] <= 'Z')
-                        av[i][j] = av[i][j] + 32;
-                }
+               // Si le caractère est une minuscule
+               if (av[i][j] >= 'a' && av[i][j] <= 'z')
+                  // Convertit le caractère en majuscule
+                  av[i][j] = av[i][j] - 32;
             }
+            else
+            {
+               // Si le caractère est une majuscule
+               if (av[i][j] >= 'A' && av[i][j] <= 'Z')
+                  // Convertit le caractère en minuscule
+                  av[i][j] = av[i][j] + 32;
+            }
+            // Passe au caractère suivant
             j++;
-        }
-        write(1, av[i], j);
-        write(1, "\n", 1);
-        i++;
-    }
-    return (0);
+         }
+         // Écrit le mot avec ses caractères convertis
+         write(1, av[i], j);
+         // Écrit une nouvelle ligne
+         write(1, "\n", 1);
+         // Passe au mot suivant
+         i++;
+      }
+      return (0);
 }
-
-
