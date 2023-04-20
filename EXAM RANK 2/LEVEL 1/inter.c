@@ -28,35 +28,47 @@ $
 
 int main(int ac, char **av)
 {
+    // Compteur pour les boucles
     int i;
+    // Tableau pour stocker les valeurs ASCII
     int ascii[256];
 
+    // Initialisation du tableau ascii à 0 pour toutes les valeurs possibles de l'ASCII
     i = 0;
     while (i < 256)
     {
         ascii[i] = 0;
         i++;
     }
+
+    // Si le nombre d'arguments n'est pas égal à 3, on écrit un retour à la ligne et on retourne 0
     if (ac != 3)
     {
         write(1, "\n", 1);
         return 0;
     }
-       while (av[2][i])
+
+    // Remplissage du tableau ascii avec les valeurs ASCII des caractères de la deuxième chaîne de caractères
+    i = 0;
+    while (av[2][i])
     {
         ascii[(unsigned char)av[2][i]] = 1;
         i++;
     }
+
+    // Parcours de la première chaîne de caractères pour afficher les caractères qui sont présents dans la deuxième chaîne
     i = 0;
     while (av[1][i])
     {
         if (ascii[(unsigned char)av[1][i]] == 1)
         {
             write(1, &av[1][i], 1);
-            ascii[(unsigned char)av[1][i]] = 2;
+            // Marquage du caractère dans le tableau ascii
+            ascii[(unsigned char)av[1][i]] = 2; 
         }
         i++;
     }
-        write(1, "\n", 1);
+    // Écriture d'un retour à la ligne
+    write(1, "\n", 1); 
     return 0;
 }
