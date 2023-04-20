@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 		{
 			// Si le caractère actuel est égal au caractère de remplacement
 			if (av[1][i] == av[2][0])
-				// Remplacement du caractèr
+				// Remplacement du caractère
 				av[1][i] = av[3][0];
 			write(1, &av[1][i], 1);
 			i++;
