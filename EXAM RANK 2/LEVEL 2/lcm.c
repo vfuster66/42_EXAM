@@ -29,20 +29,29 @@ Your function must be prototyped as follows:
   
   ---------------------------*/
   
-unsigned int lcm(unsigned int a, unsigned int b)
+/* Cette fonction calcule le plus petit multiple commun (PPCM) de deux nombres
+   entiers non signés passés en paramètre. */
+unsigned int	lcm(unsigned int a, unsigned int b)
 {
-	unsigned int n;	
+	// variable pour stocker le nombre en cours de test
+	unsigned int	n;
 
+	// si l'un des deux nombres est nul, le PPCM est zéro
 	if (a == 0 || b == 0)
 		return (0);
+	// on choisit le plus grand nombre pour commencer à tester les multiples
 	if (a > b)
 		n = a;
 	else
 		n = b;
+
+	// boucle infinie, on sortira de la fonction avec un return
 	while (1)
 	{
+		// si n est divisible par a et b, alors n est le PPCM
 		if (n % a == 0 && n % b == 0)
 			return (n);
+		// sinon, on teste le multiple suivant en incrémentant n
 		++n;
 	}
 }
