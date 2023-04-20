@@ -24,17 +24,23 @@ Examples:
 
 int		*ft_range(int start, int end)
 {
-	int		size;
-	int		*range;
-	int		i;
+	// variable qui contiendra la taille du tableau
+	int	size;
+	// pointeur vers le tableau alloué dynamiquement
+	int	*range;
+	// variable pour itérer sur le tableau
+	int	i;
 
+	// Calcul de la taille du tableau
 	if (start > end)
 		size = start - end + 1;
 	else
 		size = end - start + 1;
+	// Allocation dynamique de la mémoire pour le tableau
 	range = (int *)malloc(sizeof(int) * size);
 	if (range == NULL)
 		return (NULL);
+	// Initialisation du tableau avec les valeurs allant de "start" à "end"
 	i = 0;
 	while (i < size)
 	{
@@ -44,7 +50,8 @@ int		*ft_range(int start, int end)
 			range[i] = start--;
 		i++;
 	}
-	return (range);
+	// retourne le pointeur vers le tableau alloué dynamiquement
+	return (range); 
 }
 
 /*-------------------------
