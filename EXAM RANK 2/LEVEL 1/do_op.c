@@ -29,89 +29,87 @@ $
 
 -----------------------------------*/
 
-#include <stdlib.h>
 #include <unistd.h>
 
-int ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
-	int	sign;
+	// Initialisation de variables
 	int	result;
+	int	sign;
 	int	i;
-
+	
+	i = 0;
 	sign = 1;
 	result = 0;
-	i = 0;
-	if (str[0] == '-')
+	// Gestion du signe éventuel
+	if (str[i] == '-')
 	{
 		sign = -1;
-		i = 1;
-	}
-	while (str[i] != '\0')
-	{
-		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return sign * result;
+	// Parcours de la chaîne de caractères
+	while (str[i])
+	{
+		// Conversion de chaque chiffre en entier et construction du nombre
+		result = result * 10 + str[i] - '0';
+		i++;
+	}
+	// Retourne le nombre final avec le signe approprié
+	return (result * sign);
 }
 
-void	ft_putnbr(int n) 
+void	ft_putnbr(int n)
 {
-	char c;
-	if (n < 0)
+	char	c;
+	
+	// Si l'entier est négatif, on affiche le signe '-' et on travaille avec la valeur absolue
+	if (n < 0) 
 	{
 		write(1, "-", 1);
 		n = -n;
 	}
-	if (n >= 10)
+	// Si l'entier est supérieur à 9, on continue à récursivement afficher les chiffres
+	if (n > 9)
 	{
 		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
 	}
-	else
-	{
-		c = n + '0';
-		write(1, &c, 1);
-	}
+	// Conversion du chiffre en caractère
+	c = (n % 10) + '0';
+	// Affichage du caractère
+	write(1, &c, 1);
 }
 
-int main(int argc, char **argv) 
+int	main(int ac, char **av) 
 {
-    if (argc != 4) 
-    {
-        write(1, "\n", 1);
-        return 0;
+	// Vérification du nombre d'arguments
+	if (ac != 4) 
+	{
+		write(1, "\n", 1);
+		return 0;
     }
-    int op1 = ft_atoi(argv[1]);
-    int op2 = ft_atoi(argv[3]);
-    char op = argv[2][0];
-    int result;
-    if (op == '+') 
-    {
-        result = op1 + op2;
-    }
-    else if (op == '-') 
-    {
-        result = op1 - op2;
-    }
-    else if (op == '*') 
-    {
-        result = op1 * op2;
-    } 
-    else if (op == '/') 
-    {
-        result = op1 / op2;
-    }
-    else if (op == '%') 
-    {
-        result = op1 % op2;
-    } 
-    else
-    {
-        write(1, "\n", 1);
-        return 0;
-    }
-    ft_putnbr(result);
-    write(1, "\n", 1);
-    return 0;
+    // Conversion des deux opérandes en entiers et récupération de l'opérateur
+	int nb1 = ft_atoi(av[1]);
+	int nb2 = ft_atoi(av[3]);
+	char op = av[2][0];
+	int	result;
+	
+	// Calcul du résultat en fonction de l'opérateur
+	if (op == '+')
+		result = nb1 + nb2;
+	else if (op == '-')
+		result = nb1 - nb2;
+	else if (op == '*') 
+		result = nb1 * nb2;
+	else if (op == '/') 
+		result = nb1 / nb2;
+	else if (op == '%') 
+		result = nb1 % nb2;
+	else
+		result = 0;
+	// Si le résultat n'est pas 0, on l'affiche
+	if (result != 0) 
+		ft_putnbr(result);
+	// On affiche un retour à la ligne à la fin
+	write(1, "\n", 1); 
+	return 0;
 }
-
