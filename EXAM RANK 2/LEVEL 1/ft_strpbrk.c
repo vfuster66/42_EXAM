@@ -11,29 +11,35 @@ The function should be prototyped as follows:
 char	*ft_strpbrk(const char *s1, const char *s2);
 
 --------------------------------------*/
+#include <string.h>
 
-#include <stdlib.h>
-
-char	*ft_strpbrk(const char *s1, const char *s2)
+char	*ft_strpbrk(const char *str1, const char *str2) 
 {
-	const char	*p;
-	// On parcourt la chaîne s1 jusqu'à la fin
+	// pointeur sur le début de str1
+	const char	*s1 = str1;
+	// pointeur sur le début de str2
+	const char	*s2;
+	// boucle sur chaque caractère de str1
 	while (*s1)
 	{
-		// On parcourt la chaîne s2 jusqu'à la fin
-		*p = s2;
-		while (*p)
+		// réinitialisation du pointeur sur le début de str2
+        	s2 = str2;
+		// boucle sur chaque caractère de str2
+		while (*s2)
 		{
-			// On compare chaque caractère de s2 avec celui de s1
-			if (*p == *s1)
-				// On retourne le pointeur sur le caractère trouvé
-				return ((char *)s1); 
-			p++;
+			if (*s1 == *s2)
+			{
+				// retourne le pointeur sur le caractère correspondant
+				return (char *)s1;
+			}
+			// passe au caractère suivant dans str2
+			s2++;
 		}
+		// passe au caractère suivant dans str1
 		s1++;
 	}
-	// Si aucun caractère trouvé, on retourne NULL
-	return (NULL); 
+	// aucun caractère correspondant n'a été trouvé
+	return NULL;           
 }
 
 /*----------------------------------
