@@ -27,7 +27,6 @@ void *ft_memcpy(void *dest, const void *src, size_t n)
 
     while (n--)
         *d++ = *s++;
-
     return dest;
 }
 
@@ -37,19 +36,20 @@ char    **ft_split(char *str)
     int i;
     int j;
     int k;
-
+    
+    i = 0;
+    j = 0;
+    k = 0;
     // Compter le nombre de mots dans la chaîne de caractères
     while (str[i])
     {
         // Ignorer les espaces, les tabulations et les sauts de ligne
         while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
             i++;
-
         // Compter la longueur du mot
         k = i;
         while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
             i++;
-
         // Si la longueur du mot est supérieure à zéro, incrémenter le compteur de mots
         if (i > k)
             j++;
