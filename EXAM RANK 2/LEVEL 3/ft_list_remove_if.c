@@ -29,10 +29,13 @@ $>
 
 typedef struct    s_list
 {
+    // Pointeur vers le nœud suivant dans la liste.
     struct s_list *next;
-    void          *data;
+    // Pointeur générique vers les données stockées dans le nœud.
+    void          *data; 
 }                 t_list;
 
+// Cette fonction supprime tous les nœuds de la liste qui contiennent des données égales à data_ref.
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
 
 #endif
@@ -42,24 +45,34 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
 
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
+    // Pointeur vers le nœud précédent lors du parcours de la liste.
     t_list *prev = NULL;
-    t_list *curr = *begin_list;
+    // Pointeur vers le nœud courant lors du parcours de la liste.
+    t_list *curr = *begin_list; 
 
+    // On parcourt la liste en comparant les données de chaque nœud avec data_ref.
     while (curr != NULL)
     {
-        if (cmp(curr->data, data_ref) == 0)
+        // Si les données sont égales, on supprime le nœud correspondant.
+        if (cmp(curr->data, data_ref) == 0) 
         {
-            if (prev == NULL)
+            // Si le nœud à supprimer est le premier de la liste, on met à jour le pointeur vers le premier nœud.
+            if (prev == NULL) 
                 *begin_list = curr->next;
-            else
+            // Sinon, on met à jour le pointeur next du nœud précédent pour sauter le nœud à supprimer.
+            else 
                 prev->next = curr->next;
+            // On libère la mémoire allouée pour le nœud à supprimer.
             free(curr);
+            // Si on a supprimé le premier nœud, on continue à partir du nouveau premier nœud.
             if (prev == NULL)
                 curr = *begin_list;
-            else
+            // Sinon, on continue à partir du nœud suivant celui qui vient d'être supprimé.
+            else 
                 curr = prev->next;
         }
-        else
+        // Si les données ne sont pas égales, on continue le parcours de la liste.
+        else 
         {
             prev = curr;
             curr = curr->next;
