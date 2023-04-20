@@ -20,20 +20,26 @@ int	ft_atoi(char const *str)
 	long	result;
 	long	sign;
 
+	// Initialisation des variables
 	i = 0;
 	sign = 1;
 	result = 0;
+	// Ignorer les espaces en début de chaîne
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		str++;
+	// Gérer le signe
 	if (str[i] == '-')
 		sign = -1;
 	if (str[i] ==  '-' || str[i] == '+')
 		str++;
+	// Convertir les chiffres en entier
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		// Multiplier par 10 pour passer à la place suivante
 		result = result * 10 + str[i] - '0';
-		str++;
+		str++; // Passer au caractère suivant
 	}
+	// Retourner le résultat en le multipliant par le signe
 	return (result * sign);
 }
 
