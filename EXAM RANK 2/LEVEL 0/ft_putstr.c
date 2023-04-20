@@ -16,11 +16,15 @@ void	ft_putstr(char *str);
 
 #include <unistd.h>
 
-void ft_putstr(char *str)
+void    ft_putstr(char *str)
 {
+    // On continue de boucler tant que l'on ne rencontre pas le caractère null ('\0')
     while (*str)
-        write(1, str++, 1);
+        // On écrit le caractère pointé par le pointeur 'str' sur la sortie standard 
+        //puis on incrémente le pointeur pour passer au caractère suivant
+        write(1, str++, 1); 
 }
+
 
 /*-------------------------------
 
