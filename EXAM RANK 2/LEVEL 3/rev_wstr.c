@@ -35,39 +35,52 @@ $>
 int main(int ac, char *av[])
 {
     int len;
+    int i;
 
-    if (ac == 2)
+    // Vérifie qu'il y a un argument en entrée
+    if (ac == 2) 
     {
         len = 0;
-        while (av[1][len])
+        // Calcule la longueur de la chaîne de caractères en entrée
+        while (av[1][len]) 
             len++;
+        // Soustrait 1 à la longueur pour accéder à l'index le plus à droite
         len--;
-        while (len >= 0)
+        // Parcourt la chaîne de caractères de droite à gauche
+        while (len >= 0) 
         {
-            if (av[1][len] == ' ')
+            // Si un espace est trouvé, affiche le mot suivant
+            if (av[1][len] == ' ') 
             {
-                int i = len + 1;
-                while (av[1][i] && av[1][i] != ' ')
+                // Démarre à l'index suivant
+                i = len + 1;
+                // Parcourt le mot jusqu'à un nouvel espace ou la fin de la chaîne
+                while (av[1][i] && av[1][i] != ' ') 
                 {
-                    write(1, &av[1][i], 1);
+                    // Affiche chaque caractère du mot
+                    write(1, &av[1][i], 1); 
                     i++;
                 }
-                write(1, " ", 1);
+                // Ajoute un espace entre les mots
+                write(1, " ", 1); 
             }
-            else if (len == 0)
+            // Si le début de la chaîne est atteint, affiche le premier mot
+            else if (len == 0) 
             {
                 int i = len;
-                while (av[1][i] && av[1][i] != ' ')
+                // Parcourt le mot jusqu'à un espace ou la fin de la chaîne
+                while (av[1][i] && av[1][i] != ' ') 
                 {
-                    write(1, &av[1][i], 1);
+                    // Affiche chaque caractère du mot
+                    write(1, &av[1][i], 1); 
                     i++;
                 }
             }
+             // Décrémente la longueur pour accéder à l'index suivant
             len--;
         }
     }
+    // Ajoute un retour à la ligne à la fin de l'affichage
     write(1, "\n", 1);
     return (0);
 }
-
-
