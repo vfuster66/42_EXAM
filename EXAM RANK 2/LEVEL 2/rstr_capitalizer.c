@@ -30,35 +30,39 @@ $>
 
 #include <unistd.h>
 
-int main(int ac, char **av)
+int   main(int ac, char **av)
 {
-    int i, j;
-
-    if (ac == 1)
-    {
-        write(1, "\n", 1);
-        return (0);
-    }
-
-    i = 1;
-    while (i < ac)
-    {
-        j = 0;
-        while (av[i][j])
-        {
-            if (av[i][j] >= 'A' && av[i][j] <= 'Z')
-                av[i][j] += 32;
-            if ((av[i][j] >= 'a' && av[i][j] <= 'z') && (av[i][j + 1] == ' ' \
-                        || av[i][j + 1] == '\t' || av[i][j + 1] == '\0'))
-                av[i][j] -= 32;
-            write(1, &av[i][j], 1);
-            j++;
-        }
-        write(1, "\n", 1);
-        i++;
-    }
-
-    return (0);
+   int   i;
+   int   j;
+   
+   // Si aucun argument n'a été fourni, affiche une nouvelle ligne et quitte le programme
+   if (ac == 1)
+   {
+      write(1, "\n", 1);
+      return (0);
+   }
+   i = 1;
+   // Parcourt tous les arguments fournis
+   while (i < ac)
+   {
+      j = 0;
+      // Parcourt chaque caractère de l'argument
+      while (av[i][j])
+      {
+         // Si le caractère est une lettre majuscule, convertit en minuscule
+         if (av[i][j] >= 'A' && av[i][j] <= 'Z')
+            av[i][j] += 32;
+         // Si le caractère est une lettre minuscule suivie d'un espace, tabulation ou fin de ligne, convertit en majuscule
+         if ((av[i][j] >= 'a' && av[i][j] <= 'z') && (av[i][j + 1] == ' '
+                                                      || av[i][j + 1] == '\t' || av[i][j + 1] == '\0'))
+            av[i][j] -= 32;
+         // Affiche le caractère actuel.
+         write(1, &av[i][j], 1);
+         j++;
+      }
+      // Après avoir parcouru un argument, affiche une nouvelle ligne
+      write(1, "\n", 1);
+      i++;
+   }
+   return (0);
 }
-
-
