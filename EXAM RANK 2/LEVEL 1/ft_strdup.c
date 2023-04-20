@@ -13,25 +13,34 @@ char    *ft_strdup(char *src);
 
 #include <stdlib.h>
 
-char    *ft_strdup(char *src)
-{       
-	int             i;
-        char    *dest;
-        
-        i = 0;
-        while (src[i])
-                i++;
-        dest = malloc(sizeof(char) * (i + 1));
-        if (!dest)
-                return (NULL);
-        i = 0;
-        while (src[i])
-        {
-                dest[i] = src[i];
-                i++;
-        }
-        dest[i] = src[i];
-        return (dest);
+char	*ft_strdup(char *src)
+{
+	// Déclaration de l'index i
+	int		i;
+	// Déclaration du pointeur de destination
+	char	*dest;
+	
+	i = 0;
+	// Boucle jusqu'à la fin de la chaîne src
+	while (src[i])
+		i++;
+	// Allocation dynamique de la mémoire pour la chaîne de destination
+	dest = malloc(sizeof(char) * (i + 1));
+	// Si l'allocation échoue, on retourne NULL
+	if (!dest)
+		return (NULL);
+	i = 0;
+	// Boucle jusqu'à la fin de la chaîne src
+	while (src[i])
+	{
+		// Copie du caractère src[i] dans dest[i]
+		dest[i] = src[i];
+		i++;
+	}
+	// Copie du caractère de fin de chaîne '\0' dans dest[i]
+	dest[i] = src[i];
+	// Retourne le pointeur de la chaîne de destination
+	return (dest);
 }
 
 /*---------------------------------------------
