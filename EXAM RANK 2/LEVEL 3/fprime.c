@@ -44,33 +44,42 @@ int main(int ac, char **av)
     int n;
     int i;
     
+    // Vérifier que le programme a reçu exactement 2 arguments : le nom du programme et un entier
     if (ac != 2)
     {
-        printf("\n");
+        // Si le nombre d'arguments est incorrect, afficher une ligne vide et terminer le programme
+        printf("\n"); 
         return 0;
     }
+    // Convertir l'argument en entier
     n = atoi(av[1]);
+    // Si l'argument est 1, afficher 1 et terminer le programme
     if (n == 1)
     {
         printf("1\n");
         return 0;
     }
-    i = 2;
+    i = 2; 
+    // Boucler tant que i est inférieur ou égal à n
     while (i <= n)
     {
+        // Si n est divisible par i
         if (n % i == 0)
         {
+            // Afficher i
             printf("%d", i);
+            // Diviser n par i
             n /= i;
-            if (n > 1)
-            {
+            // Si n est plus grand que 1, afficher une étoile
+            if (n > 1)                
                 printf("*");
-            }
-            i = 1;
+            // Réinitialiser i à 1
+            i = 1; 
         }
-        i++;
+        // Passer au prochain i
+        i++; 
     }
-    printf("\n");
+    // Afficher une ligne vide à la fin de la boucle
+    printf("\n"); 
     return 0;
 }
-
