@@ -19,6 +19,7 @@ char    **ft_split(char *str);
 #include <stdio.h>
 #include <string.h>
 
+// Fonction qui copie n octets depuis l'adresse src vers l'adresse dest
 void *ft_memcpy(void *dest, const void *src, size_t n)
 {
     unsigned char *d = dest;
@@ -30,31 +31,55 @@ void *ft_memcpy(void *dest, const void *src, size_t n)
     return dest;
 }
 
-char	**ft_split(char *str)
+char    **ft_split(char *str)
 {
-    char	**result;
-    int	i;
-    int	j;
-    int	k;
+    char    **result;
+    int i;
+    int j;
+    int k;
 
-    result = (char **)malloc(sizeof(char *) * (strlen(str) + 1));
-    i = 0;
-    j = 0;
-    while (str[i] != '\0')
+    // Compter le nombre de mots dans la chaîne de caractères
+    while (str[i])
     {
+        // Ignorer les espaces, les tabulations et les sauts de ligne
         while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
             i++;
-        if (str[i] == '\0')
-            break;
+
+        // Compter la longueur du mot
         k = i;
-        while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+        while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
             i++;
-        result[j] = (char *)malloc(sizeof(char) * (i - k + 1));
-        if (!result[j])
-            return (NULL);
-        memcpy(result[j], str + k, i - k);
-        result[j][i - k] = '\0';
-        j++;
+
+        // Si la longueur du mot est supérieure à zéro, incrémenter le compteur de mots
+        if (i > k)
+            j++;
+    }
+    // Allouer de la mémoire pour le tableau de résultats
+    result = (char **)malloc(sizeof(char *) * (j + 1));
+    if (!result)
+        return (NULL);
+    i = 0;
+    j = 0;
+    while (str[i])
+    {
+        // Ignorer les espaces, les tabulations et les sauts de ligne
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+            i++;
+        // Copier le mot dans un nouveau tampon
+        k = i;
+        while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+            i++;
+        // Si la longueur du mot est supérieure à zéro, l'ajouter au tableau de résultats
+        if (i > k)
+        {
+            result[j] = (char *)malloc(sizeof(char) * (i - k + 1));
+            if (!result[j])
+                return (NULL);
+            // Copier le mot dans le tableau de résultats
+            ft_memcpy(result[j], &str[k], i - k);
+            result[j][i - k] = '\0';
+            j++;
+        }
     }
     result[j] = NULL;
     return (result);
