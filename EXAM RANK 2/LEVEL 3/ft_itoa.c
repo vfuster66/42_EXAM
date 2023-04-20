@@ -14,23 +14,23 @@ char	*ft_itoa(int nbr);
 
 #include <stdlib.h>
 
-char	*ft_itoa(int nbr)
+char	*ft_itoa(int n)
 {
     char	*str;
     int	len;
     int	sign;
     int	temp;
 
-    if (nbr == 0)
+    if (n == 0)
         return ("0");
     len = 0;
     sign = 0;
-    if (nbr < 0)
+    if (n < 0)
     {
         sign = 1;
-        nbr = -nbr;
+        n = -n;
     }
-    temp = nbr;
+    temp = n;
     while (temp > 0)
     {
         temp /= 10;
@@ -43,8 +43,8 @@ char	*ft_itoa(int nbr)
     while (len > 0)
     {
         len--;
-        str[len] = (nbr % 10) + '0';
-        nbr /= 10;
+        str[len] = (n % 10) + '0';
+        n /= 10;
     }
     if (sign)
         str[0] = '-';
