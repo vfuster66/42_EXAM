@@ -38,7 +38,7 @@ char	*ft_strdup(char *src)
 		i++;
 	}
 	// Copie du caractère de fin de chaîne '\0' dans dest[i]
-	dest[i] = src[i];
+	dest[i] = '\0';
 	// Retourne le pointeur de la chaîne de destination
 	return (dest);
 }
