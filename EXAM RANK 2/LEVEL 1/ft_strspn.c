@@ -12,28 +12,38 @@ size_t	ft_strspn(const char *s, const char *accept);
 
 --------------------------------------*/
 
-#include <stddef.h>
+#include <stdlib.h>
+
+/* La fonction ft_strspn calcule la longueur (en caractères) du segment initial de la chaîne s 
+   qui ne contient que des caractères de la chaîne accept. 
+   Cette fonction retourne un type size_t, qui est un type entier non signé. */
 
 size_t ft_strspn(const char *s, const char *accept)
 {
-    size_t	i;
-    size_t	j;
+     // Compteur pour la chaîne s
+    size_t  i;
+    // Compteur pour la chaîne accept
+    size_t	j; 
     
     i = 0;
+    // On parcourt la chaine s
     while (s[i])
     {
         j = 0;
+        // on parcourt la chaine accept
         while (accept[j])
         {
+             // Si on trouve un caractère correspondant, on sort de la boucle
             if (s[i] == accept[j])
                 break;
             j++;
         }
+        // Si aucun caractère correspondant n'est trouvé, on retourne la longueur
         if (!accept[j])
-            return i;
-        i++;
+            i++;
     }
-    return i;
+    // Si on parcourt toute la chaîne s sans trouver de caractères qui ne sont pas dans accept, on retourne la longueur de s
+    return (i); 
 }
 
 /*-------------------------------------
