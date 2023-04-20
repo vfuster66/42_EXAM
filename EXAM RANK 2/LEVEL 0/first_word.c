@@ -30,19 +30,25 @@ $>
 
 #include <unistd.h>
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	int	i;
-
+	
 	i = 0;
+	// Vérifie si un seul argument a été passé en ligne de commande
 	if (ac == 2)
 	{
+		// Ignore les espaces et les tabulations au début de l'argument
 		while (av[1][i] == ' ' || av[1][i] == '\t')
 			i++;
+		// Copie les caractères de l'argument jusqu'à ce qu'un espace ou une tabulation soit trouve
 		while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t')
-			write(1, av[1][i++], 1);
+			// Écrit chaque caractère sur la sortie standard
+			write(1, &av[1][i++], 1);
 	}
+	// Ajoute une nouvelle ligne à la fin de la sortie
 	write(1, "\n", 1);
 	return (0);
 }
+
 
