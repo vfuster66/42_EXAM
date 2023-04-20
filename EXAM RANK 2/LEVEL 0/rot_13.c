@@ -34,22 +34,28 @@ $>
 int	main(int ac, char **av)
 {
 	int	i;
-
+	
 	i = 0;
 	if (ac == 2)
 	{
+		// Boucle pour parcourir la chaine de caractères
 		while (av[1][i])
 		{
 			char c = av[1][i];
+			// On vérifie si le caractère est compris entre 'a' et 'm' ou 'A' et 'M'
 			if ((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'M'))
+				// On ajoute 13 pour le décaler de 13 positions dans l'alphabet
 				c += 13;
+			// On vérifie si le caractère est compris entre 'n' et 'z' ou 'N' et 'Z'
 			else if ((c >= 'n' && c <= 'z') || (c >= 'N' && c <= 'Z'))
+				// On soustrait 13 pour le décaler de 13 positions dans l'alphabet
 				c -= 13;
+			// On affiche le caractère modifié
 			write(1, &c, 1);
 			i++;
 		}
 	}
+	// On affiche un retour à la ligne pour finir
 	write(1, "\n", 1);
 	return (0);
 }
-
