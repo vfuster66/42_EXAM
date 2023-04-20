@@ -26,30 +26,47 @@ int	ft_atoi_base(const char *str, int str_base);
 
 int ft_atoi_base(const char *str, int str_base)
 {
-    int result = 0;
-    int sign = 1;
-    int i = 0;
+    // variable pour stocker la valeur convertie
+    int result;
+    // variable pour stocker le signe de la valeur convertie
+    int sign;
+    // variable pour parcourir la chaîne de caractères str
+    int i;
 
-    if (str_base < 2 || str_base > 16)
+    result = 0;
+    sign = 1;
+    i = 0;
+    // vérification de la validité de la base
+    if (str_base < 2 || str_base > 16) 
         return 0;
+    // vérification du signe de la valeur à convertir
     if (str[0] == '-')
     {
         sign = -1;
         i++;
     }
-    while (str[i] != '\0')
+    // parcours de la chaîne de caractères
+    while (str[i] != '\0') 
     {
+        // si le caractère est un chiffre
         if (str[i] >= '0' && str[i] <= '9')
+            // conversion en base 10
             result = result * str_base + (str[i] - '0');
+        // si le caractère est une lettre minuscule
         else if (str[i] >= 'a' && str[i] <= 'f')
+            // conversion en base 10
             result = result * str_base + (str[i] - 'a' + 10);
+        // si le caractère est une lettre majuscule
         else if (str[i] >= 'A' && str[i] <= 'F')
+            // conversion en base 10
             result = result * str_base + (str[i] - 'A' + 10);
         else
+            // si le caractère n'est pas valide, on arrête la conversion
             break;
+        // passage au caractère suivant
         i++;
     }
-
+    // retour de la valeur convertie avec son signe
     return sign * result;
 }
 
