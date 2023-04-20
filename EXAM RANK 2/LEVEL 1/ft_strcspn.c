@@ -21,7 +21,7 @@ size_t	ft_strcspn(const char *s, const char *reject)
 	
 	i = 0;
 	// Boucle jusqu'à la fin de la chaîne s
-	while (s[i] != '\0')    
+	while (s[i])
 	{
 		// Initialisation de l'indice j à 0 pour chaque caractère de la chaîne s
 		j = 0;
