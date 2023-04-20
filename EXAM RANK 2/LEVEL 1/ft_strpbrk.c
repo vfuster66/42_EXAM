@@ -16,18 +16,24 @@ char	*ft_strpbrk(const char *s1, const char *s2);
 
 char	*ft_strpbrk(const char *s1, const char *s2)
 {
+	const char	*p;
+	// On parcourt la chaîne s1 jusqu'à la fin
 	while (*s1)
 	{
-		const char *p = s2;
+		// On parcourt la chaîne s2 jusqu'à la fin
+		*p = s2;
 		while (*p)
 		{
+			// On compare chaque caractère de s2 avec celui de s1
 			if (*p == *s1)
-				return (char *)s1;
+				// On retourne le pointeur sur le caractère trouvé
+				return ((char *)s1); 
 			p++;
 		}
 		s1++;
 	}
-	return NULL;
+	// Si aucun caractère trouvé, on retourne NULL
+	return (NULL); 
 }
 
 /*----------------------------------
