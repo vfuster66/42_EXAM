@@ -26,24 +26,31 @@ $
 
 int main(int argc, char **argv)
 {
+    // Vérifier que nous avons exactement un argument
     if (argc != 2)
     {
         write(1, "\n", 1);
         return (0);
     }
 
-    int i = 0;
+    
+    int i;
+    
+    i = 0;
+    // Parcourir l'argument
     while (argv[1][i])
     {
+        // Si la lettre est une majuscule, écrire un tiret bas et la convertir en minuscule
         if (argv[1][i] >= 'A' && argv[1][i] <= 'Z')
         {
             write(1, "_", 1);
             argv[1][i] += 32;
         }
+        // Écrire la lettre (minuscule ou majuscule)
         write(1, &argv[1][i], 1);
         i++;
     }
+    // Écrire une nouvelle ligne et quitter
     write(1, "\n", 1);
     return (0);
 }
-
