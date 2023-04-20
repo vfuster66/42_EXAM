@@ -43,9 +43,10 @@ struct s_list
 };
 
 ---------------------------------*/
-
 #include "list.h"
 
+// Cette fonction échange les valeurs des données de deux nœuds de la liste.
+// Elle prend en entrée deux pointeurs vers des nœuds de la liste.
 void	swap_values(t_list *a, t_list *b)
 {
 	int	tmp = a->data;
@@ -53,16 +54,25 @@ void	swap_values(t_list *a, t_list *b)
 	b->data = tmp;
 }
 
+// Cette fonction trie une liste chaînée en utilisant l'algorithme de tri à bulles.
 t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 {
-	int	swapped = 1;
-	t_list	*cur;
+	// Variable booléenne indiquant si des échanges ont eu lieu lors de la dernière itération.
+	int	swapped;
+	// Pointeur vers le nœud courant lors du parcours de la liste.
+	t_list	*current; 
 
+	// On effectue l'algorithme de tri à bulles jusqu'à ce qu'il n'y ait plus d'échanges à effectuer.
 	while (swapped == 1)
 	{
+		// On initialise swapped à 0 avant chaque itération.
 		swapped = 0;
-		cur = lst;
-		while (cur && cur->next)
+		// On initialise cur au premier nœud de la liste.
+		current = lst; 
+
+		// On parcourt la liste jusqu'à l'avant-dernier nœud, en comparant chaque nœud avec son successeur.
+		// Si les données des deux nœuds sont dans le mauvais ordre, on échange leurs valeurs.
+		while (current && current->next)
 		{
 			if (cmp(cur->data, cur->next->data) == 0)
 			{
@@ -72,7 +82,8 @@ t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 			cur = cur->next;
 		}
 	}
-	return (lst);
+	// On retourne un pointeur vers le premier nœud de la liste triée.
+	return (lst); 
 }
 
 /*------------------------------
