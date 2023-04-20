@@ -26,29 +26,33 @@ $>
 
 ----------------------------------*/
 
-#include <unistd.h>
-
 int		main(int ac, char **av)
 {
-	int		i;
+	int	i;
 
 	i = 0;
+	 // Si le nombre d'arguments n'est pas égal à 2, on affiche une nouvelle ligne et on retourne 0
 	if (ac != 2)
 	{
 		write(1, "\n", 1);
 		return (0);
 	}
-	while (av[1][i])
+	// On itère sur chaque caractère de la chaîne av[1]
+	while (av[1][i]) 
 		i++;
+	// On décrémente i tant qu'on trouve des espaces ou des tabulations à la fin de la chaîne
 	while (--i && (av[1][i] == ' ' || av[1][i] == '\t'))
 		;
+	// On décrémente i tant qu'on trouve des caractères qui ne sont pas des espaces ou des tabulations
 	while (i && av[1][i] != ' ' && av[1][i] != '\t')
 		i--;
-	if (av[1][i] == ' ' || av[1][i] == '\t')
+	// Si le dernier caractère est un espace ou une tabulation, on incrémente i pour pointer sur le premier caractère du dernier mot
+	if (av[1][i] == ' ' || av[1][i] == '\t') 
 		i++;
-	while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t')
+	// On écrit chaque caractère du dernier mot sur la sortie standard 
+	while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') 
 		write(1, &av[1][i++], 1);
-	write(1, "\n", 1);
+	// On affiche une nouvelle ligne
+	write(1, "\n", 1); 
 	return (0);
 }
-
