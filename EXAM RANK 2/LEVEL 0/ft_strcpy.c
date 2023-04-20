@@ -18,14 +18,20 @@ char	*ft_strcpy(char *dest, char *src)
     int i;
 
     i = 0;
+    // Boucle tant que la chaîne n'est pas terminée
     while (src[i])
     {
+        // On copie la valeur de la case src[i] dans la case correspondante de dest[i]
         dest[i] = src[i];
+        // On incrémente i pour passer à la case suivante de la chaîne
         i++;
     }
+    // On place le caractère nul ('\0') à la fin de la chaîne copiée dans dest
     dest[i] = '\0';
-    return (dest);
+    // On renvoie le pointeur vers la chaîne de destination
+    return (dest); 
 }
+
 
 /*----------------------------------
 
