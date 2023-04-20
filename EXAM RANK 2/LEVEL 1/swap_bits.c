@@ -21,10 +21,11 @@ _____________
  
  ----------------------------------*/
  
- #include <unistd.h>
+#include <unistd.h>
 
 unsigned char	swap_bits(unsigned char octet)
 {
+	// on décale les 4 bits de poids faible vers les 4 bits de poids fort, et vice-versa, puis on renvoie le résultat
 	return ((octet >> 4) | (octet << 4));
 }
 
