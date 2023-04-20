@@ -49,25 +49,39 @@ size_t	ft_strcspn(const char *s, const char *reject)
 #include <stdio.h>
 #include <string.h>
 
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strcspn(const char *s, const char *reject);
+size_t ft_strcspn(const char *s, const char *reject);
 
-int	main(void)
+int main(void)
 {
-	char	s[] = "Hello, World!";
-	char	*found;
-	size_t	index;
+    char str1[] = "Hello world";
+    char str2[] = "Hello";
+    char str3[] = "world";
+    char str4[] = "12345";
+    char str5[] = "67890";
+    char str6[] = "1234567890";
+    char reject1[] = " ";
+    char reject2[] = "lo";
+    char reject3[] = "789";
 
-	found = ft_strchr(s, 'W');
-	if (found)
-		printf("Found character 'W' at position %ld in \"%s\"\n", found - s, s);
-	else
-		printf("Character 'W' not found in \"%s\"\n", s);
+    printf("ft_strcspn: %zu\n", ft_strcspn(str1, reject1));
+    printf("strcspn: %zu\n", strcspn(str1, reject1));
 
-	index = ft_strcspn(s, "o");
-	printf("Index of first occurrence of 'o' in \"%s\" is %ld\n", s, index);
+    printf("ft_strcspn: %zu\n", ft_strcspn(str1, reject2));
+    printf("strcspn: %zu\n", strcspn(str1, reject2));
 
-	return (0);
+    printf("ft_strcspn: %zu\n", ft_strcspn(str1, reject3));
+    printf("strcspn: %zu\n", strcspn(str1, reject3));
+
+    printf("ft_strcspn: %zu\n", ft_strcspn(str2, str3));
+    printf("strcspn: %zu\n", strcspn(str2, str3));
+
+    printf("ft_strcspn: %zu\n", ft_strcspn(str4, str5));
+    printf("strcspn: %zu\n", strcspn(str4, str5));
+
+    printf("ft_strcspn: %zu\n", ft_strcspn(str6, reject3));
+    printf("strcspn: %zu\n", strcspn(str6, reject3));
+
+    return 0;
 }
 
------------------------------*/
+-------------------------------------*/
