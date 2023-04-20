@@ -14,30 +14,33 @@ size_t	ft_strcspn(const char *s, const char *reject);
 
 #include <stdlib.h>
 
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
-	}
-	if (c == '\0')
-		return ((char *)s);
-	return (NULL);
-}
-
 size_t	ft_strcspn(const char *s, const char *reject)
 {
 	size_t	i;
-
+	size_t	j;
+	
 	i = 0;
-	while (s[i])
+	// Boucle jusqu'à la fin de la chaîne s
+	while (s[i] != '\0')    
 	{
-		if (ft_strchr(reject, s[i]))
-			return (i);
+		// Initialisation de l'indice j à 0 pour chaque caractère de la chaîne s
+		j = 0;
+		// Boucle jusqu'à la fin de la chaîne reject
+		while (reject[j] != '\0')   
+		{
+			// Si le caractère s[i] est présent dans reject
+			if (s[i] == reject[j])
+			{
+				// On retourne l'indice i correspondant au caractère s[i]
+				return (i);
+			}
+			// On passe au caractère suivant dans la chaîne reject
+			j++;
+		}
+		// On passe au caractère suivant dans la chaîne s
 		i++;
 	}
+	// Si aucun caractère de s n'est présent dans reject, on retourne la longueur de s
 	return (i);
 }
 
