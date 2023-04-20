@@ -11,14 +11,20 @@ int	ft_strlen(char *str);
 
 ---------------------------------*/
 
+#include <unistd.h>
+
 int	ft_strlen(char *str)
 {
-	int	i;
+	// Déclaration de la variable i qui va compter le nombre de caractères dans la chaîne
+	int	i; 
 
 	i = 0;
+	// Boucle tant que la chaîne n'est pas terminée
 	while (str[i])
+		// On incrémente i pour passer à la case suivante de la chaîne
 		i++;
-	return (i);
+	// On renvoie i, qui contient le nombre de caractères dans la chaîne
+	return (i); 
 }
 
 /*----------------------------
