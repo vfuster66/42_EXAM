@@ -24,27 +24,35 @@ $
 
 #include <unistd.h>
 
-int		main(int argc, char **argv)
+int	main(int ac, char **av)
 {
-	int i;
+	int	i;
 
-	if (argc != 2)
+	// si le nombre d'arguments est différent de 2
+	if (ac != 2) 
 	{
-		write(1, "\n", 1);
+		// on affiche un saut de ligne et on quitte le programme
+		write(1, "\n", 1); 
 		return (0);
 	}
 	i = 0;
-	while (argv[1][i])
+	// pour chaque caractère de la chaîne de caractères en argument
+	while (av[1][i]) 
 	{
-		if (argv[1][i] == '_')
+		// si le caractère est un underscore
+		if (av[1][i] == '_') 
 		{
+			// on passe au caractère suivant
 			i++;
-			argv[1][i] -= 32;
+			// on convertit le caractère en majuscule en ajoutant la différence entre la valeur ASCII de 'A' et la valeur ASCII de 'a'
+			av[1][i] -= 32; 
 		}
-		write(1, &argv[1][i], 1);
-		i++;
+		// on affiche le caractère
+		write(1, &av[1][i], 1);
+		// on passe au caractère suivant
+		i++; 
 	}
+	// on affiche un saut de ligne et on quitte le programme
 	write(1, "\n", 1);
 	return (0);
 }
-
