@@ -35,20 +35,27 @@ int main(int ac, char **av)
 	int	i;
 	int	ascii[256];
 	
+	// Initialisation de toutes les valeurs du tableau ascii à 0
 	i = 0;
 	while (i < 256)
 	{
 		ascii[i] = 0;
 		i++;
 	}
+	
+	// Vérification du nombre d'arguments
 	if (ac != 3)
 	{
 		write(1, "\n", 1);
 		return 0;
 	}
+	
+	// Parcours de la première chaîne de caractères
 	i = 0;
 	while(av[1][i])
 	{
+		// Si le caractère n'a pas encore été rencontré, on le marque comme rencontré
+		//(on change sa valeur dans le tableau ascii à 1) et on l'affiche
 		if (!ascii [(unsigned char)av[1][i]])
 		{
 			ascii[(unsigned char)av[1][i]] = 1;
@@ -56,9 +63,13 @@ int main(int ac, char **av)
 		}
 		i++;
 	}
+	
+	// Parcours de la deuxième chaîne de caractères
 	i = 0;
 	while (av[2][i])
 	{
+		// Si le caractère n'a pas encore été rencontré, on le marque comme rencontré 
+		//(on change sa valeur dans le tableau ascii à 1) et on l'affiche
 		if (!ascii[(unsigned char)av[2][i]])
 		{
 			ascii[(unsigned char)av[2][i]] = 1;
@@ -66,7 +77,7 @@ int main(int ac, char **av)
 		}
 		i++;
 	}
+	
 	write(1, "\n", 1);
 	return 0;
 }
-
