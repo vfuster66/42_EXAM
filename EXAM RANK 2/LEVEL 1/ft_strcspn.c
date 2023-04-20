@@ -26,7 +26,7 @@ size_t	ft_strcspn(const char *s, const char *reject)
 		// Initialisation de l'indice j à 0 pour chaque caractère de la chaîne s
 		j = 0;
 		// Boucle jusqu'à la fin de la chaîne reject
-		while (reject[j] != '\0')   
+		while (reject[j])
 		{
 			// Si le caractère s[i] est présent dans reject
 			if (s[i] == reject[j])
