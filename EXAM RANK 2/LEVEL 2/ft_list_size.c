@@ -20,17 +20,23 @@ typedef struct    s_list
 
 ------------------------------*/
 
+// Définition d'une structure de liste chaînée
 typedef struct    s_list
 {
-    struct s_list *next;
-    void          *data;
+	// Pointeur vers le prochain élément de la liste
+	struct s_list *next;
+	// Pointeur générique vers les données stockées dans l'élément de la liste
+	void          *data;
 }                t_list;
 
+// Fonction récursive qui calcule la taille d'une liste chaînée
 int	ft_list_size(t_list *begin_list)
 {
-	if (begin_list == 0)
+	// Si la liste est vide, la taille est de 0
+	if (begin_list == 0)  
 		return (0);
-	else
+	// Sinon, on ajoute 1 à la taille de la sous-liste à partir de l'élément suivant
+	else  
 		return (1 + ft_list_size(begin_list->next));
 }
 
