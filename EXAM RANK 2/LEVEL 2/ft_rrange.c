@@ -24,23 +24,31 @@ Examples:
 
 int     *ft_rrange(int start, int end)
 {
-    int size;
+    // taille du tableau de résultat
+    in  size;
+    // pointeur vers le tableau de résultat
     int *result;
+    // variable compteur
     int i;
-    int step;
+    // pas pour la boucle
+    intstep;       
 
+    // calcul de la taille du tableau
     if (start > end)
         size = start - end + 1;
     else
         size = end - start + 1;
+    // allocation de la mémoire pour le tableau
     result = (int *)malloc(sizeof(int) * size);
     if (!result)
         return (NULL);
     i = 0;
+    // calcul du pas de la boucle en fonction de start et end
     if (start > end)
         step = 1;
     else
         step = -1;
+    // remplissage du tableau de résultat
     while (i < size)
     {
         result[i] = end;
