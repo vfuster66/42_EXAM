@@ -20,29 +20,42 @@ $>
 
 ---------------------------------*/
 
-#include <unistd.h>
+#include <unistd.h>	// pour la fonction write()
 
-int		main(int ac, const char **av)
+/* Cette fonction affiche le nombre d'arguments passés en ligne de commande
+   en utilisant la sortie standard. */
+int main(int ac, const char **av)
 {
-	int n; 
-	char c;
-	
+	// variable pour stocker le nombre d'arguments
+	int		n;
+	// variable pour stocker le caractère à afficher
+	char	c;
+
+	// on soustrait 1 à ac car le premier argument est le nom du programme
 	n = ac - 1;
-	if (n < 0)
+	// si le nombre est négatif, on affiche un signe moins
+	if (n < 0)	
 	{
 		write(1, "-", 1);
-		n = -n;
+		// on prend la valeur absolue pour la suite
+		n = -n;	
 	}
-	if (n >= 10)
+	if (n >= 10)	// si le nombre a deux chiffres ou plus, on appelle récursivement main()
 	{
+		// on affiche le premier chiffre
 		main(n / 10, av);
+		// on affiche le deuxième chiffre
 		main(n % 10, av);
 	}
-	else
+	// sinon, on affiche directement le chiffre
+	else	
 	{
+		// on convertit l'entier en caractère ASCII
 		c = n + '0';
+		// on écrit le caractère dans la sortie standard
 		write(1, &c, 1);
 	}
+	// on ajoute un retour à la ligne à la fin de l'affichage
 	write(1, "\n", 1);
 	return (0);
 }
