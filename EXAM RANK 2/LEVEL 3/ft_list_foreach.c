@@ -29,8 +29,10 @@ typedef struct    s_list
 
 typedef struct    s_list
 {
-    struct s_list *next;
-    void          *data;
+    // pointeur vers l'élément suivant dans la liste
+    struct s_list *next; 
+    // pointeur vers les données stockées dans l'élément
+    void          *data;    
 }                 t_list;
 
 void ft_list_foreach(t_list *begin_list, void (*f)(void *));
@@ -42,12 +44,16 @@ void ft_list_foreach(t_list *begin_list, void (*f)(void *));
 
 void ft_list_foreach(t_list *begin_list, void (*f)(void *))
 {
-    t_list *current = begin_list;
+    // pointeur vers l'élément courant dans la liste, initialisé à begin_list
+    t_list *current = begin_list;   
 
-    while (current != NULL)
+    // boucle tant que l'élément courant n'est pas NULL
+    while (current != NULL)         
     {
+        // appelle la fonction f avec les données stockées dans l'élément courant
         (*f)(current->data);
-        current = current->next;
+        // passe à l'élément suivant dans la liste
+        current = current->next;    
     }
 }
 
