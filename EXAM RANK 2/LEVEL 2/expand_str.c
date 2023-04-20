@@ -39,30 +39,43 @@ $>
 
 #include <unistd.h>
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int		i;
-	int		flag;
+	int	i;
+	// Variable booléenne pour savoir si le caractère précédent était un espace ou une tabulation
+	int	flag; 
 
-	if (ac == 2)
+	// Vérifie si un seul argument est donné
+	if (ac == 2) 
 	{
 		i = 0;
-		while (av[1][i] == ' ' || av[1][i] == '\t')
+		// Ignore les espaces et les tabulations au début de la chaîne
+		while (av[1][i] == ' ' || av[1][i] == '\t') 
 			i += 1;
-		while (av[1][i])
+		// Parcourt tous les caractères de la chaîne
+		while (av[1][i]) 
 		{
-			if (av[1][i] == ' ' || av[1][i] == '\t')
+			// Si le caractère est un espace ou une tabulation
+			if (av[1][i] == ' ' || av[1][i] == '\t') 
+				// Met la variable flag à vrai
 				flag = 1;
-			if (!(av[1][i] == ' ' || av[1][i] == '\t'))
+			// Si le caractère n'est pas un espace ou une tabulation
+			if (!(av[1][i] == ' ' || av[1][i] == '\t')) 
 			{
+				// Si le caractère précédent était un espace ou une tabulation
 				if (flag)
+					// Écrit trois espaces pour remplacer l'espace ou la tabulation
 					write(1, "   ", 3);
+				// Met la variable flag à faux
 				flag = 0;
-				write(1, &av[1][i], 1);
+				// Écrit le caractère
+				write(1, &av[1][i], 1); 
 			}
+			// Passe au caractère suivant
 			i += 1;
 		}
 	}
+	// Écrit un saut de ligne
 	write(1, "\n", 1);
 	return (0);
 }
