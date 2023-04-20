@@ -27,32 +27,38 @@ $>
 
 -------------------------------------*/
 
-#include <unistd.h> // For write
-int      main(int ac, char const *av[])
+#include <unistd.h>
+
+int     main(int ac, char const *av[])
 {
-        int i;
-        int flag;
+        int     i;
+        int     flag;
+        
         if (ac == 2)
         {
                 i = 0;
+                // Ignorer les espaces et tabulations au début de la chaîne
                 while (av[1][i] == ' ' || av[1][i] == '\t')
                         i += 1;
                 while (av[1][i])
                 {
+                        // Si on rencontre un espace ou une tabulation, activer le flag
                         if (av[1][i] == ' ' || av[1][i] == '\t')
                                 flag = 1;
+                        // Si on rencontre un caractère qui n'est pas un espace ou une tabulation
                         if (!(av[1][i] == ' ' || av[1][i] == '\t'))
                         {
+                                // Si le flag est actif, ajouter un espace avant d'ajouter le caractère
                                 if (flag)
                                         write(1, " ", 1);
+                                // Désactiver le flag et ajouter le caractère
                                 flag = 0;
                                 write(1, &av[1][i], 1);
                         }
                         i += 1;
                 }
         }
+        // Ajouter un saut de ligne à la fin
         write(1, "\n", 1);
         return (0);
 }
-
-
