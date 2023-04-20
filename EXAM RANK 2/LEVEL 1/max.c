@@ -18,23 +18,30 @@ If the array is empty, the function returns 0.
 
 #include <stdlib.h>
 
+// fonction pour trouver le maximum dans un tableau
 int max(int *tab, unsigned int len)
 {
-    int	res;
+    int result;
+    
+    // si la longueur est nulle, il n'y a pas de maximum
     if (!len)
         return (0);
-
-    res = *tab;
+    // initialisation du maximum à la première valeur du tableau
+    res = *tab; 
     unsigned int i;
     
-    i = 1;
+    // on commence à parcourir le tableau à partir de l'indice 1
+    i = 1; 
     while (i < len)
     {
-        if (res < *(tab + i))
-            res = *(tab + i);
+        // si la valeur courante est supérieure au maximum actuel
+        if (result < *(tab + i))
+            // on met à jour le maximum
+            result = *(tab + i); 
         i++;
     }
-    return (res);
+    // on retourne le maximum trouvé
+    return (result); 
 }
 
 /*--------------------------------
