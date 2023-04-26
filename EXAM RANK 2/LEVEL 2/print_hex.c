@@ -73,4 +73,6 @@ int main(int ac, char **av)
                         // on affiche sa représentation en base 16
                         ft_print_hex(n);
         }
+        write(1, "\n", 1);
+        return (0);
 }
