@@ -46,7 +46,7 @@ int		skip_whitespace(char *str, int i)
 }
 
 // Cette fonction renvoie la longueur du premier mot dans la chaîne str.
-int		ft_wordlen(char *str)
+int		wordlen(char *str)
 {
 	int i = 0;
 
@@ -63,7 +63,7 @@ int		print_word(char *str, int i, int *is_first)
 	// On ignore les espaces et les tabulations au début du mot.
 	i = skip_whitespace(str, i);
 	// On calcule la longueur du mot.
-	word_len = ft_wordlen(str + i);
+	word_len = wordlen(str + i);
 	// Si ce n'est pas le premier mot qu'on imprime, on ajoute un espace avant.
 	if (*is_first == 0)
 		write(1, " ", 1);
@@ -79,7 +79,7 @@ int		print_word(char *str, int i, int *is_first)
 int		epur_str(char *str)
 {
 	int i = 0;
-	int is_first = 1;
+	int flag = 1;
 
 	// On ignore les espaces et les tabulations au début de la chaîne.
 	i = skip_whitespace(str, i);
@@ -87,12 +87,12 @@ int		epur_str(char *str)
 	while (str[i] != '\0')
 	{
 		// On imprime le premier mot à partir de la position i, et on met à jour la nouvelle position i.
-		i = print_word(str, i, &is_first);
+		i = print_word(str, i, &flag);
 		// On ignore les espaces et les tabulations après le mot qu'on vient d'imprimer.
 		i = skip_whitespace(str, i);
 	}
 	// On renvoie is_first qui vaut 1 si la chaîne est vide, et 0 sinon.
-	return (is_first);
+	return (flag);
 }
 
 int		main(int ac, char **av)
