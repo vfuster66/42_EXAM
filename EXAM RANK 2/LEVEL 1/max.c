@@ -27,7 +27,7 @@ int max(int *tab, unsigned int len)
     if (!len)
         return (0);
     // initialisation du maximum à la première valeur du tableau
-    res = *tab; 
+    result = *tab; 
     unsigned int i;
     
     // on commence à parcourir le tableau à partir de l'indice 1
