@@ -74,12 +74,12 @@ t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 		// Si les données des deux nœuds sont dans le mauvais ordre, on échange leurs valeurs.
 		while (current && current->next)
 		{
-			if (cmp(cur->data, cur->next->data) == 0)
+			if (cmp(current->data, current->next->data) == 0)
 			{
-				swap_values(cur, cur->next);
+				swap_values(current, current->next);
 				swapped = 1;
 			}
-			cur = cur->next;
+			current = current->next;
 		}
 	}
 	// On retourne un pointeur vers le premier nœud de la liste triée.
