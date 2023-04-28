@@ -22,22 +22,21 @@ If the array is empty, the function returns 0.
 int max(int *tab, unsigned int len)
 {
     int result;
+    unsigned int    i;
     
     // si la longueur est nulle, il n'y a pas de maximum
     if (!len)
         return (0);
     // initialisation du maximum à la première valeur du tableau
-    result = *tab; 
-    unsigned int i;
-    
+    result = tab[0];   
     // on commence à parcourir le tableau à partir de l'indice 1
     i = 1; 
     while (i < len)
     {
         // si la valeur courante est supérieure au maximum actuel
-        if (result < *(tab + i))
+        if (result < tab[i])
             // on met à jour le maximum
-            result = *(tab + i); 
+            result = tab[i]; 
         i++;
     }
     // on retourne le maximum trouvé
