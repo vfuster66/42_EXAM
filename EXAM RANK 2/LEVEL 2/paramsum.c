@@ -27,16 +27,22 @@ void ft_putnbr(int n)
 {       
         char    digit;
         if (n >= 10)
-                ft_putnbr(n / 10);  // Appel récursif pour afficher les chiffres de n/10
-        digit = n % 10 + '0';  // Convertit le dernier chiffre en caractère
-        write(1, &digit, 1);   // Écrit le caractère sur la sortie standard
+                // Appel récursif pour afficher les chiffres de n/10
+                ft_putnbr(n / 10);
+        // Convertit le dernier chiffre en caractère
+        digit = n % 10 + '0';
+        // Écrit le caractère sur la sortie standard
+        write(1, &digit, 1);   
 }       
 
 int main(int ac, char **av)
 {       
-        (void)av;  // Utilisation inutile de av, évite un avertissement de compilation
+        // Utilisation inutile de av, évite un avertissement de compilation
+        (void)av;  
         
-        ft_putnbr(ac - 1);  // Appelle ft_putnbr avec le nombre d'arguments moins 1
-        write(1, "\n", 1);  // Écrit un saut de ligne sur la sortie standard
+        // Appelle ft_putnbr avec le nombre d'arguments moins 1
+        ft_putnbr(ac - 1);
+        // Écrit un saut de ligne sur la sortie standard
+        write(1, "\n", 1);  
         return (0);
 } 
