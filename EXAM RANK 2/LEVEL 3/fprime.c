@@ -39,47 +39,48 @@ $
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int ac, char **av)
+int	main(int argc, char *argv[])
 {
-    int n;
-    int i;
-    
-    // Vérifier que le programme a reçu exactement 2 arguments : le nom du programme et un entier
-    if (ac != 2)
-    {
-        // Si le nombre d'arguments est incorrect, afficher une ligne vide et terminer le programme
-        printf("\n"); 
-        return 0;
-    }
-    // Convertir l'argument en entier
-    n = atoi(av[1]);
-    // Si l'argument est 1, afficher 1 et terminer le programme
-    if (n == 1)
-    {
-        printf("1\n");
-        return 0;
-    }
-    i = 2; 
-    // Boucler tant que i est inférieur ou égal à n
-    while (i <= n)
-    {
-        // Si n est divisible par i
-        if (n % i == 0)
-        {
-            // Afficher i
-            printf("%d", i);
-            // Diviser n par i
-            n /= i;
-            // Si n est plus grand que 1, afficher une étoile
-            if (n > 1)                
-                printf("*");
-            // Réinitialiser i à 1
-            i = 1; 
-        }
-        // Passer au prochain i
-        i++; 
-    }
-    // Afficher une ligne vide à la fin de la boucle
-    printf("\n"); 
-    return 0;
+    // compteur pour la boucle while
+	int	i;
+    // le nombre à factoriser
+	int	number;  
+
+	// Vérifier s'il y a un seul argument passé en ligne de commande
+	if (argc == 2)
+	{
+		i = 1;
+        // convertir la chaîne de caractères en entier
+		number = atoi(argv[1]);  
+
+		// Si le nombre est égal à 1, la seule factorisation possible est 1
+		if (number == 1)
+			printf("1");
+
+		// Tant que le nombre est supérieur ou égal à i
+		while (number >= ++i)
+		{
+			// Si i est un facteur de number
+			if (number % i == 0)
+			{
+                // afficher le facteur i
+				printf("%d", i);  
+
+				// Si number est égal à i, cela signifie que tous les facteurs ont été trouvés
+				if (number == i)
+					break ;
+
+                // afficher l'opérateur de multiplication
+				printf("*");
+                // diviser number par i
+				number /= i;
+                // réinitialiser le compteur i
+				i = 1;            
+			}
+		}
+	}
+    // afficher un retour à la ligne
+	printf("\n");   
+	return (0);
 }
+
