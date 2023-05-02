@@ -20,42 +20,23 @@ $>
 
 ---------------------------------*/
 
-#include <unistd.h>	// pour la fonction write()
+#include <unistd.h>
 
-/* Cette fonction affiche le nombre d'arguments passés en ligne de commande
-   en utilisant la sortie standard. */
-int main(int ac, const char **av)
-{
-	// variable pour stocker le nombre d'arguments
-	int		n;
-	// variable pour stocker le caractère à afficher
-	char	c;
+// Fonction récursive pour afficher les chiffres de n
+void ft_putnbr(int n)
+{       
+        char    digit;
+        if (n >= 10)
+                ft_putnbr(n / 10);  // Appel récursif pour afficher les chiffres de n/10
+        digit = n % 10 + '0';  // Convertit le dernier chiffre en caractère
+        write(1, &digit, 1);   // Écrit le caractère sur la sortie standard
+}       
 
-	// on soustrait 1 à ac car le premier argument est le nom du programme
-	n = ac - 1;
-	// si le nombre est négatif, on affiche un signe moins
-	if (n < 0)	
-	{
-		write(1, "-", 1);
-		// on prend la valeur absolue pour la suite
-		n = -n;	
-	}
-	if (n >= 10)	// si le nombre a deux chiffres ou plus, on appelle récursivement main()
-	{
-		// on affiche le premier chiffre
-		main(n / 10, av);
-		// on affiche le deuxième chiffre
-		main(n % 10, av);
-	}
-	// sinon, on affiche directement le chiffre
-	else	
-	{
-		// on convertit l'entier en caractère ASCII
-		c = n + '0';
-		// on écrit le caractère dans la sortie standard
-		write(1, &c, 1);
-	}
-	// on ajoute un retour à la ligne à la fin de l'affichage
-	write(1, "\n", 1);
-	return (0);
-}
+int main(int ac, char **av)
+{       
+        (void)av;  // Utilisation inutile de av, évite un avertissement de compilation
+        
+        ft_putnbr(ac - 1);  // Appelle ft_putnbr avec le nombre d'arguments moins 1
+        write(1, "\n", 1);  // Écrit un saut de ligne sur la sortie standard
+        return (0);
+} 
