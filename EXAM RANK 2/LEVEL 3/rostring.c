@@ -36,87 +36,83 @@ $>
 --------------------------------*/
 
 #include <unistd.h>
+#include <stdlib.h>
 
-// Cette fonction renvoie la position de la première occurrence d'un caractère qui n'est pas une espace ou une tabulation dans la chaîne str à partir de la position i.
-int		skip_whitespace(char *str, int i)
+int main(int ac, char **av)
 {
-	while (str[i] == ' ' || str[i] == '\t')
-		++i;
-	return (i);
+	// Vérifier que l'argument est bien présent
+    	if (ac < 2) 
+    	{
+		// Si l'argument est absent, écrire une ligne vide et terminer le programme
+        	write(1, "\n", 1);
+        	return 0;
+    	}
+    	// Trouver le début du premier mot
+    	int	i;
+	
+	i = 0;
+	// Chercher les espaces ou les tabulations au début de la chaîne
+    	while (av[1][i] == ' ' || av[1][i] == '\t') 
+        i++;
+    	// Trouver la fin du premier mot
+    	int	j;
+	
+	j = i;
+	// Chercher la fin du premier mot (la première espace ou tabulation)
+    	while (av[1][j] && av[1][j] != ' ' && av[1][j] != '\t') 
+        	j++;
+    	// Sauvegarder le premier mot dans un tampon temporaire
+    	int	len;
+	
+	// Calculer la longueur du premier mot
+	len = j - i;
+	// Allouer de la mémoire pour stocker le premier mot (plus un caractère pour le terminateur de chaîne)
+    	char *tmp = malloc(len + 1);
+	// Vérifier que l'allocation a réussi
+    	if (!tmp)
+        	return 1;
+    	int	k;
+	
+	k = -1;
+	// Copier le premier mot dans le tampon temporaire
+    	while (++k < len)
+		tmp[k] = av[1][i + k];
+	// Terminer la chaîne avec le caractère nul
+    	tmp[k] = '\0';
+    	// Imprimer le reste de la chaîne avec des mots séparés par des espaces
+	// Ignorer les espaces ou les tabulations qui suivent le premier mot
+    	while (av[1][j] && (av[1][j] == ' ' || av[1][j] == '\t'))
+        	j++;
+	// Parcourir le reste de la chaîne
+    	while (av[1][j])
+	{ 
+		// Début d'un nouveau mot
+        	i = j; 
+		// Chercher la fin du mot
+        	while (av[1][j] && av[1][j] != ' ' && av[1][j] != '\t') 
+            		j++;
+		// Si un mot a été trouvé, l'écrire
+        	if (i < j)
+		{ 
+			// Écrire un espace avant le mot
+            		write(1, " ", 1);
+			// Écrire le mot
+            		write(1, av[1] + i, j - i); 
+        	}
+		// Ignorer les espaces ou les tabulations qui suivent le mot
+        	while (av[1][j] && (av[1][j] == ' ' || av[1][j] == '\t')) 
+            		j++;
+    	}
+    	// Imprimer le premier mot à la fin, avec un espace
+    	write(1, " ", 1);
+    	write(1, tmp, len);
+    	// Libérer le tampon temporaire
+    	free(tmp);
+    	// Écrire une ligne vide pour terminer la sortie
+    	write(1, "\n", 1);
+    	return 0;
 }
+``
 
-// Cette fonction renvoie la longueur du premier mot dans la chaîne str.
-int		wordlen(char *str)
-{
-	int i = 0;
-
-	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t')
-		++i;
-	return (i);
-}
-
-// Cette fonction imprime le premier mot dans la chaîne str à partir de la position i, et renvoie la nouvelle position dans la chaîne.
-int		print_word(char *str, int i, int *is_first)
-{
-	int word_len;
-
-	// On ignore les espaces et les tabulations au début du mot.
-	i = skip_whitespace(str, i);
-	// On calcule la longueur du mot.
-	word_len = wordlen(str + i);
-	// Si ce n'est pas le premier mot qu'on imprime, on ajoute un espace avant.
-	if (*is_first == 0)
-		write(1, " ", 1);
-	// On imprime le mot.
-	write(1, str + i, word_len);
-	// On met is_first à 0 pour indiquer que le premier mot a été imprimé.
-	*is_first = 0;
-	// On renvoie la nouvelle position dans la chaîne.
-	return (i + word_len);
-}
-
-// Cette fonction imprime tous les mots dans la chaîne str séparés par un seul espace, et renvoie 1 si la chaîne est vide (c'est-à-dire qu'il n'y a pas de mots à imprimer).
-int		epur_str(char *str)
-{
-	int i = 0;
-	int flag = 1;
-
-	// On ignore les espaces et les tabulations au début de la chaîne.
-	i = skip_whitespace(str, i);
-	// Tant qu'on n'a pas atteint la fin de la chaîne,
-	while (str[i] != '\0')
-	{
-		// On imprime le premier mot à partir de la position i, et on met à jour la nouvelle position i.
-		i = print_word(str, i, &flag);
-		// On ignore les espaces et les tabulations après le mot qu'on vient d'imprimer.
-		i = skip_whitespace(str, i);
-	}
-	// On renvoie is_first qui vaut 1 si la chaîne est vide, et 0 sinon.
-	return (flag);
-}
-
-int		main(int ac, char **av)
-{
-	if (ac >= 2)
-	{
-		// On récupère la chaîne à traiter depuis les arguments du programme.
-		char *str = av[1];
-		int i;
-		int is_first;
-
-		i = 0;
-		// On ignore les espaces et les tabulations au début de la chaîne.
-		i = skip_whitespace(str, i);
-		// On avance jusqu'au début du deuxième mot dans la chaîne.
-		i = i + ft_wordlen(str + i);
-		// On imprime tous les mots dans la chaîne séparés par un seul espace, à partir de la position i.
-		is_first = epur_str(str + i);
-		// Imprime le premier mot, avec is_first défini sur vrai
-		print_word(str, 0, &is_first);
-	}
-	// Imprime un caractère de saut de ligne pour terminer la sortie
-	write(1, "\n", 1);
-	// Renvoie 0 pour indiquer une exécution réussie du programme
-	return (0);
 
 	
