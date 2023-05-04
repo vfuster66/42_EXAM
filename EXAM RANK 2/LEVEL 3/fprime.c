@@ -39,7 +39,7 @@ $
 #include <stdio.h>
 #include <stdlib.h>
 
-int	main(int argc, char *argv[])
+int	main(int ac, char **av)
 {
     // compteur pour la boucle while
 	int	i;
@@ -47,11 +47,11 @@ int	main(int argc, char *argv[])
 	int	number;  
 
 	// Vérifier s'il y a un seul argument passé en ligne de commande
-	if (argc == 2)
+	if (ac == 2)
 	{
 		i = 1;
         // convertir la chaîne de caractères en entier
-		number = atoi(argv[1]);  
+		number = atoi(av[1]);  
 
 		// Si le nombre est égal à 1, la seule factorisation possible est 1
 		if (number == 1)
