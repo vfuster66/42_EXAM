@@ -51,7 +51,7 @@ int	main(int ac, char **av)
 		i = 0;
 		// Ignore les espaces et les tabulations au début de la chaîne
 		while (av[1][i] == ' ' || av[1][i] == '\t') 
-			i += 1;
+			i++;
 		// Parcourt tous les caractères de la chaîne
 		while (av[1][i]) 
 		{
@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 				write(1, &av[1][i], 1); 
 			}
 			// Passe au caractère suivant
-			i += 1;
+			i++;
 		}
 	}
 	// Écrit un saut de ligne
