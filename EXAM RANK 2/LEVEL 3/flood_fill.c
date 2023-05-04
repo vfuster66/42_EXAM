@@ -97,32 +97,41 @@ typedef struct s_point
 } t_point;
 
 // Fonction récursive qui remplit une zone de caractères identiques à partir d'un point donné
-void fill_area(char **tab, t_point size, t_point begin, char c)
+#include "flood_fill.h"
+
+/*
+** Cette fonction récursive est appelée pour remplir toutes les cases d'une
+** région connexe à partir de la case de départ (cur) et en remplaçant tous
+** les caractères to_fill par 'F'. La fonction arrête de se propager dans une
+** direction si elle rencontre les bords de la grille (taille size) ou si la case
+** courante n'a pas la valeur to_fill.
+*/
+void	fill(char **tab, t_point size, t_point cur, char to_fill)
 {
-    // On vérifie si le point est en dehors des limites du tableau
-    if (begin.x < 0 || begin.x >= size.x || begin.y < 0 || begin.y >= size.y)
-        return;
-    
-    // On vérifie si le caractère du point actuel est différent de celui qu'on cherche à remplacer
-    if (tab[begin.y][begin.x] != c)
-        return;
-    
-    // On marque le point actuel comme étant rempli
-    tab[begin.y][begin.x] = 'F';
-    
-    // On remplit les zones voisines récursivement
-    fill_area(tab, size, (t_point){begin.x + 1, begin.y}, c);
-    fill_area(tab, size, (t_point){begin.x - 1, begin.y}, c);
-    fill_area(tab, size, (t_point){begin.x, begin.y + 1}, c);
-    fill_area(tab, size, (t_point){begin.x, begin.y - 1}, c);
+	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x
+		|| tab[cur.y][cur.x] != to_fill)
+		// Arrête si on est hors des limites ou si la case n'a pas la valeur to_fill
+		return ;
+	// Remplace la case courante par 'F'
+	tab[cur.y][cur.x] = 'F'; 
+	// Appelle récursivement fill() pour toutes les cases adjacentes
+	// Case à gauche
+	fill(tab, size, (t_point){cur.x - 1, cur.y}, to_fill);
+	// Case à droite
+	fill(tab, size, (t_point){cur.x + 1, cur.y}, to_fill);
+	// Case en haut
+	fill(tab, size, (t_point){cur.x, cur.y - 1}, to_fill);
+	// Case en bas
+	fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill); 
 }
 
-// Fonction principale qui appelle fill_area pour remplir la zone correspondante
-void flood_fill(char **tab, t_point size, t_point begin)
+/*
+** Cette fonction est appelée pour remplir toute la région connexe à partir de la
+** case de départ (begin) en appelant la fonction fill(). Elle utilise la valeur
+** de la case de départ (tab[begin.y][begin.x]) comme valeur to_fill pour fill().
+*/
+void	flood_fill(char **tab, t_point size, t_point begin)
 {
-    // On récupère le caractère à remplacer
-    char c = tab[begin.y][begin.x];
-    
-    // On appelle fill_area pour remplir la zone correspondante
-    fill_area(tab, size, begin, c);
+	fill(tab, size, begin, tab[begin.y][begin.x]);
 }
+
