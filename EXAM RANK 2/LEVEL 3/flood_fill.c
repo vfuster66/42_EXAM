@@ -86,9 +86,6 @@ $>
 
 ------------------------------------*/
 
-#include <stdlib.h>
-#include <stdio.h>
-
 // Définition de la structure de données pour un point
 typedef struct s_point
 {
@@ -97,15 +94,12 @@ typedef struct s_point
 } t_point;
 
 // Fonction récursive qui remplit une zone de caractères identiques à partir d'un point donné
-#include "flood_fill.h"
+// Cette fonction récursive est appelée pour remplir toutes les cases d'une
+// région connexe à partir de la case de départ (cur) et en remplaçant tous
+// les caractères to_fill par 'F'. La fonction arrête de se propager dans une
+// direction si elle rencontre les bords de la grille (taille size) ou si la case
+// courante n'a pas la valeur to_fill.
 
-/*
-** Cette fonction récursive est appelée pour remplir toutes les cases d'une
-** région connexe à partir de la case de départ (cur) et en remplaçant tous
-** les caractères to_fill par 'F'. La fonction arrête de se propager dans une
-** direction si elle rencontre les bords de la grille (taille size) ou si la case
-** courante n'a pas la valeur to_fill.
-*/
 void	fill(char **tab, t_point size, t_point cur, char to_fill)
 {
 	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x
@@ -125,11 +119,10 @@ void	fill(char **tab, t_point size, t_point cur, char to_fill)
 	fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill); 
 }
 
-/*
-** Cette fonction est appelée pour remplir toute la région connexe à partir de la
-** case de départ (begin) en appelant la fonction fill(). Elle utilise la valeur
-** de la case de départ (tab[begin.y][begin.x]) comme valeur to_fill pour fill().
-*/
+// Cette fonction est appelée pour remplir toute la région connexe à partir de la
+// case de départ (begin) en appelant la fonction fill(). Elle utilise la valeur
+// de la case de départ (tab[begin.y][begin.x]) comme valeur to_fill pour fill().
+
 void	flood_fill(char **tab, t_point size, t_point begin)
 {
 	fill(tab, size, begin, tab[begin.y][begin.x]);
