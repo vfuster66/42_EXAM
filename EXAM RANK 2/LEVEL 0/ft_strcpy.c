@@ -11,8 +11,6 @@ char    *ft_strcpy(char *s1, char *s2);
 
 -------------------------------*/
 
-#include <unistd.h>
-
 char	*ft_strcpy(char *dest, char *src)
 {
     int i;
