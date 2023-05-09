@@ -20,30 +20,31 @@ size_t	ft_strspn(const char *s, const char *accept);
 
 size_t ft_strspn(const char *s, const char *accept)
 {
-     // Compteur pour la chaîne s
-    size_t  i;
-    // Compteur pour la chaîne accept
-    size_t	j; 
+   // Compteur pour la chaîne s
+   size_t  i;
+   // Compteur pour la chaîne accept
+   size_t	j; 
     
-    i = 0;
-    // On parcourt la chaine s
-    while (s[i])
-    {
-        j = 0;
-        // on parcourt la chaine accept
-        while (accept[j])
-        {
-             // Si on trouve un caractère correspondant, on sort de la boucle
-            if (s[i] == accept[j])
-                break;
-            j++;
-        }
-        // Si aucun caractère correspondant n'est trouvé, on retourne la longueur
-        if (!accept[j])
-            i++;
-    }
-    // Si on parcourt toute la chaîne s sans trouver de caractères qui ne sont pas dans accept, on retourne la longueur de s
-    return (i); 
+   i = 0;
+   // On parcourt la chaine s
+   while (s[i])
+   {
+      j = 0;
+      // on parcourt la chaine accept
+      while (accept[j])
+      {
+         // Si on trouve un caractère correspondant, on sort de la boucle
+         if (s[i] == accept[j])
+            break;
+         j++;
+      }
+      // Si aucun caractère correspondant n'est trouvé, on retourne la longueur
+      if (!accept[j])
+         return (i);
+      i++;
+   }
+   // Si on parcourt toute la chaîne s sans trouver de caractères qui ne sont pas dans accept, on retourne la longueur de s
+   return (i); 
 }
 
 /*-------------------------------------
