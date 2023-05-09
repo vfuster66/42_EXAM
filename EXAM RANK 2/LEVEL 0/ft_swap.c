@@ -13,8 +13,6 @@ void	ft_swap(int *a, int *b);
 
 -----------------------*/
 
-#include <unistd.h>
-
 void	ft_swap(int *a, int *b)
 {
 	// Déclaration d'une variable temporaire pour stocker la valeur de a
