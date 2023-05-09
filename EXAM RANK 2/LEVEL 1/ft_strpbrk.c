@@ -11,19 +11,17 @@ The function should be prototyped as follows:
 char	*ft_strpbrk(const char *s1, const char *s2);
 
 --------------------------------------*/
-#include <string.h>
+#include <stddef.h>
 
-char	*ft_strpbrk(const char *str1, const char *str2) 
+char	*ft_strpbrk(const char *s1, const char *s2) 
 {
 	// pointeur sur le début de str1
-	const char	*s1 = str1;
+	const char	*s2_start = s2;
 	// pointeur sur le début de str2
-	const char	*s2;
-	// boucle sur chaque caractère de str1
 	while (*s1)
 	{
 		// réinitialisation du pointeur sur le début de str2
-        	s2 = str2;
+        	s2 = s2_start;
 		// boucle sur chaque caractère de str2
 		while (*s2)
 		{
