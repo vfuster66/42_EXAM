@@ -11,8 +11,6 @@ int	ft_strlen(char *str);
 
 ---------------------------------*/
 
-#include <unistd.h>
-
 int	ft_strlen(char *str)
 {
 	// Déclaration de la variable i qui va compter le nombre de caractères dans la chaîne
