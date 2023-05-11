@@ -42,9 +42,9 @@ $>
 #include <stdlib.h>
 #include <unistd.h>
 
-void    ft_putnbr(int nb)
+void    ft_putnbr(int n)
 {
-    char    c;
+    char    digit;
     
     // Fonction récursive pour afficher un nombre entier en utilisant write
     if (nb >= 10)
@@ -73,39 +73,28 @@ int ft_atoi(char *str)
     return (result);
 }
 
-void print_table(int n, int i)
+void    tab_mult(int nb)
 {
-    // Fonction récursive pour afficher la table de multiplication de n jusqu'à 9*n
-    if (i <= 9)
-    {
-        // On affiche le multiplicateur
-        ft_putnbr(i);
-        // On affiche le symbole 'x' pour indiquer la multiplication
-        write(1, " x ", 3);
-        // On affiche le multiplicande
-        ft_putnbr(n);
-        // On affiche le symbole '=' pour indiquer le résultat
-        write(1, " = ", 3);
-        // On affiche le résultat de la multiplication
-        ft_putnbr(n * i);
-        // On saute une ligne pour passer à la multiplication suivante
-        write(1, "\n", 1);
-        // On appelle la fonction récursivement pour afficher la multiplication suivante
-        print_table(n, i + 1);
-    }
+        int     i;
+
+        i = 1;
+        while (i <= 9)
+        {
+                ft_putnbr(i);
+                write(1, " x ", 3);
+                ft_putnbr(nb);
+                write(1, " = ", 3);
+                ft_putnbr(i * nb);
+                write(1, "\n", 1);
+                i++;
+        }
 }
 
-int main(int ac, char **av)
+int     main(int ac, char **av)
 {
-    if (ac != 2)
-    {
-        // Si le nombre d'arguments est incorrect, on affiche une ligne vide et on termine le programme
-        write(1, "\n", 1);
-        return 0;
-    }
-    // On convertit le premier argument en un entier
-    int n = ft_atoi(av[1]);
-    // On affiche la table de multiplication pour ce nombre
-    print_table(n, 1); 
-    return 0;
+        if (ac != 2)
+                write(1, "\n", 1);
+        else
+                tab_mult(ft_atoi(av[1]));
+        return (0);
 }
