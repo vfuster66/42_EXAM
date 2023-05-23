@@ -12,80 +12,97 @@ char	*ft_itoa(int nbr);
 
 ------------------------------*/
 #include <stdlib.h>
+ 
+/* Cette fonction calcule la valeur absolue d'un nombre entier (nbr).
+   Si le nombre est négatif, elle le retourne avec le signe inversé,
+   sinon elle le retourne sans modification. */
 
-char	*ft_itoa(int n)
+int absolute_value(int nbr)
 {
-    // pointeur vers le début de la chaîne de caractères
-    char	*str;
-    // longueur de la chaîne de caractères
-    int	len;
-    // indicateur pour savoir si le nombre est négatif
-    int	sign;
-    // variable temporaire pour stocker la valeur de n
-    int	temp;
-
-    // retourne la chaîne de caractères "0" si n est égal à 0
-    if (n == 0)
-        return ("0");   
-    len = 0;
-    sign = 0;
-    if (n < 0)
-    {
-        // indique que le nombre est négatif
-        sign = 1;
-        // change la valeur de n en positive
-        n = -n;         
-    }
-    temp = n;
-    while (temp > 0)
-    {
-        // divise temp par 10 pour obtenir le nombre de chiffres dans n
-        temp /= 10;     
-        len++;
-    }
-    if (sign)
-        // ajoute 1 à la longueur de la chaîne de caractères si le nombre est négatif
-        len++;
-    // alloue de la mémoire pour la chaîne de caractères
-    str = (char *)malloc(sizeof(char) * (len + 1));
-    // ajoute un caractère nul à la fin de la chaîne de caractères
-    str[len] = '\0';    
-    while (len > 0)
-    {
-        len--;
-        // ajoute le chiffre correspondant à la fin de la chaîne de caractères
-        str[len] = (n % 10) + '0';  
-        n /= 10;
-    }
-    if (sign)
-        // ajoute le signe "-" au début de la chaîne de caractères si le nombre est négatif
-        str[0] = '-';
-    // retourne la chaîne de caractères représentant n
-    return (str);       
+    if (nbr < 0)
+        return (-nbr);
+    return (nbr);
 }
 
-/*---------------------------------------
+/* Cette fonction calcule la longueur d'un nombre entier (nbr).
+   Elle compte le nombre de chiffres en itérant sur le quotient de la division
+   par 10 jusqu'à ce que le nombre devienne 0.
+   Elle incrémente la variable len à chaque itération et gère le cas où nbr est nul ou négatif.
+   La longueur du nombre est retournée. */
 
- #include <stdio.h>
- #include <limits.h>
+int get_len(int nbr)
+{
+    int len = 0;
+    if (nbr <= 0)
+        ++len;
+    while (nbr != 0)
+    {
+        ++len;
+        nbr = nbr / 10;
+    }
+    return (len);
+}
 
- int		main(void)
- {
- 	int d = INT_MIN;
- 	printf("%d =? %s\n", d, ft_itoa(d));
+/* Cette fonction convertit un nombre entier (nbr) en une chaîne de caractères.
+   Elle commence par calculer la longueur de la chaîne nécessaire en appelant la fonction get_len(nbr).
+   Ensuite, elle alloue la mémoire nécessaire pour la chaîne résultat à l'aide de malloc.
+   La taille allouée est (len + 1) pour inclure le caractère nul de fin de chaîne.
+   Elle initialise le dernier caractère de la chaîne à '\0'.
 
- 	d = -13;
- 	printf("%d =? %s\n", d, ft_itoa(d));
+   Ensuite, elle traite les cas où nbr est négatif ou nul en plaçant le signe '-' ou '0' respectivement
+   dans le premier caractère de la chaîne résultat.
 
- 	d = 0;
- 	printf("%d =? %s\n", d, ft_itoa(d));
+   Ensuite, à l'aide d'une boucle while, elle itère sur chaque chiffre du nombre en utilisant la division
+   et le modulo par 10. Elle convertit chaque chiffre en son équivalent en caractère en ajoutant '0' et
+   place le caractère correspondant dans la chaîne résultat à l'index approprié en partant de la fin.
 
- 	d = 5;
- 	printf("%d =? %s\n", d, ft_itoa(d));
+   Enfin, elle retourne la chaîne résultat. */
 
- 	d = INT_MAX;
- 	printf("%d =? %s\n", d, ft_itoa(d));
- }
+char *ft_itoa(int nbr)
+{
+    char *result;
+    int len;
+
+    len = get_len(nbr);
+    result = malloc(sizeof(char) * (len + 1));
+    result[len] = '\0';
+
+    if (nbr < 0)
+        result[0] = '-';
+    else if (nbr == 0)
+        result[0] = '0';
+
+    while (nbr != 0)
+    {
+        --len;
+        result[len] = absolute_value(nbr % 10) + '0';
+        nbr = nbr / 10;
+    }
+    return (result);
+}
+
+ 
+//-------------------------------------------------------
+// #include <stdio.h>
+// #include <limits.h>
+ 
+// int      main(void)
+// {
+//  int d = INT_MIN;
+//  printf("%d =? %s\n", d, ft_itoa(d));
+ 
+//  d = -13;
+//  printf("%d =? %s\n", d, ft_itoa(d));
+ 
+//  d = 0;
+//  printf("%d =? %s\n", d, ft_itoa(d));
+ 
+//  d = 5;
+//  printf("%d =? %s\n", d, ft_itoa(d));
+ 
+//  d = INT_MAX;
+//  printf("%d =? %s\n", d, ft_itoa(d));
+// }
  
  ----------------------------------------*/
  
