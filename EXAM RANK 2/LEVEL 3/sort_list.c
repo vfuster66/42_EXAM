@@ -44,46 +44,33 @@ struct s_list
 
 ---------------------------------*/
 #include "list.h"
+#include <stddef.h>
 
-// Cette fonction échange les valeurs des données de deux nœuds de la liste.
-// Elle prend en entrée deux pointeurs vers des nœuds de la liste.
-void	swap_values(t_list *a, t_list *b)
+t_list *sort_list(t_list *lst, int (*cmp)(int, int))
 {
-	int	tmp = a->data;
-	a->data = b->data;
-	b->data = tmp;
-}
+    int swap;
+    t_list *current = lst;
 
-// Cette fonction trie une liste chaînée en utilisant l'algorithme de tri à bulles.
-t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
-{
-	// Variable booléenne indiquant si des échanges ont eu lieu lors de la dernière itération.
-	int	swapped;
-	// Pointeur vers le nœud courant lors du parcours de la liste.
-	t_list	*current; 
+    while (current->next != NULL)
+    {
+        if (cmp(current->data, current->next->data) == 0)
+        {
+            // Échange des valeurs des nœuds actuel et suivant
+            swap = current->data;
+            current->data = current->next->data;
+            current->next->data = swap;
 
-	// On effectue l'algorithme de tri à bulles jusqu'à ce qu'il n'y ait plus d'échanges à effectuer.
-	while (swapped == 1)
-	{
-		// On initialise swapped à 0 avant chaque itération.
-		swapped = 0;
-		// On initialise cur au premier nœud de la liste.
-		current = lst; 
+            // Réinitialisation du pointeur current pour commencer à trier depuis le début de la liste
+            current = lst;
+        }
+        else
+        {
+            // Passage au nœud suivant dans la liste
+            current = current->next;
+        }
+    }
 
-		// On parcourt la liste jusqu'à l'avant-dernier nœud, en comparant chaque nœud avec son successeur.
-		// Si les données des deux nœuds sont dans le mauvais ordre, on échange leurs valeurs.
-		while (current && current->next)
-		{
-			if (cmp(current->data, current->next->data) == 0)
-			{
-				swap_values(current, current->next);
-				swapped = 1;
-			}
-			current = current->next;
-		}
-	}
-	// On retourne un pointeur vers le premier nœud de la liste triée.
-	return (lst); 
+    return lst;
 }
 
 /*------------------------------
