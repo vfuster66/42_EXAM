@@ -82,27 +82,27 @@ char *ft_itoa(int nbr)
 }
 
  
-//-------------------------------------------------------
-// #include <stdio.h>
-// #include <limits.h>
+/*-------------------------------------------------------
+#include <stdio.h>
+#include <limits.h>
  
-// int      main(void)
-// {
-//  int d = INT_MIN;
-//  printf("%d =? %s\n", d, ft_itoa(d));
+int      main(void)
+{
+int d = INT_MIN;
+printf("%d = %s\n", d, ft_itoa(d));
  
-//  d = -13;
-//  printf("%d =? %s\n", d, ft_itoa(d));
+d = -13;
+printf("%d = %s\n", d, ft_itoa(d));
  
-//  d = 0;
-//  printf("%d =? %s\n", d, ft_itoa(d));
+d = 0;
+printf("%d = %s\n", d, ft_itoa(d));
  
-//  d = 5;
-//  printf("%d =? %s\n", d, ft_itoa(d));
+d = 5;
+printf("%d = %s\n", d, ft_itoa(d));
  
-//  d = INT_MAX;
-//  printf("%d =? %s\n", d, ft_itoa(d));
-// }
+d = INT_MAX;
+printf("%d = %s\n", d, ft_itoa(d));
+}
  
  ----------------------------------------*/
  
