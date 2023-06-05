@@ -30,53 +30,56 @@ $>
 
 #include <unistd.h>
 
-int   main(int ac, char **av)
+int main(int ac, char **av)
 {
+   // Variable de boucle pour parcourir les arguments
    int   i;
+   // Variable de boucle pour parcourir les caractères de chaque argument
    int   j;
    
+   // Commencer à partir du premier argument (avant le nom du programme)
    i = 1;
-   // Si le programme est lancé sans argument
-   if (ac == 1) 
+   if (ac == 1)
    {
-      // Écrit une nouvelle ligne et quitte
-      write(1, "\n", 1);
+      // S'il n'y a pas d'arguments, écrire simplement un saut de ligne
+      write(1, "\n", 1); 
       return (0);
    }
-   // Boucle sur les arguments fournis en ligne de commande
+   // Parcourir tous les arguments
    while (i < ac)
-    {
+   {
+      // Réinitialiser la variable de boucle pour chaque argument
       j = 0;
-      // Boucle sur les caractères du ième argument
+      // Parcourir tous les caractères de l'argument actuel
       while (av[i][j])
       {
-         // Si le caractère est une lettre
          if ((av[i][j] >= 'a' && av[i][j] <= 'z') || (av[i][j] >= 'A' && av[i][j] <= 'Z'))
          {
-            // Si le caractère est le premier caractère du mot ou s'il est précédé d'un caractère non alphabétique
+            // Si le caractère est une lettre majuscule ou minuscule
             if (j == 0 || !((av[i][j - 1] >= 'a' && av[i][j - 1] <= 'z') || (av[i][j - 1] >= 'A' && av[i][j - 1] <= 'Z')))
             {
-               // Si le caractère est une minuscule
+               // Si c'est la première lettre de l'argument ou si la lettre précédente n'est pas une lettre
                if (av[i][j] >= 'a' && av[i][j] <= 'z')
-                  // Convertit le caractère en majuscule
+                  // Convertir la lettre en majuscule
                   av[i][j] = av[i][j] - 32;
             }
             else
             {
-               // Si le caractère est une majuscule
                if (av[i][j] >= 'A' && av[i][j] <= 'Z')
-                  // Convertit le caractère en minuscule
+                  // Convertir la lettre en minuscule
                   av[i][j] = av[i][j] + 32;
             }
-            // Passe au caractère suivant
-            j++;
          }
-         // Écrit le mot avec ses caractères convertis
-         write(1, av[i], j);
-         // Écrit une nouvelle ligne
-         write(1, "\n", 1);
-         // Passe au mot suivant
-         i++;
+         // Écrire le caractère traité
+         write(1, &av[i][j], 1);
+         // Passer au caractère suivant dans l'argument actuel
+         j++;
       }
-      return (0);
+      // Après avoir traité un argument complet, écrire un saut de ligne
+      write(1, "\n", 1);
+      // Passer à l'argument suivant
+      i++;
+   }
+   return (0);
 }
+
