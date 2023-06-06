@@ -16,73 +16,52 @@ char    **ft_split(char *str);
 -------------------------------*/
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
-// Fonction qui copie n octets depuis l'adresse src vers l'adresse dest
-void *ft_memcpy(void *dest, const void *src, size_t n)
+char **ft_split(char *str)
 {
-    unsigned char *d = dest;
-    const unsigned char *s = src;
+    // Compteur pour itérer à travers la chaîne d'entrée
+	int		i = 0;
+    // Compteur pour suivre la ligne actuelle du tableau split
+	int		row = 0;
+    // Compteur pour suivre la colonne actuelle de chaque ligne
+	int		column = 0;
+    // Tableau pour stocker les sous-chaînes splittées
+	char	**split;     
 
-    while (n--)
-        *d++ = *s++;
-    return dest;
-}
-
-char    **ft_split(char *str)
-{
-    char    **result;
-    int i;
-    int j;
-    int k;
-    
-    i = 0;
-    j = 0;
-    k = 0;
-    // Compter le nombre de mots dans la chaîne de caractères
-    while (str[i])
-    {
-        // Ignorer les espaces, les tabulations et les sauts de ligne
-        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-            i++;
-        // Compter la longueur du mot
-        k = i;
-        while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-            i++;
-        // Si la longueur du mot est supérieure à zéro, incrémenter le compteur de mots
-        if (i > k)
-            j++;
-    }
-    // Allouer de la mémoire pour le tableau de résultats
-    result = (char **)malloc(sizeof(char *) * (j + 1));
-    if (!result)
-        return (NULL);
-    i = 0;
-    j = 0;
-    while (str[i])
-    {
-        // Ignorer les espaces, les tabulations et les sauts de ligne
-        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-            i++;
-        // Copier le mot dans un nouveau tampon
-        k = i;
-        while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-            i++;
-        // Si la longueur du mot est supérieure à zéro, l'ajouter au tableau de résultats
-        if (i > k)
-        {
-            result[j] = (char *)malloc(sizeof(char) * (i - k + 1));
-            if (!result[j])
-                return (NULL);
-            // Copier le mot dans le tableau de résultats
-            ft_memcpy(result[j], &str[k], i - k);
-            result[j][i - k] = '\0';
-            j++;
-        }
-    }
-    result[j] = NULL;
-    return (result);
+	// Allouer de la mémoire pour le tableau split
+	split = (char **)malloc(sizeof(char *) * 256);
+	if (!split)
+		return (NULL);
+	while (str[i])
+	{
+		// Ignorer les espaces, les tabulations et les retours à la ligne
+		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+			i++;
+		if (str[i])
+		{
+			// Allouer de la mémoire pour la ligne actuelle
+			split[row] = (char *)malloc(sizeof(char) * 4096);
+			if (split[row] == NULL)
+			{
+				// En cas d'échec d'allocation de mémoire, libérer la mémoire précédemment allouée
+				while (row >= 0)
+					free(split[row--]);
+				free(split);
+				return (NULL);
+			}
+			// Copier les caractères dans la ligne actuelle jusqu'à rencontrer un espace, une tabulation ou un retour à la ligne
+			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+				split[row][column++] = str[i++];
+			// Terminer la ligne actuelle par un caractère nul
+			split[row][column] = '\0';
+			// Passer à la ligne suivante
+			row++;
+			column = 0;
+		}
+	}
+	// Définir le dernier élément du tableau split sur NULL pour marquer la fin
+	split[row] = NULL;
+	return (split);
 }
 
 /*-----------------------------------
