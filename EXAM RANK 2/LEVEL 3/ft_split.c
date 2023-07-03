@@ -17,51 +17,67 @@ char    **ft_split(char *str);
 
 #include <stdlib.h>
 
+// Fonction pour diviser une chaîne de caractères en mots
 char **ft_split(char *str)
 {
-    // Compteur pour itérer à travers la chaîne d'entrée
-	int		i = 0;
-    // Compteur pour suivre la ligne actuelle du tableau split
-	int		row = 0;
-    // Compteur pour suivre la colonne actuelle de chaque ligne
-	int		column = 0;
-    // Tableau pour stocker les sous-chaînes splittées
-	char	**split;     
+	// Index pour parcourir la chaîne de caractères
+	int index = 0;
+	// Indice de ligne pour le tableau de mots
+	int row_tab = 0;
+	// Tableau pour stocker les mots
+	char **tab;
 
-	// Allouer de la mémoire pour le tableau split
-	split = (char **)malloc(sizeof(char *) * 256);
-	if (!split)
+	// Allouer de la mémoire pour le tableau de pointeurs de mots
+	tab = (char **)malloc(sizeof(char *) * 256);
+	if (!tab)
+		// Retourner NULL si l'allocation de mémoire a échoué
 		return (NULL);
-	while (str[i])
+	// Parcourir la chaîne de caractères jusqu'à la fin
+	while (str[index])
 	{
-		// Ignorer les espaces, les tabulations et les retours à la ligne
-		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-			i++;
-		if (str[i])
+		// Ignorer les espaces, les tabulations et les sauts de ligne
+		while (str[index] == ' ' || str[index] == '\t' || str[index] == '\n')
+			index++;
+		// Vérifier si la fin de la chaîne n'a pas été atteinte
+		if (str[index])
 		{
-			// Allouer de la mémoire pour la ligne actuelle
-			split[row] = (char *)malloc(sizeof(char) * 4096);
-			if (split[row] == NULL)
+			// Longueur du mot courant
+			int word_length = 0;
+			// Calculer la longueur du mot courant
+			while (str[index + word_length] && str[index + word_length] != ' ' 
+					&& str[index + word_length] != '\t' && str[index + word_length] != '\n')
+				word_length++;
+			// Allouer de la mémoire pour le mot courant
+			tab[row_tab] = (char *)malloc(sizeof(char) * (word_length + 1));
+			// Vérifier si l'allocation de mémoire a échoué
+			if (!tab[row_tab])
 			{
-				// En cas d'échec d'allocation de mémoire, libérer la mémoire précédemment allouée
-				while (row >= 0)
-					free(split[row--]);
-				free(split);
+				// Libérer la mémoire allouée aux mots précédents
+				while (row_tab >= 0)
+					free(tab[row_tab--]);
+				// Libérer la mémoire allouée au tableau de pointeurs de mots
+				free(tab);
+				// Retourner NULL si l'allocation de mémoire a échoué
 				return (NULL);
 			}
-			// Copier les caractères dans la ligne actuelle jusqu'à rencontrer un espace, une tabulation ou un retour à la ligne
-			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-				split[row][column++] = str[i++];
-			// Terminer la ligne actuelle par un caractère nul
-			split[row][column] = '\0';
-			// Passer à la ligne suivante
-			row++;
-			column = 0;
+			int i = 0;
+			// Copier le mot courant dans le tableau
+			while (i < word_length)
+			{
+				// Copier chaque caractère du mot
+				tab[row_tab][i] = str[index++];
+				i++;
+			}
+			// Ajouter le caractère de fin de chaîne à la fin du mot
+			tab[row_tab][word_length] = '\0';
+			// Passer à la ligne suivante du tableau
+			row_tab++;
 		}
 	}
-	// Définir le dernier élément du tableau split sur NULL pour marquer la fin
-	split[row] = NULL;
-	return (split);
+	// Ajouter un pointeur NULL à la fin du tableau pour indiquer la fin des mots
+	tab[row_tab] = NULL;
+	// Retourner le tableau de mots
+	return (tab);
 }
 
 /*-----------------------------------
