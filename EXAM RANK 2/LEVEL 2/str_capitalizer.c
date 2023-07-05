@@ -30,56 +30,50 @@ $>
 
 #include <unistd.h>
 
-int main(int ac, char **av)
+void str_capitalizer(char *str)
 {
-   // Variable de boucle pour parcourir les arguments
-   int   i;
-   // Variable de boucle pour parcourir les caractères de chaque argument
-   int   j;
-   
-   // Commencer à partir du premier argument (avant le nom du programme)
-   i = 1;
-   if (ac == 1)
-   {
-      // S'il n'y a pas d'arguments, écrire simplement un saut de ligne
-      write(1, "\n", 1); 
-      return (0);
-   }
-   // Parcourir tous les arguments
-   while (i < ac)
-   {
-      // Réinitialiser la variable de boucle pour chaque argument
-      j = 0;
-      // Parcourir tous les caractères de l'argument actuel
-      while (av[i][j])
-      {
-         if ((av[i][j] >= 'a' && av[i][j] <= 'z') || (av[i][j] >= 'A' && av[i][j] <= 'Z'))
-         {
-            // Si le caractère est une lettre majuscule ou minuscule
-            if (j == 0 || !((av[i][j - 1] >= 'a' && av[i][j - 1] <= 'z') || (av[i][j - 1] >= 'A' && av[i][j - 1] <= 'Z')))
-            {
-               // Si c'est la première lettre de l'argument ou si la lettre précédente n'est pas une lettre
-               if (av[i][j] >= 'a' && av[i][j] <= 'z')
-                  // Convertir la lettre en majuscule
-                  av[i][j] = av[i][j] - 32;
-            }
-            else
-            {
-               if (av[i][j] >= 'A' && av[i][j] <= 'Z')
-                  // Convertir la lettre en minuscule
-                  av[i][j] = av[i][j] + 32;
-            }
-         }
-         // Écrire le caractère traité
-         write(1, &av[i][j], 1);
-         // Passer au caractère suivant dans l'argument actuel
-         j++;
-      }
-      // Après avoir traité un argument complet, écrire un saut de ligne
-      write(1, "\n", 1);
-      // Passer à l'argument suivant
-      i++;
-   }
-   return (0);
+   // Variable pour l'itération
+	int i = 0;
+
+	// Vérifie si le premier caractère est une lettre minuscule et le convertit en majuscule 
+   // si c'est le cas
+	if (str[i] >= 'a' && str[i] <= 'z')
+		str[i] -= 32;
+   // Écrit le caractère modifié à la sortie standard
+	write(1, &str[i], 1);
+   // Parcourt les caractères restants de la chaîne
+	while (str[++i])
+	{
+		// Convertit une lettre majuscule en minuscule si elle est rencontrée
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] += 32;
+		// Convertit une lettre minuscule en majuscule si elle est précédée d'un espace ou d'une tabulation
+		if ((str[i] >= 'a' && str[i] <= 'z') && (str[i - 1] == ' ' || str[i - 1] == '\t'))
+			str[i] -= 32;
+      // Écrit le caractère modifié à la sortie standard
+		write(1, &str[i], 1);
+	}
 }
 
+int main(int ac, char **av)
+{
+	int i;
+
+   // Si aucun argument n'est passé, écrit une nouvelle ligne et quitte
+	if (ac == 1)
+	{
+		write(1, "\n", 1); 
+		return (0);
+	}
+	i = 1;
+   // Parcourt tous les arguments passés
+	while (i < ac)
+	{
+      // Applique la fonction de capitalisation à chaque argument
+		str_capitalizer(av[1]);
+      // Écrit une nouvelle ligne après chaque argument
+		write(1, "\n", 1); 
+		i++;
+	}
+	return (0);
+}
