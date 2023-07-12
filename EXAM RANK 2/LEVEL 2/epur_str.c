@@ -29,36 +29,37 @@ $>
 
 #include <unistd.h>
 
-int     main(int ac, char const *av[])
+int main(int ac, char **av)
 {
-        int     i;
-        int     flag;
-        
+        int        i = 0;
+        int        space = -1;
+    
         if (ac == 2)
         {
-                i = 0;
-                // Ignorer les espaces et tabulations au début de la chaîne
-                while (av[1][i] == ' ' || av[1][i] == '\t')
-                        i += 1;
                 while (av[1][i])
                 {
-                        // Si on rencontre un espace ou une tabulation, activer le flag
-                        if (av[1][i] == ' ' || av[1][i] == '\t')
-                                flag = 1;
-                        // Si on rencontre un caractère qui n'est pas un espace ou une tabulation
-                        if (!(av[1][i] == ' ' || av[1][i] == '\t'))
+                        // Vérifie si le caractère actuel n'est pas un espace ou une tabulation      
+                        if (av[1][i] != ' ' && av[1][i] != '\t')
                         {
-                                // Si le flag est actif, ajouter un espace avant d'ajouter le caractère
-                                if (flag)
+                                // Si le caractère précédent était un espace
+                                if (space == 1)
+                                        // Écrit un espace dans la sortie standard pour séparer les mots
                                         write(1, " ", 1);
-                                // Désactiver le flag et ajouter le caractère
-                                flag = 0;
-                                write(1, &av[1][i], 1);
+                                // Le caractère actuel n'est pas un espace, donc isSpace est mis à 0
+                                space = 0;
+                                // Écrit le caractère actuel dans la sortie standard
+                                write(1, &av[1][i], 1); 
                         }
-                        i += 1;
+                        // Si le caractère actuel est un espace et le caractère précédent n'était pas un espace
+                        else if (space == 0)
+                                // isSpace est mis à 1 pour indiquer qu'un espace consécutif a été rencontré
+                                space = 1;
+                        // Passe au caractère suivant
+                        i++; 
                 }
         }
-        // Ajouter un saut de ligne à la fin
+        // Écrit un saut de ligne à la fin de la sortie standard
         write(1, "\n", 1);
-        return (0);
+        return 0;
 }
+
