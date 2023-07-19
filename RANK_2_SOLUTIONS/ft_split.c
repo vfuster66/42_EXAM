@@ -12,16 +12,15 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-
-char	**ft_split(char *str)
+char    **ft_split(char *str)
 {
-	int		i = 0;
-	int		row = 0;
-	int		column;
+	int	i = 0;
+	int	row = 0;
+	int	column;
 	char	**tab;
 
 	tab = (char **)malloc(sizeof(char *) * 256);
-    if (!tab)
+	if (!tab)
 		return (NULL);
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
 		i++;
@@ -29,13 +28,13 @@ char	**ft_split(char *str)
 	{
 		column = 0;
 		tab[row] = (char *)malloc(sizeof(char) * 4096);
-        if (!tab)
+		if (!tab[row])
 			return (NULL);
-		while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+		while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\0')
 			tab[row][column++] = str[i++];
+		tab[row][column] = '\0';
 		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
 			i++;
-		tab[row][column] = '\0';
 		row++;
 	}
 	tab[row] = NULL;
