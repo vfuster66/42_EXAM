@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//Version 1
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -33,4 +34,31 @@ int	main(int ac, char **av)
 	}
 	printf("\n");
 	return (0);
+}
+
+//Version 2
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int     main(int ac, char **av)
+{
+        int     nb1;
+        int     nb2;
+        int     temp;
+
+        if (ac == 3)
+        {
+                nb1 = atoi(av[1]);
+                nb2 = atoi(av[2]);
+                while (nb2 != 0)
+                {
+                        temp = nb2;
+                        nb2 = nb1 % nb2;
+                        nb1 = temp;
+                }
+                printf("%d", nb1);
+        }
+        printf("\n");
+        return (0);
 }
