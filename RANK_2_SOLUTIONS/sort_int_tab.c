@@ -53,6 +53,7 @@ void sort_int_tab(int *tab, unsigned int size)
 	}
 }
 
+/*--------------------------------------------
 #include <stdio.h>
 
 void sort_int_tab(int *tab, unsigned int size);
@@ -71,3 +72,4 @@ int main()
 
     return 0;
 }
+--------------------------------------------*/
