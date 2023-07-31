@@ -124,6 +124,7 @@ void  flood_fill(char **tab, t_point size, t_point begin)
 	fill(tab, size, begin, tab[begin.y][begin.x]);
 }
 
+/*-------------------------------------------------
 char** make_area(char** zone, t_point size)
 {
 	char** new;
@@ -162,3 +163,4 @@ int main(void)
 		printf("%s\n", area[i]);
 	return (0);
 }
+-----------------------------------------------*/
