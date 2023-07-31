@@ -52,6 +52,7 @@ void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
 	}
 }
 
+/*---------------------------------------------
 #include <stdio.h>
 #include <stdlib.h>
 #include "ft_list.h"
@@ -82,3 +83,4 @@ int main()
 
     return 0;
 }
+------------------------------------------------*/
