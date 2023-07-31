@@ -83,7 +83,7 @@ int		main(int ac, char **av)
 		{
 			if (a % n == 0 && b % n == 0)
 			{
-				printf("%d", n);
+				printf("%d\n", n);
 				return ;
 			}
 			n--;
