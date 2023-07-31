@@ -48,30 +48,29 @@ $
 
 -------------------------*/
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int	main(int ac, char **av)
 {
-	int	i = 1;
-	int	number;
+	int	nombre;
+	int	diviseur;
 
 	if (ac == 2)
 	{
-		number = atoi(av[1]);
-		if (number == 1)
-			printf("1");
-		while (number >= ++i)
+		nombre = atoi(av[1]);
+		diviseur  = 2;
+		while (nombre != 1)
 		{
-			if (number % i == 0)
+			if (nombre % diviseur == 0)
 			{
-				printf("%d", i);
-				if (number == i)
-					break ;
-				printf("*");
-				number /= i;
-				i = 1;
+				printf("%d", diviseur);
+				nombre /= diviseur;
+				if (nombre != 1)
+					printf("*");
 			}
+			else
+				diviseur++;
 		}
 	}
 	printf("\n");
