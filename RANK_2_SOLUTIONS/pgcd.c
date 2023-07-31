@@ -43,21 +43,21 @@ int	main(int ac, char **av)
 
 int     main(int ac, char **av)
 {
-        int     nb1;
-        int     nb2;
+        int     a;
+        int     b;
         int     temp;
 
         if (ac == 3)
         {
-                nb1 = atoi(av[1]);
-                nb2 = atoi(av[2]);
-                while (nb2 != 0)
+                a = atoi(av[1]);
+                b = atoi(av[2]);
+                while (b != 0)
                 {
-                        temp = nb2;
-                        nb2 = nb1 % nb2;
-                        nb1 = temp;
+                        temp = b;
+                        b = a % b;
+                        a = temp;
                 }
-                printf("%d", nb1);
+                printf("%d", a);
         }
         printf("\n");
         return (0);
@@ -68,17 +68,27 @@ int     main(int ac, char **av)
 #include <stdio.h>
 #include <stdlib.h>
 
-void	pgcd(int a, int b)
+int		main(int ac, char **av)
 {
-	int n = a;
-
-	while (n > 0)
+	int	a;
+	int	b;
+	int	n;
+	
+	if (ac == 3)
 	{
-		if (a % n == 0 && b % n == 0)
+		a = atoi(av[1]);
+		b = atoi(av[2]);
+		n = a;
+		while (n > 0)
 		{
-			printf("%d", n);
-			return;
+			if (a % n == 0 && b % n == 0)
+			{
+				printf("%d", n);
+				return ;
+			}
+			n--;
 		}
-		--n;
-	}
+	}	
+	printf("\n");
+	return (0);
 }
