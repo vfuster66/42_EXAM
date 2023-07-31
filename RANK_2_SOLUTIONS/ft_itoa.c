@@ -64,23 +64,15 @@ char    *ft_itoa(int nbr)
 }
 
 /*-------------------------------------------
-#include <stdlib.h>
 #include <stdio.h>
-#include <limits.h>
+#include <stdlib.h>
 
 char	*ft_itoa(int nbr);
 
-int      main(void)
+int main(int ac, char **av)
 {
-	int d = INT_MIN;
-	printf("%d = %s\n", d, ft_itoa(d));
-	d = -13;
-	printf("%d = %s\n", d, ft_itoa(d));
-	d = 0;
-	printf("%d = %s\n", d, ft_itoa(d));
-	d = 5;
-	printf("%d = %s\n", d, ft_itoa(d));
-	d = INT_MAX;
-	printf("%d = %s\n", d, ft_itoa(d));
+	(void)ac;
+    printf("%s\n", ft_itoa(atoi(av[1])));
+    return (0);
 }
 -------------------------------------------*/
