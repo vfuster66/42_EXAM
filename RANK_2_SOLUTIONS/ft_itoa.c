@@ -14,9 +14,6 @@
 #include <stdio.h>
 #include <limits.h>
 
-#include <stdlib.h>
-#include <limits.h>
-
 char    *ft_itoa(int nbr)
 {
 	int		i = 0;
@@ -25,7 +22,8 @@ char    *ft_itoa(int nbr)
 
 	if (nbr == -2147483648)
 		return ("-2147483648");
-	if (!(str = (char *)malloc(sizeof(char) * i + 1)))
+	str = malloc(sizeof(char) * i + 1))
+	if (!str)
 		return (NULL);
 	str[i] ='\0';
 	if (nbr == 0)
