@@ -22,7 +22,7 @@ char    *ft_itoa(int nbr)
 
 	if (nbr == -2147483648)
 		return ("-2147483648");
-	str = malloc(sizeof(char) * i + 1))
+	str = malloc(sizeof(char) * i + 1);
 	if (!str)
 		return (NULL);
 	str[i] ='\0';
