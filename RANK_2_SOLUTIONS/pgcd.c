@@ -62,3 +62,23 @@ int     main(int ac, char **av)
         printf("\n");
         return (0);
 }
+
+//Version 3
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void	pgcd(int a, int b)
+{
+	int n = a;
+
+	while (n > 0)
+	{
+		if (a % n == 0 && b % n == 0)
+		{
+			printf("%d", n);
+			return;
+		}
+		--n;
+	}
+}
