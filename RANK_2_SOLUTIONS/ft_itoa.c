@@ -26,8 +26,6 @@ char	*ft_itoa(int nbr);
 ------------------------------*/
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
 
 char    *ft_itoa(int nbr)
 {
@@ -65,7 +63,12 @@ char    *ft_itoa(int nbr)
 	return (str);
 }
 
+/*-------------------------------------------
+#include <stdlib.h>
+#include <stdio.h>
+#include <limits.h>
 
+char	*ft_itoa(int nbr);
 
 int      main(void)
 {
