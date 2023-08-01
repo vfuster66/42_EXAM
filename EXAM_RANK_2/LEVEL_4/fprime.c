@@ -36,51 +36,47 @@ $
 
 -------------------------*/
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-    // compteur pour la boucle while
-	int	i;
-    // le nombre à factoriser
-	int	number;  
+	// Variable pour stocker le nombre saisi en argument
+    	int nombre;
+	// Variable pour stocker le diviseur actuel
+    	int diviseur;
 
-	// Vérifier s'il y a un seul argument passé en ligne de commande
-	if (ac == 2)
-	{
-		i = 1;
-        // convertir la chaîne de caractères en entier
-		number = atoi(av[1]);  
-
-		// Si le nombre est égal à 1, la seule factorisation possible est 1
-		if (number == 1)
-			printf("1");
-
-		// Tant que le nombre est supérieur ou égal à i
-		while (number >= ++i)
-		{
-			// Si i est un facteur de number
-			if (number % i == 0)
-			{
-                // afficher le facteur i
-				printf("%d", i);  
-
-				// Si number est égal à i, cela signifie que tous les facteurs ont été trouvés
-				if (number == i)
-					break ;
-
-                // afficher l'opérateur de multiplication
-				printf("*");
-                // diviser number par i
-				number /= i;
-                // réinitialiser le compteur i
-				i = 1;            
-			}
-		}
-	}
-    // afficher un retour à la ligne
-	printf("\n");   
-	return (0);
+	// Vérifie qu'un seul argument a été fourni lors de l'exécution du programme
+	if (ac == 2)        
+    	{
+		// Convertit l'argument en entier et le stocke dans la variable 'nombre'
+        	nombre = atoi(av[1]);
+		// Initialise le diviseur à 2, car tout nombre est divisible par 1
+        	diviseur = 2;
+		// Continue tant que le nombre n'a pas été complètement décomposé en facteurs premiers
+		while (nombre != 1)
+        	{
+			// Vérifie si 'nombre' est divisible par 'diviseur' sans laisser de reste
+            		if (nombre % diviseur == 0) 
+            		{
+				// Affiche le diviseur, qui est un facteur premier du nombre
+                		printf("%d", diviseur);
+				// Divise 'nombre' par le diviseur pour obtenir le nombre réduit
+                		nombre /= diviseur;
+				// Vérifie si le nombre réduit est différent de 1 (il y a encore des facteurs premiers à trouver)
+				if (nombre != 1)
+					// Affiche un astérisque pour indiquer la multiplication des facteurs premiers
+					printf("*");        
+            		}
+            		else
+				// Si 'nombre' n'est pas divisible par 'diviseur', incrémente 'diviseur' pour essayer avec le prochain nombre
+                		diviseur++;     
+        	}
+    	}
+	// Affiche une nouvelle ligne à la fin pour une meilleure mise en forme
+	printf("\n");
+	// Indique que le programme s'est exécuté avec succès
+    	return 0;       
 }
+
 
