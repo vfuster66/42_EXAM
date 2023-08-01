@@ -53,13 +53,16 @@ $
 
 int	main(int ac, char **av)
 {
-	int	nombre;
-	int	diviseur;
-
 	if (ac == 2)
 	{
-		nombre = atoi(av[1]);
-		diviseur  = 2;
+		int	nombre = atoi(av[1]);
+		int	diviseur = 2;
+
+		if (nombre <= 0)
+		{
+			printf("\n");
+			return (0);
+		}
 		while (nombre != 1)
 		{
 			if (nombre % diviseur == 0)
