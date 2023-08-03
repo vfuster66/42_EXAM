@@ -60,36 +60,37 @@ int	ft_atoi(char *str)
 	return (result);
 }
 
-int	ft_is_prime(int n)
+int	ft_is_prime(int nombre)
 {
-	int	i = 2;
+	int	diviseur = 2;
 	
-	if (n <= 1)
+	//un nombre premier est obligatoirement superieur a 1
+	if (nombre <= 1)
 		return (0);
-	while (i * i <= n)
+	while (diviseur * diviseur <= nombre)
 	{
-		if (n % i == 0)
+		if (nombre % diviseur == 0)
 			return (0);
-		i++;
+		diviseur++;
 	}
 	return (1);
 }
 
 int	main(int ac, char **av)
 {
-	int	i = 2;
-	int	result = 0;
+	int	nombre_actuel = 2;
+	int	somme_des_premiers = 0;
 
 	if (ac == 2)
 	{
-		while (i <= ft_atoi(av[1]))
+		while (nombre_actuel <= ft_atoi(av[1]))
 		{
-			if (ft_is_prime(i))
-				result += i;
-			i++;
+			if (ft_is_prime(nombre_actuel))
+				somme_des_premiers += nombre_actuel;
+			nombre_actuel++;
 		}
 	}
-	ft_putnbr(result);
+	ft_putnbr(somme_des_premiers);
 	write(1, "\n", 1);
 	return (0);
 }
