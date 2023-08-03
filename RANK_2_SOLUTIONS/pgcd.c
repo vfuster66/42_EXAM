@@ -44,21 +44,21 @@ $
 
 int	main(int ac, char **av)
 {
-	int	a;
-	int	b;
+	int	nb1;
+	int	nb2;
 	
 	if (ac == 3)
 	{
-		a = atoi(av[1]);
-		b = atoi(av[2]);
-		while (a != b)
+		nb1 = atoi(av[1]);
+		nb2 = atoi(av[2]);
+		while (nb1 != nb2)
 		{
-			if (a > b)
-				a = a - b;
+			if (nb1 > nb2)
+				nb1 = nb1 - nb2;
 			else
-				b = b - a;
+				nb2 = nb2 - nb1;
 		}
-		printf("%d", a);
+		printf("%d", nb1);
 	}
 	printf("\n");
 	return (0);
@@ -71,21 +71,21 @@ int	main(int ac, char **av)
 
 int     main(int ac, char **av)
 {
-        int     a;
-        int     b;
+        int     nb1;
+        int     nb2;
         int     temp;
 
         if (ac == 3)
         {
-                a = atoi(av[1]);
-                b = atoi(av[2]);
-                while (b != 0)
+                nb1 = atoi(av[1]);
+                nb2 = atoi(av[2]);
+                while (nb2 != 0)
                 {
-                        temp = b;
-                        b = a % b;
-                        a = temp;
+                        temp = nb2;
+                        nb2 = nb1 % mb2;
+                        nb1 = temp;
                 }
-                printf("%d", a);
+                printf("%d", nb1);
         }
         printf("\n");
         return (0);
@@ -98,23 +98,23 @@ int     main(int ac, char **av)
 
 int		main(int ac, char **av)
 {
-	int	a;
-	int	b;
-	int	n;
+	int	nb1;
+	int	nb2;
+	int	diviseur_commun;
 	
 	if (ac == 3)
 	{
-		a = atoi(av[1]);
-		b = atoi(av[2]);
-		n = a;
-		while (n > 0)
+		nb1 = atoi(av[1]);
+		nb2 = atoi(av[2]);
+		diviseur_commun = nb1;
+		while (diviseur_commun > 0)
 		{
-			if (a % n == 0 && b % n == 0)
+			if (nb1 % diviseur_commun == 0 && nb2 % diviseur_commun == 0)
 			{
-				printf("%d\n", n);
+				printf("%d\n", diviseur_commun);
 				return ;
 			}
-			n--;
+			diviseur_commun--;
 		}
 	}	
 	printf("\n");
