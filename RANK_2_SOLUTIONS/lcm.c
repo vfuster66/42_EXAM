@@ -10,32 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*Assignment name  : hidenp
-Expected files   : hidenp.c
-Allowed functions: write
--------------------------------
+/*Assignment name  : lcm
+Expected files   : lcm.c
+Allowed functions:
+--------------------------------------------------------------------------------
 
-Write a program named hidenp that takes two strings and displays 1
-followed by a newline if the first string is hidden in the second one,
-otherwise displays 0 followed by a newline.
+Write a function who takes two unsigned int as parameters and returns the 
+computed LCM of those parameters.
 
-Let s1 and s2 be strings. We say that s1 is hidden in s2 if it's possible to
-find each character from s1 in s2, in the same order as they appear in s1.
-Also, the empty string is hidden in any string.
+LCM (Lowest Common Multiple) of two non-zero integers is the smallest postive
+integer divisible by the both integers.
 
-If the number of parameters is not 2, the program displays a newline.
+A LCM can be calculated in two ways:
 
-Examples :
+- You can calculate every multiples of each integers until you have a common
+multiple other than 0
 
-$>./hidenp "fgex.;" "tyf34gdgf;'ektufjhgdgex.;.;rtjynur6" | cat -e
-1$
-$>./hidenp "abc" "2altrb53c.sse" | cat -e
-1$
-$>./hidenp "abc" "btarc" | cat -e
-0$
-$>./hidenp | cat -e
-$
-$>
+- You can use the HCF (Highest Common Factor) of these two integers and 
+calculate as follows:
+
+	LCM(x, y) = | x * y | / HCF(x, y)
+  
+  | x * y | means "Absolute value of the product of x by y"
+
+If at least one integer is null, LCM is equal to 0.
+
+Your function must be prototyped as follows:
+
+  unsigned int    lcm(unsigned int a, unsigned int b);
 
 -------------------------------*/
 
