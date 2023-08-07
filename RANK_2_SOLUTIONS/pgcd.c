@@ -112,7 +112,7 @@ int		main(int ac, char **av)
 			if (nb1 % diviseur_commun == 0 && nb2 % diviseur_commun == 0)
 			{
 				printf("%d\n", diviseur_commun);
-				return ;
+				return (nb1);
 			}
 			diviseur_commun--;
 		}
