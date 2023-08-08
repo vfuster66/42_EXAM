@@ -49,32 +49,46 @@ int	main(int ac, char **av)
 	int	i = 0;
 	int	next;
 
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
+		// Boucle pour parcourir la chaine de caracteres jusqu'a la fin
 		while (av[1][i])
 			i++;
+		// Revenir au caractere precedent '\0'
 		i--;
+		// Boucle tant que i n'est pas revenu au debut de la chaine
 		while (i >= 0)
 		{
+			// Si le caractere actuel est un espace, un mot est trouve
 			if (av[1][i] == ' ')
 			{
+				// Boucle pour parcourir le mot inverse a partir du caractere suivant
+				// et tant qu'il ne rencontre pas d'espace
 				next = i + 1;
 				while (av[1][next] && av[1][next] != ' ')
 				{
+					// Afficher le mot
 					write(1, &av[1][next], 1);
 					next++;
 				}
+				// Afficher un espace
 				write(1, " ", 1);
 			}
+			// Ou si le debut de la chaine est atteint
 			else if (i == 0)
 			{
+				// Boucle pour parcourir le mot inverse a partir du caractere actuel
+				// et tant qu'il ne rencontre pas d'espace
 				next = i;
 				while (av[1][next] && av[1][next] != ' ')
 				{
+					// Afficher le mot
 					write(1, &av[1][next], 1);
 					next++;
 				}
 			}
+			// Passer au mot precedent
 			i--;
 		}
 	}
