@@ -46,6 +46,7 @@ $
 
 int	main(int ac, char **av)
 {
+	// Verifier le nombre d'arguments exact
 	if (ac == 4)
 	{
 		if (av[2][0] == '+')
