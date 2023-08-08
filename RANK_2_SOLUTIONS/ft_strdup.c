@@ -27,20 +27,29 @@ char    *ft_strdup(char *src);
 
 char    *ft_strdup(char *src)
 {
+    // Chaine de caracteres
     char    *dest;
+    // Index pour parcourir la chaine
     int i = 0;
-    
+
+    // Boucle pour parcourir la chaine de caracteres jusqu'a la fin
     while (src[i])
             i++;
+    // Allouer de la memoire dynamiquement pour la chaine de caracteres dest
     dest = malloc(sizeof(char) * (i + 1));
     if (!dest)
         return (NULL);
+    // Reinitialiser i pour parcourir a nouveau la chaine
     i = 0;
+    // Boucle pour parcourir la chaine de caracteres
     while (src[i])
     {
+        // Copier l'index de src dans dest
         dest[i] = src[i];
+        // Passer au caractere suivant
         i++;
     }
+    // Ajouter le caractere nul de fin de chaine de caracteres
     dest[i] = '\0';
     return (dest);
 }
