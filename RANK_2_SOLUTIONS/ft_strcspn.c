@@ -28,20 +28,29 @@ size_t	ft_strcspn(const char *s, const char *reject);
 
 size_t	ft_strcspn(const char *s, const char *reject)
 {
+    // Index pour parcourir la chaine de caracteres s
     size_t  i = 0;
+    // Index pour parcourir la chaine de caracteres reject
     size_t  j;
 
+    // Boucle pour parcourir la chaine de caracteres s
     while (s[i])
     {
         j = 0;
+        Boucle pour parcourir la chaine de caracteres reject
         while(reject[j])
         {
+            // Si le caractere actuel de s est egal au caractere actuel de reject
             if (s[i] == reject[j])
+                // Renvoyer la valeur de l'index i
                 return (i);
+            // Passer au caractere j suivant
             j++;
         }
+        // Passer au caractere i suivant
         i++;
     }
+    // Renvoyer la valeur de l'index i
     return (i);
 }
 
