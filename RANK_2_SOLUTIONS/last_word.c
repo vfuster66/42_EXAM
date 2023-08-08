@@ -42,20 +42,29 @@ $>
 
 int	main(int ac, char **av)
 {
+	// Index pour parcourir la chaine de caracteres
 	int	i = 0;
 
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
+		// Boucle qui avance pour parcourir la chaine de caracteres jusqu'a la fin
 		while (av[1][i])
 			i++;
+		// Boucle qui recule pour ignorer les espaces et les tabs en partant 
+		// du caractere precedent '\0'
 		while (--i && (av[1][i] == ' ' || av[1][i] == '\t'))
 			;
+		// Boucle qui recule tant qu'il n'y a pas d'espace ou de tab
 		while (i && av[1][i] != ' ' && av[1][i] != '\t')
 			i--;
+		// Boucle qui avance pour ignorer les espaces ou les tabs
 		if (av[1][i] == ' ' || av[1][i] == '\t')
 			i++;
+		// Boucle qui avance tant qu'il  n'y a pas d'espace ou de tab
 		while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t')
 		{
+			// Afficher les caracteres du dernier mot
 			write(1, &av[1][i], 1);
 			i++;
 		}
