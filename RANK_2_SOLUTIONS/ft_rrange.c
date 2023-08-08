@@ -36,26 +36,37 @@ Examples:
 
 int *ft_rrange(int start, int end)
 {
+    // Index pour parcourir le tableau d'entiers
     int i = 0;
-    int *rrange;
-    int size;
+    // Pointeur vers un tableau d'entiers
+    int *tab;
+    // Variable pour stocker la taille du tableau
+    int size_tab;
 
+    // Verifier si la sequence d'entiers est en ordre decroissant
     if (start > end)
-        size = start - end + 1;
+        // Calcul de la taille du tableau
+        size_tab = start - end + 1;
+    // Ou si la sequence d'entiers est en ordre croissant
     else
-        size = end - start + 1;
-    rrange = malloc(sizeof(int) * size);
-    if (!rrange)
+        // Calcul de la taille du tableau
+        size_tab = end - start + 1;
+    // Allocation dynamique de la memoire
+    tab = malloc(sizeof(int) * size);
+    if (!tab)
         return (NULL);
-    while (i < size)
+    // Tant que la valeur actuelle est plus petite que la taille du tableau
+    while (i < size_tab)
     {
+        // Affecter la valeur actuelle de end en fonction de la direction de la sequence
         if (start <= end)
-            rrange[i] = end--;
+            tab[i] = end--;
         else
-            rrange[i] = end++;
+            tab[i] = end++;
+        // Passer a la valeur suivante
         i++;
     }
-    return (rrange);
+    return (tab);
 }
 
 #include <stdio.h>
