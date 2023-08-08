@@ -43,19 +43,30 @@ $>
 
 int	main(int ac, char **av)
 {
+	// Index pour parcourir av[1]
 	int	i = 0;
+	// Index pour parcourir av[2]
 	int	j = 0;
 
+	// Verifier le nombre exact d'arguments
 	if (ac == 3)
 	{
+		// Boucle qui parcourt les 2 chaines simultanement
 		while (av[1][i] && av[2][j])
 		{
+			// Si le caractere de av[1] est present dans av[2]
 			if (av[1][i] == av[2][j])
+				// Passer au caractere suivant de av[1]
 				i++;
+			// Passer au caractere suivant de av[2]
 			j++;
 		}
+		// Si la fin de la chaine av[1] est atteinte, tous les caracteres ont ete
+		// trouves dans av[2]
 		if (av[1][i] == '\0')
 			write(1, "1", 1);
+		// Ou si la fin de la chaine av[1] n'a pas ete atteinte, au moins 1 caractere
+		// n'a pas ete trouve dans av[2]
 		else
 			write(1, "0", 1);
 	}
