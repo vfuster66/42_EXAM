@@ -29,23 +29,32 @@ char    *ft_strrev(char *str);
 
 char    *ft_strrev(char *str)
 {
+	// Pointeur pour marquer le debut de la chaine de caracteres
 	char	*start;
+	// Pointeur pour marquer la fin de la chaine de caracteres
 	char	*end;
+	// Variable temporaire
 	char	temp;
 
+	// Verifier s'il y a une chaine de caracteres
 	if (!str)
 		return (NULL);
+	// Initialiser start et end pour qu'ils pointent vers le debut de la chaine
 	start = str;
 	end = str;
 
+	// Boucle pour deplacer le pointeur end jusqu'a la fin de la chaine de caracteres
 	while (*end)
 		end++;
 	end--;
+	// Boucle tant que start n'a pas atteint end
 	while (start < end)
 	{
+		// Echange des caracteres start et end
 		temp = *start;
 		*start = *end;
 		*end = temp;
+		// Les index se rapprochent jusqu'a se croiser
 		start++;
 		end--;
 	}
