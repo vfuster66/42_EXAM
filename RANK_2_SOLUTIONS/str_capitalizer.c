@@ -44,24 +44,37 @@ $>
 
 int main(int ac, char **av)
 {
+	// Argument
 	int	i = 1;
+	// Index de l'argument
 	int	j;
 
+	// S'il n'y a pas d'argument, afficher un retour a la ligne
 	if (ac == 1)
 		write(1, "\n", 1);
+	// Ou s'il y a au moins 1 argument
 	else
 	{
+		// Boucle pour parcourir tous les arguments 
 		while (i < ac)
 		{	
 			j = 0;
+			// Si le 1er caractere de l'argument est une lettre minuscule
 			if (av[i][j] >= 'a' && av[i][j] <= 'z')
+				// Mettre la lettre en majuscule
 				av[i][j] -= 32;
+			// Afficher le caractere
 			write(1, &av[i][j], 1);
+			// Boucle qui parcourt les caracteres suivants de l'argument
 			while (av[i][++j])
 			{
+				// Si le caractere actuel est une lettre majuscule
 				if (av[i][j] >= 'A' && av[i][j] <= 'Z')
+					// Passer la lettre en minuscule
 					av[i][j] += 32;
+				// Si le caractere actuel est une lettre minuscule et le caractere suivant est un espace ou une tab ou un cractere nul
 				if ((av[i][j] >= 'a' && av[i][j] <= 'z') && (av[i][j - 1] == ' ' || av[i][j - 1] == '\t' || av[i][j - 1] == '\0'))
+					// Passer la lettre en majuscule
 					av[i][j] -= 32;
 				write(1, &av[i][j], 1);
 				
