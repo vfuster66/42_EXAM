@@ -38,6 +38,7 @@ $>
 
 #include <unistd.h>
 
+// Fonction pour afficher un entier sur la sortie standard
 void	ft_putnbr(int n)
 {
 	char	c;
@@ -47,6 +48,7 @@ void	ft_putnbr(int n)
 	write(1, &c, 1);
 }
 
+// Fonction pour convertir une chaine de caracteres en entier
 int	ft_atoi(char *str)
 {
 	int	i = 0;
@@ -60,6 +62,7 @@ int	ft_atoi(char *str)
 	return (result);
 }
 
+// Fonction pour verifier si un nombre donne est premier ou non
 int	ft_is_prime(int nombre)
 {
 	int	diviseur = 2;
@@ -76,6 +79,7 @@ int	ft_is_prime(int nombre)
 	return (1);
 }
 
+// Fonction principale
 int	main(int ac, char **av)
 {
 	int	nombre_actuel = 2;
