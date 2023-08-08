@@ -43,20 +43,31 @@ $
 
 int	main(int ac, char **av)
 {
+	// Index pour parcourir av[1]
 	int	i = 0;
+	// Index pour parcourir av[2]
 	int	j = 0;
-	
+
+	// Verifier le nombre exact d'arguments
 	if (ac == 3)
 	{
+		// Boucle pour parcourir les 2 chaines de caracteres simultanement
 		while (av[1][i] && av[2][j])
 		{
+			// Si les caracteres sont identiques
 			if (av[1][i] == av[2][j])
+				// Passer au caractere suivant de av[1]
 				i++;
+			// Passer au caractere suivant de av[2]
 			j++;
 		}
+		// Si la chaine de caracteres av[1] a ete parcourue jusqu'a la fin
+		// La chaine est entierement contenue dans av[2]
 		if (av[1][i] == '\0')
 		{
+			// Reinitialiser i
 			i = 0;
+			// Boucle pour afficher av[1]
 			while (av[1][i])
 			{
 				write(1, &av[1][i], 1);
