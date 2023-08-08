@@ -101,19 +101,27 @@ int		main(int ac, char **av)
 	int	nb1;
 	int	nb2;
 	int	diviseur_commun;
-	
+
+	// Verifier le nombre exact d'arguments
 	if (ac == 3)
 	{
+		// Convertir les 2 chaines de caracteres et les affecter a nb1 et nb2
 		nb1 = atoi(av[1]);
 		nb2 = atoi(av[2]);
+		// Affecter nb1 a diviseur_commun
 		diviseur_commun = nb1;
+		// Boucle qui itere tant que le diviseur_commun est positif
 		while (diviseur_commun > 0)
 		{
+			// Si nb1 et nb2 sont divisibles par le diviseur_commun
 			if (nb1 % diviseur_commun == 0 && nb2 % diviseur_commun == 0)
 			{
+				// Afficher le diviseur_commun
 				printf("%d\n", diviseur_commun);
+				// Rtourner nb1
 				return (nb1);
 			}
+			// Ou passer au diviseur_commun precedent
 			diviseur_commun--;
 		}
 	}	
