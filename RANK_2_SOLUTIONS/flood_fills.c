@@ -97,28 +97,38 @@ FFF0000F
 $> 
 
 ------------------------------------*/
+// Algorithme de remplissage par debordement pour remplir une region connexe
+// d'un tableau 2D de caracteres
 
 #include <stdlib.h>
 #include <stdio.h>
 
+// Structure donnee pour representer les coordonnees d'un point dans le tableau
 typedef struct s_point
 {
 	int x;
 	int y;
 } t_point;
 
+// Fonction recursive pour parcourir la region connexe a partir du point actuel
+// et remplir les cellules avec le caractere 'F'
 void	fill(char **tab, t_point size, t_point current, char to_fill)
 {
+	// Verifier si les coordonnees sont en dehors du tableau
+	// et si le caractere actuel est different du caractere to_fill 
 	if (current.y < 0 || current.x < 0 || current.y >= size.y || current.x >= size.x 
 			|| tab[current.y][current.x] != to_fill)
 		return ;
+	// Affecter le caractere 'F' au caractere actuel
 	tab[current.y][current.x] = 'F';
+	// Appel recursifpour les points adjacents en haut, en bas, a gauche, a droite
 	fill(tab, size, (t_point){current.x - 1, current.y}, to_fill);
 	fill(tab, size, (t_point){current.x + 1, current.y}, to_fill);
 	fill(tab, size, (t_point){current.x, current.y - 1}, to_fill);
 	fill(tab, size, (t_point){current.x, current.y + 1}, to_fill);
 }
 
+// Fonction d'interface qui appelle la fonction fill avec les parametres appropries
 void  flood_fill(char **tab, t_point size, t_point begin)
 {
 	fill(tab, size, begin, tab[begin.y][begin.x]);
