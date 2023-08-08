@@ -58,22 +58,32 @@ struct s_list
 
 t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 {
+	// Variable temporaire pour echanger 2 noeuds
 	int	swap;
+	// Pointeur utilise pour stocker le pointeur initial vers le 1er noeud
 	t_list	*temp;
 
+	// Mise a jour de temp vers le debut de la liste
 	temp = lst;
+	// Boucle pour parcourir la liste tant que l'element n'est pas le dernier
 	while(lst->next != NULL)
 	{
+		// Les donnees actuelles et les suivantes sont egales
 		if (((*cmp)(lst->data, lst->next->data)) == 0)
 		{
+			// Echange des donnees
 			swap = lst->data;
 			lst->data = lst->next->data;
 			lst->next->data = swap;
+			// Mise a jour de lst vers le debut de la liste stocke dans temp
 			lst = temp;
 		}
+		// Ou si les donnees actuelles et suivantes sont differentes
 		else
+			// Affecter l'element suivant a lst
 			lst = lst->next;
 	}
+	// Mise a jour de lst vers le debut de la liste stocke dans temp
 	lst = temp;
 	return (lst);
 }
