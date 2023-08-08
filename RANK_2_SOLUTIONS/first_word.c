@@ -44,12 +44,16 @@ $>
 
 int	main(int ac, char **av)
 {
+	// Index pour parcourir la chaine de caracteres
 	int	i = 0;
 
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
+		// Avancer dans la chaine tant que le caractere actuel est un espace ou une tab
 		while (av[1][i] == ' ' || av[1][i] == '\t')
 			i++;
+		// Afficher le caractere tant que le caractere est different d'un espace ou une tab
 		while (av[1][i] != ' ' && av[1][i] != '\t')
 		{
 			write(1, &av[1][i], 1);
