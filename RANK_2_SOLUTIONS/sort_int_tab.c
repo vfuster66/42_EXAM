@@ -34,19 +34,28 @@ void sort_int_tab(int *tab, unsigned int size)
 	unsigned int	j;
 	int	temp;
 
+	// Verifier si le tableau est vide ou qu'il ne comporte qu'un argument
+	// Le tableau est deja trie
 	if (size <= 1)
 		return ;
+	// Boucle externe qui parcourt le tableau jusqu'a la fin
+	// Controle le nombre d'iteration pour trier le tableau
 	while (i < size - 1)
 	{
 		j = 0;
+		// Boucle interne utilisee pour comparer chaque element avec son voisin
+		// et l'intervertir si necessaire
 		while (j < size - i - 1)
 		{
+			// Comparaison entre l'element actuel et le suivant et swap des 
+			// elements si necessaire
 			if (tab[j] > tab[j + 1])
 			{
 				temp = tab[j];
 				tab[j] = tab[j + 1];
 				tab[j + 1] = temp;
 			}
+			// Passer a la comparaison suivante
 			j++;
 		}
 		i++;
