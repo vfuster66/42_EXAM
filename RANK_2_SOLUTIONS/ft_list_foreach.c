@@ -43,12 +43,15 @@ typedef struct    s_list
 void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
 
 {
-	// Pointeur 
+	// Pointeur pour parcourir la liste
 	t_list	*current = begin_list;
 
+	// Boucle pour parcourir la liste jusqu'a la fin
 	while (current != NULL)
 	{
+		// Appel de la fonction
 		(*f)(current->data);
+		// Passer a l 'element suivant de la liste
 		current = current->next;
 	}
 }
