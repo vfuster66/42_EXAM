@@ -27,15 +27,21 @@ int	    is_power_of_2(unsigned int n);
 
 int is_power_of_2(unsigned int n)
 {
+	// Si n est egal a 0 il ne peut pas etre une puissance
 	if (n == 0)
 		return (0);
+	// Boucle tant que n est plus grand que 1
 	while (n > 1)
 	{
+		// Si n est divisible par 2 = n est pair
 		if (n % 2 == 0)
+			// Diviser n par 2
 			n /= 2;
+		// Ou si n est impair, il ne peut pas etre une puissance
 		else
 			return (0);
 	}
+	// Renvoyer vrai
 	return (1);
 }
 
