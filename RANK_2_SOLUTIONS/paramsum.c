@@ -34,6 +34,7 @@ $>
 
 #include <unistd.h>
 
+// Fonction pour afficher un entier sur la sortie standard
 void	ft_putnbr(int n)
 {
 	char	c;
@@ -46,7 +47,9 @@ void	ft_putnbr(int n)
 
 int	main(int ac, char **av)
 {
+	// Ignorer av
 	(void)av;
+	// Afficher la valeur de ac moins 1
 	ft_putnbr(ac - 1);
 	write(1, "\n", 1);
 	return (0);
