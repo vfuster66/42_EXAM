@@ -30,13 +30,18 @@ Example, if you pass 2 to print_bits, it will print "00000010"
 
 void	print_bits(unsigned char octet)
 {
+	// Boucle qui parcourt chaque bit du plus fort au moins fort
 	int	i = 7;
 	while (i >= 0)
 	{
+		// Decalage vers la droite et extraction du bit a la position i de l'octet
+		// Si le bit est egal a 1, afficher 1
 		if ((octet >> i) & 1)
 			write(1, "1", 1);
+		// Ou si le bit est egal a 0, afficher 0
 		else
 			write(1, "0", 1);
+		// Passer au bit moins fort
 		i--;
 	}
 }
