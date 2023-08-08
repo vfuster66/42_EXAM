@@ -28,19 +28,28 @@ char	*ft_strpbrk(const char *s1, const char *s2);
 
 char	*ft_strpbrk(const char *s1, const char *s2)
 {
-	const char *s2_start = s2;
-	
+	// Variable debut_s2 pour conserver le pointeur de debut de chaine s2
+	const char *debut_s2 = s2;
+
+	// Boucle pour parcourir s1 jusqu'a la fin
 	while (*s1)
 	{
-		s2 = s2_start;
+		// Reinitialiser le pointeur s2 vers le debut de la chaine
+		s2 = debut_s2;
+		// Boucle pour parcourir s2
 		while (*s2)
 		{
+			// Si une correspondance est trouvee
 			if (*s1 == *s2)
+				// Renvoyer le caractere actuel de s1
 				return ((char *)s1);
+			// Passer au caractere suivant de s2
 			s2++;
 		}
+		// Passer au caractere suivant de s1
 		s1++;
 	}
+	// Renvoyer NULL si aucun caractere en commun n'est trouve
 	return (NULL);
 }
 
