@@ -32,19 +32,28 @@ If the array is empty, the function returns 0.
 
 int	max(int* tab, unsigned int len)
 {
-    int result;
+    int    valeur_max;
+    // Index du deuxieme element du tableau
     unsigned int       i;
+
+    // Verifier si le tableau est vide
     if (len == 0)
         return (0);
-    result = tab[0];
+    // Assigner la 1ere valeur du tableau a la valeur_max
+    valeur_max = tab[0];
+    // Initialiser i a la deuxieme valeur du tableau
     i = 1;
+    // Boucle qui parcourt tous les elements du tableau
     while (i < len)
     {
-        if (result < tab[i])
-            result = tab[i];
+        // Comparaison de la valeur_max avec la valeur actuelle du tableau
+        if (valeur_max < tab[i])
+            // Mise a jour de valeur_max chaque fois qu'une valeur plus grande est trouvee
+            valeur_max = tab[i];
+        // Passer a l'element suivant
         i++;
     }
-    return (result);
+    return (valeur_max);
 }
 
 #include <stdlib.h>
