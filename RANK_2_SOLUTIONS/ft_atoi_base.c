@@ -39,21 +39,29 @@ int ft_atoi_base(const char *str, int str_base)
 	int	result = 0;
 	int	sign = 1;
 
+	// Verifier si str_base est compris entre la base binaire et la base hexadecimale
 	if (str_base >= 2 && str_base <= 16)
 	{
+		// Si le 1er caractere de la chaine est le caractere '-'
 		if (str[0] == '-')
 		{
+			// variable mise a jour indiquant que l'entier sera negatif 
 			sign = -1;
+			// Passer au caractere suivant
 			i++;
 		}
+		// Boucle pour parcourir la chaine de caracteres jusqu'a la fin
 		while (str[i])
 		{
+			// Verifier pour chaque caractere en fonction de la base specifiee
+			// Convertir le caractere en sa valeur numerique
 			if (str[i] >= '0' && str[i] <= '9')
 				result = result * str_base + str[i] - '0';
 			else if (str[i] >= 'a' && str[i] <= 'f')
 				result = result * str_base + str[i] - 'a' + 10;
 			else if (str[i] >= 'A' && str[i] <= 'F')
 				result = result * str_base + str[i] - 'A' + 10;
+			// Ou caractere invalide rencontre qui met fin a la conversion
 			else
 				break ;
 			i++;
