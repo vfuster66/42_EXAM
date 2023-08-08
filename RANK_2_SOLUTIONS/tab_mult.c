@@ -53,6 +53,7 @@ $>
 
 #include <unistd.h>
 
+// Fonction pour afficher un entier sur la sortie standard
 void	ft_putnbr(int n)
 {
 	char	c;
@@ -62,6 +63,8 @@ void	ft_putnbr(int n)
 	write(1, &c, 1);
 }
 
+
+// Fonction pour convertir une chaine de caracteres en entier
 int	ft_atoi(char *str)
 {
 	int	i = 0;
@@ -77,23 +80,37 @@ int	ft_atoi(char *str)
 
 int	main(int ac, char **av)
 {
+	// Compteur
 	int	nb1;
+	// Argument
 	int	nb2;
-	
+
+	// Verifier si le nombre d'arguments est different de 2, afficher un retour a la ligne
 	if (ac != 2)
 		write(1, "\n", 1);
+	// Ou si le nombre d'arguments est egal a 2
 	else
 	{
+		// Debut du compteur a 1
 		nb1 = 1;
+		// Argument converti en entier
 		nb2 = ft_atoi(av[1]);
+		// Boucle de 1 a 9
 		while (nb1 <= 9)
 		{
+			// Afficher le compteur
 			ft_putnbr(nb1);
+			// Afficher le caractere 'x'
 			write(1, " x ", 3);
+			// Afficher l'argument
 			ft_putnbr(nb2);
+			// Afficher le caractere '='
 			write(1, " = ", 3);
+			// Afficher le resultat de la multiplication des 2 nombres
 			ft_putnbr(nb1 * nb2);
+			// Afficher un retour a la ligne
 			write(1, "\n", 1);
+			// Passer au nombre suivant du compteur
 			nb1++;
 		}
 	}
