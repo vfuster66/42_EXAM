@@ -35,6 +35,7 @@ $
 
 #include <unistd.h>
 
+// Fonction pour convertir une chaine de caracteres en entier
 int	ft_atoi(char *str)
 {
 	int	i = 0;
@@ -48,6 +49,7 @@ int	ft_atoi(char *str)
 	return (result);
 }
 
+// Fonction pour afficher la representation hexadecimale de l'entier sur la sortie standard
 void	putnbr_hex(int n)
 {
 	char	tab[] = "0123456789abcdef";
@@ -59,13 +61,17 @@ void	putnbr_hex(int n)
 
 int	main(int ac, char **av)
 {
-	int	n;
+	int	arg;
 
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
-		n = ft_atoi(av[1]);
-		if (n >= 0)
-			putnbr_hex(n);
+		// Convertir av[1] en entier et l'affecter a arg
+		arg = ft_atoi(av[1]);
+		// Si arg est positif
+		if (arg >= 0)
+			// Afficher la representation hexadecimale de arg
+			putnbr_hex(arg);
 	}
 	write(1, "\n", 1);
 	return (0);
