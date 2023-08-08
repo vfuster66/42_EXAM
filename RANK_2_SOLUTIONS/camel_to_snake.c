@@ -38,12 +38,16 @@ $
 
 int	main(int ac, char **av)
 {
+	// Index pour parcourir la chaine de caracteres
 	int	i = 0;
-	
+
+	// Verifie le nombre d'arguments exacts
 	if (ac == 2)
 	{
+		// Tant que la chaine de caracteres n'est pas terminee
 		while (av[1][i])
 		{
+			// Si une lettre majuscule est rencontree 
 			if (av[1][i] >= 'A' && av[1][i] <= 'Z')
 			{
 				write(1, "_", 1);
