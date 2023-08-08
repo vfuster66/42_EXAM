@@ -31,12 +31,17 @@ _____________
 unsigned char	reverse_bits(unsigned char octet)
 {
 	int	i = 0;
+	// Variable pour stocker les bits de l'octet inversé
 	int	reversed = 0;
-	
+
+	// Boucle qui itere les bits de 0 a 7
 	while (i < 8)
 	{
+		// Decalage du bit de reversed vers la gauche combiné a l'extraction du dernier bit de octet
 		reversed = (reversed << 1) | (octet & 1);
+		// Decalage du bit de octet vers la droite
 		octet >>= 1;
+		// Passer au bit suivant
 		i++;
 	}
 	return (reversed);
