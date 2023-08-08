@@ -41,18 +41,30 @@ $>
 
 void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
+	// Pointeur pour parcourir la liste
 	t_list	*current;
 
+	// Verifier si begin_list est un pointeur NULL ou si le 1er element
+	// de la liste est NULL.
 	if ((begin_list == NULL) || (*begin_list == NULL))
 		return ;
+
+	// Initialisation de current avec le 1er element de la liste
 	current = *begin_list;
+	// Si la comparaison entre les 2 valeurs est egale
 	if (cmp(current->data, data_ref) == 0)
 	{
+		// Mise a jour du pointeur *begin_list vers l'element suivant
 		*begin_list = current->next;
+		// Suppression de l'element current
 		free(current);
+		// Recursion pour comparer les elements suivants et supprimer
+		// ce qui doit l'etre
 		ft_list_remove_if(begin_list, data_ref, cmp);
 	}
+	// Passer a l'element suivant de la liste
 	current = *begin_list;
+	// Recursion pour continuer de chercher et de supprimer d'autres elements
 	ft_list_remove_if(&current->next, data_ref, cmp);
 }
 
