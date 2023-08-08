@@ -44,15 +44,21 @@ $>
 
 int	main(int ac, char **av)
 {
+	// Index pour parcourir la chaine
 	int	i = 0;
-	
+
+	// Verifier le nombre d'arguments exacts pour rentrer dans la boucle
 	if (ac == 2)
 	{
+		// Tant que la chaine de caracteres n'est pas terminee
 		while (av[1][i])
 		{
+			// transformation miroir
 			if (av[1][i] >= 'a' && av[1][i] <= 'z')
+				// ex : pour 'a' = 97 -> 219 - 97 = 122 = 'z'
 				av[1][i] = 219 - av[1][i];
 			else if (av[1][i] >= 'A' && av[1][i] <= 'Z')
+				// ex : pour 'A' = 65 -> 155 - 65 = 90 = 'Z'
 				av[1][i] = 155 - av[1][i];
 			write(1, &av[1][i], 1);
 			i++;
