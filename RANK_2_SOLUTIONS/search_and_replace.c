@@ -45,12 +45,17 @@ eNcOre Un ExEmPle Pas Facile a Ecrire $
 int	main(int ac, char **av)
 {
 	int	i = 0;
-
+	
+	// Verifier le nombre exact d'arguments et que les arguments av[2] et av[3]
+	// ne comportent qu'un seul caractere
 	if (ac == 4 && av[2][1] == '\0' && av[3][1] == '\0')
 	{
+		// Boucle pour parcourir la chaine de caracteres jusqu'a la fin
 		while (av[1][i])
 		{
+			// Si le caractere de av[2] est egal au caractere actuel de av[1]
 			if (av[1][i] == av[2][0])
+				// Remplacer le caractere actuel de av[1] par le caractere de av[3]
 				av[1][i] = av[3][0];
 			write(1, &av[1][i], 1);
 			i++;
