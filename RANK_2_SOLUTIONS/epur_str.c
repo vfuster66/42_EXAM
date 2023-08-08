@@ -44,21 +44,31 @@ $>
 int main(int ac, char **av)
 {
 	int	i = 0;
-	int	space = -1;
-	
+	int	etat_des_espaces = -1;
+
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
+		// Parcourir la chaine de caracteres jusqu'a la fin
 		while(av[1][i])
-		{	
+		{
+			// Si le caractere actuel est different d'un espace et d'une tab
 			if (av[1][i] != ' ' && av[1][i] != '\t')
 			{
-				if (space == 1)
+				// si le caractere precedent etait un espace ou une tab
+				if (etat_des_espaces == 1)
+					// Afficher 1 espace
 					write(1, " ", 1);
-				space = 0;
+				// mise a jour de la variable en fonction du caractere actuel
+				// 0 = caractere different d'un espace ou d'une tab
+				etat_des_espaces = 0;
 				write(1, &av[1][i], 1);
 			}
-			else if (space == 0)
-				space = 1;
+			// si le caractere precedent n'etait pas un espace ou une tab
+			else if (etat_des_espaces == 0)
+				// mise a jour de la variable en fonction du caractere actuel
+				// 1 = caractere egal a un espace ou une tab
+				etat des espaces = 1;
 			i++;
 		}
 	}
