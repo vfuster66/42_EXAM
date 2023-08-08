@@ -47,31 +47,47 @@ $> ./fprime 42 21 | cat -e
 $
 
 -------------------------*/
+// Programme qui prend un entier en argument et affiche sa decomposition
+// en facteurs premiers
+// Un facteur premier est un nombre qui divise exactement le nombre donne
+// sans laisser de reste
 
 #include <stdlib.h>
 #include <stdio.h>
 
 int	main(int ac, char **av)
 {
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
+		// Affecter l'argument converti en entier a nombre
 		int	nombre = atoi(av[1]);
+		// Variable utilisee pour parcourir les diviseurs potentiels du nombre donne
+		// intitialise a 2 qui est le plus petit nombre premier
 		int	diviseur = 2;
-
+		
+		// Si nombre est plus petit ou egal a 0 , il n'a pas de decomposition en
+		// facteurs premiers
 		if (nombre <= 0)
 		{
 			printf("\n");
 			return (0);
 		}
+		// Boucle tant que le nombre n'est pas egal a 1
 		while (nombre != 1)
 		{
+			Si le nombre est divisible par le diviseur = facteur premier de nombre
 			if (nombre % diviseur == 0)
 			{
+				// Afficher le diviseur qui est un facteur premier
 				printf("%d", diviseur);
+				// Mise a jour de nombre en le divisant par diviseur
 				nombre /= diviseur;
+				// Si le nombre n'est pas egal a 1, afficher '*'
 				if (nombre != 1)
 					printf("*");
 			}
+			// Ou passer au diviseur suivant 
 			else
 				diviseur++;
 		}
