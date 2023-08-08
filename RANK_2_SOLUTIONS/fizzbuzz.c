@@ -52,6 +52,7 @@ $>
 
 #include <unistd.h>
 
+// Afficher un nombre entier sur la sortie standard
 void	ft_putnbr(int n)
 {
 	char	c;
@@ -64,20 +65,27 @@ void	ft_putnbr(int n)
 
 int	main(void)
 {
-	int	i = 1;
+	// nombre de 1...
+	int	nombre = 1;
 
-	while (i <= 100)
+	// ... a 100
+	while (nombre <= 100)
 	{
-		if (i % 3 == 0 && i % 5 == 0)
+		// Verifier si le nombre est divisible par 3 et par 5
+		if (nombre % 3 == 0 && nombre % 5 == 0)
 			write(1, "fizzbuzz", 8);
-		else if (i % 3 == 0)
+		// Ou verifier si le nombre est divisible par 3
+		else if (nombre % 3 == 0)
 			write(1, "fizz", 4);
-		else if (i % 5 == 0)
+		// Ou verifier si le nombre est divisible par 5
+		else if (nombre % 5 == 0)
 			write(1, "buzz", 4);
+		// Ou afficher  le nombre qui ne fait pas partie des conditions ci-dessus
 		else
-			ft_putnbr(i);
+			ft_putnbr(nombre);
 		write(1, "\n", 1);
-		i++;
+		// Passer au nombre suivant
+		nombre++;
 	}
 	return (0);
 }
