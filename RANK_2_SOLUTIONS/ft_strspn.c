@@ -28,22 +28,33 @@ size_t	ft_strspn(const char *s, const char *accept);
 
 size_t  ft_strspn(const char *s, const char *accept)
 {
+    // Index pour parcourir la chaine de caracteres s
     size_t  i = 0;
+    // Index pour parcourir la chaine de caracteres accept
     size_t  j;
 
+    // Boucle pour parcourir la chaine s
     while (s[i])
     {
         j = 0;
+        // Boucle pour parcourir la chaine accept
         while (accept[j])
         {
+            // Si les deux caracteres sont egaux, s[i] fait partie de accept
             if (s[i] == accept[j])
+                // Sortir de la boucle 
                 break ;
+            // Passer au caractere suivant de accept 
             j++;
         }
+        // Si on arrive au bout de la chaine accept
         if (accept[j] == '\0')
+            // Renvoyer la valeur de i
             return (i);
+        // Passer au caractere suivant de s
         i++;
     }
+    // Renvoyer la valeur de i
     return (i);
 }
 
