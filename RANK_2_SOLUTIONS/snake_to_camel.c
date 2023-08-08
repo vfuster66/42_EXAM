@@ -38,15 +38,21 @@ $
 
 int	main(int ac, char **av)
 {
+	// Index pour parcourir la chaine de caracteres
 	int	i = 0;
 
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
+		// Boucle pour parcourir la chaine de caracteres jusqu'a la fin
 		while (av[1][i])
 		{
+			// Si le caractere actuel est '_'
 			if (av[1][i] == '_')
 			{
+				// Passer au caractere suivant
 				i++;
+				// Mettre la lettre minuscule en majuscule
 				av[1][i] -= 32;
 			}
 			write(1, &av[1][i], 1);
