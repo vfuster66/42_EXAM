@@ -47,21 +47,27 @@ $>
 int	main(int ac, char **av)
 {
 	int	i;
-	int	j;
-	int	k;
+	int	compteur;
+	int	multiplicateur;
 
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
 		i = 0;
+		// Boucle pour parcourir la chaine de caracteres
 		while (av[1][i])
 		{
-   			k = 1;
+   			multiplicateur = 1;
+			// Verifie si le caractere est une lettre
 			if (av[1][i] >= 'A' && av[1][i] <= 'Z')
-				k = av[1][i] - 64;
+				// ex : 'A' - 64 = 65 - 64 = 1
+				multiplicateur = av[1][i] - 64;
 			else if (av[1][i] >= 'a' && av[1][i] <= 'z')
-				k = av[1][i] - 96;
+				// ex : 'a' - 96 = 97 - 96 = 1
+				multiplicateur = av[1][i] - 96;
 			j = 0;
-			while (j < k)
+			Boucle qui itere tant que le compteur est plus petit que le multiplicateur
+			while (compteur < multiplicateur)
 			{
 				write(1, &av[1][i], 1);
 				j++;
