@@ -65,7 +65,7 @@ int main(int ac, char **av)
 				etat_des_espaces = 0;
 				write(1, &av[1][i], 1);
 			}
-			// Si le caractere precedent est different d'un espace ou d'une tab 
+			// Ou si le caractere precedent est different d'un espace ou d'une tab 
 			else if (etat_des_espaces == 0)
 				// Mise a jour de la variable
 				// 1 = caractere precedent egal a un espace ou une tab
