@@ -60,7 +60,7 @@ char    **ft_split(char *str)
 		while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\0')
 			// Copie de chaque caractere dans le tableau
 			tab[row][column++] = str[i++];
-		// Ajouter le caractere nu a la fin de la chaine de caracteres
+		// Ajouter le caractere nul a la fin de la chaine de caracteres
 		tab[row][column] = '\0';
 		// Ignorer les espaces, tab, retour a la ligne de fin de chaine
 		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
