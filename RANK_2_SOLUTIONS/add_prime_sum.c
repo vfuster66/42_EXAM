@@ -85,15 +85,22 @@ int	main(int ac, char **av)
 	int	nombre_actuel = 2;
 	int	somme_des_premiers = 0;
 
+	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
+		// Boucle qui itere tant que le nombre_actuel est plus
+		// petit ou egal a l'argument converti en entier
 		while (nombre_actuel <= ft_atoi(av[1]))
 		{
+			// Verifier si le nombre_actuel est un nombre premier
 			if (ft_is_prime(nombre_actuel))
+				// Ajouter le nombre_actuel a la somme_des_premiers
 				somme_des_premiers += nombre_actuel;
+			// Passer au nombre_actuel suivant
 			nombre_actuel++;
 		}
 	}
+	// Afficher la somme des nombres premiers
 	ft_putnbr(somme_des_premiers);
 	write(1, "\n", 1);
 	return (0);
