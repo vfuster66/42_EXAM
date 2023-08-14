@@ -100,18 +100,22 @@ void	sort_int_tab(int *tab, unsigned int size)
 
 void sort_int_tab(int *tab, unsigned int size);
 
-int main()
+int main() 
 {
-    int tab[] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
-    unsigned int size = sizeof(tab) / sizeof(tab[0]);
+    int arr[] = {4, 2, 7, 1, 9, 3};
+    unsigned int arr_size = sizeof(arr) / sizeof(arr[0]);
 
-    sort_int_tab(tab, size);
-
-    for (unsigned int i = 0; i < size; i++) {
-        printf("%d ", tab[i]);
+    printf("Avant le tri : ");
+    for (unsigned int i = 0; i < arr_size; i++) {
+        printf("%d ", arr[i]);
     }
     printf("\n");
-
+    sort_int_tab(arr, arr_size);
+    printf("Après le tri : ");
+    for (unsigned int i = 0; i < arr_size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
     return 0;
 }
 --------------------------------------------*/
