@@ -28,39 +28,52 @@ Input is always coherent.
 
 --------------------------------------*/
 
-void sort_int_tab(int *tab, unsigned int size)
+void	ft_swap(int *a, int *b)
 {
-	unsigned int	i = 0;
-	unsigned int	j;
 	int	temp;
 
-	// Verifier si le tableau est vide ou qu'il ne comporte qu'un argument
-	// Le tableau est deja trie
-	if (size <= 1)
-		return ;
-	// Boucle externe qui parcourt le tableau jusqu'a la fin
-	// Controle le nombre d'iteration pour trier le tableau
-	while (i < size - 1)
-	{
-		j = 0;
-		// Boucle interne utilisee pour comparer chaque element avec son voisin
-		// et l'intervertir si necessaire
-		while (j < size - i - 1)
-		{
-			// Comparaison entre l'element actuel et le suivant et swap des 
-			// elements si necessaire
-			if (tab[j] > tab[j + 1])
-			{
-				temp = tab[j];
-				tab[j] = tab[j + 1];
-				tab[j + 1] = temp;
-			}
-			// Passer a la comparaison suivante
-			j++;
-		}
-		i++;
-	}
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
+
+void sort_int_tab(int *tab, unsigned int size)
+{
+	// Indice pour parcourir le tableau
+	int i;
+	// Compteur pour suivre le nombre d'itérations (passages) effectués
+	int compteur_passages; 
+
+	i = 0;
+	compteur_passages = 0;
+
+	// Si le tableau est vide ou contient un seul élément, il est déjà trié, donc on retourne
+	if (size <= 1)
+		return;
+
+	// Boucle principale pour contrôler les itérations (passages) à travers le tableau
+	while (compteur_passages < size)
+	{
+		// Réinitialisation de l'indice de parcours pour chaque passage
+		i = 0;
+		
+		// Boucle interne pour comparer et échanger les éléments adjacents
+		while (i < (size - 1))
+		{
+		// Si l'élément actuel est plus grand que l'élément suivant, on les échange
+		if (tab[i] > tab[i + 1])
+		{
+			// La fonction ft_swap est utilisée pour échanger les éléments en mémoire
+			ft_swap(&tab[idx], &tab[idx + 1]);
+		}
+		// Passage à l'élément suivant dans le tableau
+		i++; 
+        }
+	// Passage au prochain itération (passage)
+        compteur_passages++; 
+    }
+}
+
 
 /*--------------------------------------------
 #include <stdio.h>
