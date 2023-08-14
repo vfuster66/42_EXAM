@@ -27,7 +27,7 @@ Doubles must be preserved.
 Input is always coherent.
 
 --------------------------------------*/
-
+// Version 1
 void	ft_swap(int *a, int *b)
 {
 	int	temp;
@@ -40,9 +40,9 @@ void	ft_swap(int *a, int *b)
 void sort_int_tab(int *tab, unsigned int size)
 {
 	// Indice pour parcourir le tableau
-	int i;
+	unsigned int i;
 	// Compteur pour suivre le nombre d'itérations (passages) effectués
-	int compteur_passages; 
+	unsigned int int compteur_passages; 
 
 	i = 0;
 	compteur_passages = 0;
@@ -64,7 +64,7 @@ void sort_int_tab(int *tab, unsigned int size)
 		if (tab[i] > tab[i + 1])
 		{
 			// La fonction ft_swap est utilisée pour échanger les éléments en mémoire
-			ft_swap(&tab[idx], &tab[idx + 1]);
+			ft_swap(&tab[i], &tab[i + 1]);
 		}
 		// Passage à l'élément suivant dans le tableau
 		i++; 
@@ -72,6 +72,26 @@ void sort_int_tab(int *tab, unsigned int size)
 	// Passage au prochain itération (passage)
         compteur_passages++; 
     }
+}
+
+// Version 2
+void	sort_int_tab(int *tab, unsigned int size)
+{
+	unsigned int	i;
+	int		temp;
+
+	i = 0;
+	while (i < (size - 1))
+	{
+		if (tab[i] > tab[i + 1])
+		{
+			temp = tab[i];
+			tab[i] = tab[i + 1];
+			tab[i + 1] = temp;
+			i = -1;
+		}
+		i++;
+	}
 }
 
 
