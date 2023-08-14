@@ -75,25 +75,33 @@ void sort_int_tab(int *tab, unsigned int size)
 }
 
 // Version 2
-void	sort_int_tab(int *tab, unsigned int size)
+void sort_int_tab(int *tab, unsigned int size)
 {
-	unsigned int	i;
-	int		temp;
+	// Indice pour parcourir le tableau
+	unsigned int i;
+	// Variable temporaire pour effectuer l'échange
+	int temp;       
 
-	i = 0;
+	// Initialisation de l'indice de parcours
+	i = 0;          
+
+	// Boucle principale pour contrôler les itérations à travers le tableau
 	while (i < (size - 1))
 	{
+		// Si l'élément actuel est plus grand que l'élément suivant, on les échange
 		if (tab[i] > tab[i + 1])
 		{
-			temp = tab[i];
+			temp = tab[i];         
 			tab[i] = tab[i + 1];
 			tab[i + 1] = temp;
-			i = -1;
+			// Réinitialisation de l'indice de parcours pour vérifier à nouveau depuis le début
+			i = -1; 
 		}
-		i++;
+
+		// Passage à l'élément suivant dans le tableau
+		i++; 
 	}
 }
-
 
 /*--------------------------------------------
 #include <stdio.h>
