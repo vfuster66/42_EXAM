@@ -40,12 +40,9 @@ void	ft_swap(int *a, int *b)
 void sort_int_tab(int *tab, unsigned int size)
 {
 	// Indice pour parcourir le tableau
-	unsigned int i;
+	unsigned int i = 0;
 	// Compteur pour suivre le nombre d'itérations (passages) effectués
-	unsigned int int compteur_passages; 
-
-	i = 0;
-	compteur_passages = 0;
+	unsigned int compteur_passages = 0; 
 
 	// Si le tableau est vide ou contient un seul élément, il est déjà trié, donc on retourne
 	if (size <= 1)
@@ -78,12 +75,9 @@ void sort_int_tab(int *tab, unsigned int size)
 void sort_int_tab(int *tab, unsigned int size)
 {
 	// Indice pour parcourir le tableau
-	unsigned int i;
+	unsigned int i = 0;
 	// Variable temporaire pour effectuer l'échange
-	int temp;       
-
-	// Initialisation de l'indice de parcours
-	i = 0;          
+	int temp;                
 
 	// Boucle principale pour contrôler les itérations à travers le tableau
 	while (i < (size - 1))
