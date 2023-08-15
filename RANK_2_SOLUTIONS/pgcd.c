@@ -44,13 +44,11 @@ $
 
 int	main(int ac, char **av)
 {
-	int	nb1;
-	int	nb2;
-	
 	if (ac == 3)
 	{
-		nb1 = atoi(av[1]);
-		nb2 = atoi(av[2]);
+		int	nb1 = atoi(av[1]);
+		int	nb2 = atoi(av[2]);
+		
 		while (nb1 != nb2)
 		{
 			if (nb1 > nb2)
@@ -71,17 +69,13 @@ int	main(int ac, char **av)
 
 int     main(int ac, char **av)
 {
-        int     nb1;
-        int     nb2;
-        int     temp;
-
         if (ac == 3)
         {
-                nb1 = atoi(av[1]);
-                nb2 = atoi(av[2]);
+                int	nb1 = atoi(av[1]);
+                int	nb2 = atoi(av[2]);
                 while (nb2 != 0)
                 {
-                        temp = nb2;
+                        int	temp = nb2;
                         nb2 = nb1 % mb2;
                         nb1 = temp;
                 }
@@ -98,18 +92,15 @@ int     main(int ac, char **av)
 
 int		main(int ac, char **av)
 {
-	int	nb1;
-	int	nb2;
-	int	diviseur_commun;
-
 	// Verifier le nombre exact d'arguments
 	if (ac == 3)
 	{
 		// Convertir les 2 chaines de caracteres et les affecter a nb1 et nb2
-		nb1 = atoi(av[1]);
-		nb2 = atoi(av[2]);
+		int	nb1 = atoi(av[1]);
+		int	nb2 = atoi(av[2]);
 		// Affecter nb1 a diviseur_commun
-		diviseur_commun = nb1;
+		int	diviseur_commun = nb1;
+		
 		// Boucle qui itere tant que le diviseur_commun est positif
 		while (diviseur_commun > 0)
 		{
