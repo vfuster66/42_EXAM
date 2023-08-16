@@ -42,14 +42,14 @@ int ft_atoi_base(const char *str, int str_base)
 	// Verifier si str_base est compris entre la base binaire et la base hexadecimale
 	if (str_base >= 2 && str_base <= 16)
 	{
-		// Si le 1er caractere de la chaine est le caractere '-'
-		if (str[0] == '-')
-		{
-			// variable mise a jour indiquant que l'entier sera negatif 
-			sign = -1;
-			// Passer au caractere suivant
-			i++;
-		}
+		// Ignorer les caracteres non imprimables
+		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+                        str++;
+		// Verifier le signe
+                if (str[i] == '-')
+                        sign = -1;
+                if (str[i] == '-' || str[i] == '+')
+                        str++;
 		// Boucle pour parcourir la chaine de caracteres jusqu'a la fin
 		while (str[i])
 		{
@@ -64,7 +64,7 @@ int ft_atoi_base(const char *str, int str_base)
 			// Ou caractere invalide rencontre qui met fin a la conversion
 			else
 				break ;
-			i++;
+			str++;
 		}
 	}
 	return (result * sign);
