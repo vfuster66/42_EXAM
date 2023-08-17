@@ -49,10 +49,7 @@ char    *ft_itoa(int nbr)
 	str[i] ='\0';
 	// Si le nombre est egal a 0, on revoie la chaine '0'
 	if (nbr == 0)
-	{
-		str[0] = '0';
-		return (str);
-	}
+		return ("0");
 	// Si le nombre est negatif
 	if (nbr < 0)
 	{
