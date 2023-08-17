@@ -61,17 +61,13 @@ void	putnbr_hex(int n)
 
 int	main(int ac, char **av)
 {
-	int	arg;
-
 	// Verifier le nombre exact d'arguments
 	if (ac == 2)
 	{
-		// Convertir av[1] en entier et l'affecter a arg
-		arg = ft_atoi(av[1]);
-		// Si arg est positif
-		if (arg >= 0)
-			// Afficher la representation hexadecimale de arg
-			putnbr_hex(arg);
+		// Si av[1] est positif
+		if (ft_atoi(av[1]) >= 0)
+			// Afficher la representation hexadecimale de av[1]
+			putnbr_hex(ft_atoi(av[1]));
 	}
 	write(1, "\n", 1);
 	return (0);
