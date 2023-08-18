@@ -55,7 +55,8 @@ int main(int ac, char **av)
             		i++;
 		// Verifier si la chaine est vide ou si elle ne contient que
 		// des espaces ou des tabs
-        	if (av[1][i] == '\0' || av[1][i] == '\n' || av[1][i] == '\t')
+        	if (av == ' ' || av[1][i] == '\0' || av[1][i] == '\n' 
+			|| av[1][i] == '\t')
 		{
 			// Afficher un retour a la ligne et sortir du programme
             		write(1, "\n", 1);
@@ -63,7 +64,7 @@ int main(int ac, char **av)
         	}
 		// Boucle pour afficher le premier mot
 		while (av[1][i] != ' ' && av[1][i] != '\t' && av[1][i] != '\0' 
-			&& av[1][i] != '\n' && av[1][i] != '\r')
+			&& av[1][i] != '\n')
 		{
 			write(1, &av[1][i], 1);
             		i++;
