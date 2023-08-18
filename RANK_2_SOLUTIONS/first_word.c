@@ -55,7 +55,7 @@ int main(int ac, char **av)
             		i++;
 		// Verifier si la chaine est vide ou si elle ne contient que
 		// des espaces ou des tabs
-        	if (av[1][i] == '\0' || av[1][i] == '\n' || av[1][i] == '\r')
+        	if (av[1][i] == '\0' || av[1][i] == '\n' || av[1][i] == '\t')
 		{
 			// Afficher un retour a la ligne et sortir du programme
             		write(1, "\n", 1);
