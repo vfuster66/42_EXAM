@@ -51,10 +51,10 @@ char    **ft_split(char *str)
 	// Boucle pour parcourir la chaine de caracteres jusqu'a la fin
 	while (str[i])
 	{
-		caractere_mot = 0;
+		char_index = 0;
 		// Allouer dynamiquement de la memoire pour stocker un nouveau mot
 		tab[word_index] = (char *)malloc(sizeof(char) * 4096);
-		if (!tab[mot])
+		if (!tab[word_index])
 			return (NULL);
 		// Boucle pour parcourir les caracteres du mot
 		while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\0')
