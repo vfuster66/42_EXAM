@@ -35,9 +35,9 @@ char    **ft_split(char *str)
 	// Index pour parcourir la chaine de caracteres
 	int	i = 0;
 	// Variable pour stocker chaque mot dans le tableau
-	int	mot = 0;
+	int	word_index = 0;
 	// Variable pour stocker chaque caractere du mot dans le tableau
-	int	caractere_mot;
+	int	char_index;
 	// Tableau de pointeurs vers des chaines de caracteres
 	char	**tab;
 
@@ -53,23 +53,23 @@ char    **ft_split(char *str)
 	{
 		caractere_mot = 0;
 		// Allouer dynamiquement de la memoire pour stocker un nouveau mot
-		tab[mot] = (char *)malloc(sizeof(char) * 4096);
+		tab[word_index] = (char *)malloc(sizeof(char) * 4096);
 		if (!tab[mot])
 			return (NULL);
 		// Boucle pour parcourir les caracteres du mot
 		while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\0')
 			// Copie de chaque caractere dans le tableau
-			tab[mot][caractere_mot++] = str[i++];
+			tab[word_index][char_index++] = str[i++];
 		// Ajouter le caractere nul a la fin de la chaine de caracteres
-		tab[mot][caractere_mot] = '\0';
+		tab[word_index][char_index] = '\0';
 		// Ignorer les espaces, tab, retour a la ligne de fin de chaine
 		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
 			i++;
 		// Passer au mot suivant
-		mot++;
+		word_index++;
 	}
 	// Assigner NULL a la derniere case du tableau = plus de mot a stocker
-	tab[mot] = NULL;
+	tab[word_index] = NULL;
 	return (tab);
 }
 
