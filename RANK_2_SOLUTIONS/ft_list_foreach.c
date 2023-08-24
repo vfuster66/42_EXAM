@@ -44,15 +44,16 @@ void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
 
 {
 	// Pointeur pour parcourir la liste
-	t_list	*current = begin_list;
-
+	t_list	*list_ptr;
+	
+	list_ptr = begin_list;
 	// Boucle pour parcourir la liste jusqu'a la fin
-	while (current != NULL)
+	while (list_ptr)
 	{
 		// Appel de la fonction
-		(*f)(current->data);
+		(*f)(list_ptr->data);
 		// Passer a l 'element suivant de la liste
-		current = current->next;
+		list_ptr = list_ptr->next;
 	}
 }
 
