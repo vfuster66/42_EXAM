@@ -73,6 +73,11 @@ int	main(int ac, char **av)
 			printf("\n");
 			return (0);
 		}
+		if (nombre == 1)
+		{
+			printf("1\n");
+			return (0);
+		}
 		// Boucle tant que le nombre n'est pas egal a 1
 		while (nombre != 1)
 		{
