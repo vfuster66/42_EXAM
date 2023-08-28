@@ -41,34 +41,37 @@ $>
 
 #include <unistd.h>
 
-int main(int ac, char **av)
+int main(int ac, char const **av)
 {
-	int	i = 0;
-	int	etat_des_espaces = -1;
+	// index pour parcourir la chaine de caracteres
+	int i = 0;
+	// variable pour gerer les espaces
+	int etat_des_espaces;
 
-	// Verifier le nombre exact d'arguments
+	// Verifier le nombre d'arguments
 	if (ac == 2)
 	{
-		// Parcourir la chaine de caracteres jusqu'a la fin
-		while(av[1][i])
+		// Ignorer les esspaces et les tabulations
+		while (av[1][i] == ' ' || av[1][i] == '\t')
+			i++;
+		// Parcourir la chaine de caracteres jusqu' a la fin
+		while (av[1][i])
 		{
-			// Si le caractere actuel est different d'un espace et d'une tab
+			// Verifier s'il y a un espace et activer le flag
+			if (av[1][i] == ' ' || av[1][i] == '\t')
+				etat_des_espaces = 1;
+			// Verifier s'il n'y a pas d'espace ou de tab
 			if (av[1][i] != ' ' && av[1][i] != '\t')
 			{
-				// si le caractere precedent etait un espace ou une tab
-				if (etat_des_espaces == 1)
-					// Afficher 1 espace
+				// Verifier si le flag est actif, afficher un espace
+				if (etat_des_espaces)
 					write(1, " ", 1);
-				// mise a jour de la variable en fonction du caractere actuel
-				// 0 = caractere different d'un espace ou d'une tab
+				// Desactiver le flag
 				etat_des_espaces = 0;
+				// Afficher le caractere
 				write(1, &av[1][i], 1);
 			}
-			// Ou si le caractere precedent n'etait pas un espace ou une tab
-			else if (etat_des_espaces == 0)
-				// mise a jour de la variable en fonction du caractere actuel
-				// 1 = caractere egal a un espace ou une tab
-				etat des espaces = 1;
+			// Passer au caractere suivant
 			i++;
 		}
 	}
