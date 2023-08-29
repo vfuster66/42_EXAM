@@ -38,84 +38,29 @@ $
 
 -----------------------------------*/
 
-//Version 1
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+
+unsigned int	pgcd(unsigned int a, unsigned int b)
+{
+	unsigned int	temp;
+
+	while (b != 0)
+	{
+		temp = b;
+		b = a % b;
+		a = temp;
+	}
+	return (a);
+}
 
 int	main(int ac, char **av)
 {
 	if (ac == 3)
 	{
-		int	nb1 = atoi(av[1]);
-		int	nb2 = atoi(av[2]);
-		
-		while (nb1 != nb2)
-		{
-			if (nb1 > nb2)
-				nb1 = nb1 - nb2;
-			else
-				nb2 = nb2 - nb1;
-		}
-		printf("%d", nb1);
+		unsigned int	result = pgcd(atoi(av[1]), atoi(av[2]));
+		printf("%d", result);
 	}
-	printf("\n");
-	return (0);
-}
-
-//Version 2
-
-#include <stdio.h>
-#include <stdlib.h>
-
-int     main(int ac, char **av)
-{
-        if (ac == 3)
-        {
-                int	nb1 = atoi(av[1]);
-                int	nb2 = atoi(av[2]);
-                while (nb2 != 0)
-                {
-                        int	temp = nb2;
-                        nb2 = nb1 % mb2;
-                        nb1 = temp;
-                }
-                printf("%d", nb1);
-        }
-        printf("\n");
-        return (0);
-}
-
-//Version 3
-
-#include <stdio.h>
-#include <stdlib.h>
-
-int		main(int ac, char **av)
-{
-	// Verifier le nombre exact d'arguments
-	if (ac == 3)
-	{
-		// Convertir les 2 chaines de caracteres et les affecter a nb1 et nb2
-		int	nb1 = atoi(av[1]);
-		int	nb2 = atoi(av[2]);
-		// Affecter nb1 a diviseur_commun
-		int	diviseur_commun = nb1;
-		
-		// Boucle qui itere tant que le diviseur_commun est positif
-		while (diviseur_commun > 0)
-		{
-			// Si nb1 et nb2 sont divisibles par le diviseur_commun
-			if (nb1 % diviseur_commun == 0 && nb2 % diviseur_commun == 0)
-			{
-				// Afficher le diviseur_commun
-				printf("%d\n", diviseur_commun);
-				// Rtourner nb1
-				return (nb1);
-			}
-			// Ou passer au diviseur_commun precedent
-			diviseur_commun--;
-		}
-	}	
 	printf("\n");
 	return (0);
 }
