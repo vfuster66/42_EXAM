@@ -38,7 +38,7 @@ int	max(int* tab, unsigned int len)
     // Assigner la 1ere valeur du tableau a la valeur_max
     int    valeur_max = tab[0];
     // Initialiser i a la deuxieme valeur du tableau
-    int    i = 1;
+    unsigned int    i = 1;
     // Boucle qui parcourt tous les elements du tableau
     while (i < len)
     {
