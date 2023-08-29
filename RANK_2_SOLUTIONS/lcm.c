@@ -40,35 +40,7 @@ Your function must be prototyped as follows:
   unsigned int    lcm(unsigned int a, unsigned int b);
 
 -------------------------------*/
-// Version 1
-unsigned int lcm(unsigned int a, unsigned int b)
-{
-	// Variable pour chercher le PPCM
-	unsigned int	nombre;
-	// Si une des valeurs est egale a 0, il n'y a pas de PPCM 
-	if (a == 0 || b == 0)
-		return (0);
-	// Si a est plus grand que b, la valeur de nombre est a
-	if (a > b)
-		nombre = a;
-	// Ou si b est plus grand que a, la valeur de nombre est b
-	else
-		nombre = b;
-	// Boucle infinie car toujours vraie
-	while (1)
-	{
-		// Si a et b sont divisibles par nombre
-		if (nombre % a == 0 && nombre % b == 0)
-			// nombre est le PPCM
-			return (nombre);
-		// nombre n'est pas le PPCM, on passe au nombre suivant
-		nombre++;
-	}
-}
 
-/*-------------------------------*/
-
-// Version 2
 unsigned int    pgcd(unsigned int a, unsigned int b)
 {
 	unsigned int	temp;
