@@ -33,7 +33,7 @@ If the array is empty, the function returns 0.
 int	max(int* tab, unsigned int len)
 {
     // Verifier si le tableau est vide
-    if (len == 0)
+    if (tab == NULL || len == 0)
         return (0);
     // Assigner la 1ere valeur du tableau a la valeur_max
     int    valeur_max = tab[0];
