@@ -13,7 +13,11 @@ void	ft_putnbr(int n)
 int	main(int ac, char **av)
 {
 	(void)av;
-	ft_putnbr(ac - 1);
+
+	if (ac == 1)
+		write(1, "0", 1);
+	else
+		ft_putnbr(ac - 1);
 	write(1, "\n", 1);
 	return (0);
 }
