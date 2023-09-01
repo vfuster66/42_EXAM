@@ -46,7 +46,7 @@ int main(int ac, char const **av)
 	// index pour parcourir la chaine de caracteres
 	int i = 0;
 	// variable pour gerer les espaces
-	int etat_des_espaces;
+	int etat_des_espaces = 0;
 
 	// Verifier le nombre d'arguments
 	if (ac == 2)
