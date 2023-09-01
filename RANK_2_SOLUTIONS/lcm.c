@@ -41,23 +41,23 @@ Your function must be prototyped as follows:
 
 -------------------------------*/
 
-unsigned int    pgcd(unsigned int a, unsigned int b)
-{
-	unsigned int	temp;
-	while (b != 0)
-	{
-		temp = b;
-		b = a % b;
-		a = temp;
-	}
-	return (a);
-}
-
 unsigned int    lcm(unsigned int a, unsigned int b)
 {
-	if (a == 0 || b == 0)
-		return (0);
-	return ((a * b) / pgcd(a, b));
+        if (a == 0 || b == 0)
+                return (0);
+
+        unsigned int n;
+        if (a > b)
+                n = a;
+        else
+                n = b;
+
+        while (1)
+        {
+                if (n % a == 0 && n % b == 0)
+                        return (n);
+                ++n;
+        }
 }
 
 /*-------------------------------*/
