@@ -22,10 +22,10 @@ int	main(int ac, char **av)
 		{
 			if (nombre % diviseur == 0)
 			{
-			       printf("%d", diviseur);
-			       nombre /= diviseur;
+				printf("%d", diviseur);
+				nombre /= diviseur;
 				if (nombre != 1)
-				printf("*");
+					printf("*");
 			}
 			else
 				diviseur++;
