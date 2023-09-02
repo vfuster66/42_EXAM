@@ -13,6 +13,11 @@ int	main(int ac, char **av)
 			printf("\n");
 			return (0);
 		}
+		if (nombre == 1)
+		{
+			printf("1\n");
+			return (0);
+		}
 		while (nombre != 1)
 		{
 			if (nombre % diviseur == 0)
