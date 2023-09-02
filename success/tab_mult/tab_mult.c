@@ -17,8 +17,13 @@ int	ft_atoi(char *str)
 
 	while (str[i])
 	{
-		result = result * 10 + str[i] - '0';
-		i++;
+		if (str[i] >= '0' && str[i] <= '9')
+		{
+			result = result * 10 + str[i] - '0';
+			i++;
+		}
+		else
+			return (0);
 	}
 	return (result);
 }
@@ -34,15 +39,20 @@ int	main(int ac, char **av)
 	{
 		nb1 = 1;
 		nb2 = ft_atoi(av[1]);
-		while (nb1 <= 9)
-		{
-			ft_putnbr(nb1);
-			write(1, " x ", 3);
-			ft_putnbr(nb2);
-			write(1, " = ", 3);
-			ft_putnbr(nb1 * nb2);
+		if (nb2 == 0)
 			write(1, "\n", 1);
-			nb1++;
+		else
+		{
+			while (nb1 <= 9)
+			{
+				ft_putnbr(nb1);
+				write(1, " x ", 3);
+				ft_putnbr(nb2);
+				write(1, " = ", 3);
+				ft_putnbr(nb1 * nb2);
+				write(1, "\n", 1);
+				nb1++;
+			}
 		}
 	}
 	return (0);
