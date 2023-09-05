@@ -1,47 +1,34 @@
-Assignment name  : add_prime_sum
-Expected files   : add_prime_sum.c
-Allowed functions: write, exit
+## Subject
+
+```
+Assignment name  : first_word
+Expected files   : first_word.c
+Allowed functions: write
 --------------------------------------------------------------------------------
 
-Écrire un programme qui prend un entier positif en argument et affiche la somme
-de tous les nombres premiers inférieurs ou égaux à ce paramètre, suivie d'un
-\n.
+Write a program that takes a string and displays its first word, followed by a
+newline.
 
-Si le nombre d'arguments n'est pas 1, ou que l'argument n'est pas positif,
-afficher 0 et un \n.
+A word is a section of string delimited by spaces/tabs or by the start/end of
+the string.
 
-Oui, les exemples sont justes.
-
-Exemples:
-
-$>./add_prime_sum 5
-10
-$>./add_prime_sum 7 | cat -e
-17$
-$>./add_prime_sum | cat -e
-0$
-$>
-
-
-Assignment name  : add_prime_sum
-Expected files   : add_prime_sum.c
-Allowed functions: write, exit
---------------------------------------------------------------------------------
-
-Write a program that takes a positive integer as argument and displays the sum
-of all prime numbers inferior or equal to it followed by a newline.
-
-If the number of arguments is not 1, or the argument is not a positive number,
-just display 0 followed by a newline.
-
-Yes, the examples are right.
+If the number of parameters is not 1, or if there are no words, simply display
+a newline.
 
 Examples:
 
-$>./add_prime_sum 5
-10
-$>./add_prime_sum 7 | cat -e
-17$
-$>./add_prime_sum | cat -e
-0$
+$> ./first_word "FOR PONY" | cat -e
+FOR$
+$> ./first_word "this        ...    is sparta, then again, maybe    not" | cat -e
+this$
+$> ./first_word "   " | cat -e
+$
+$> ./first_word "a" "b" | cat -e
+$
+$> ./first_word "  lorem,ipsum  " | cat -e
+lorem,ipsum$
 $>
+```
+
+## Sujet
+
