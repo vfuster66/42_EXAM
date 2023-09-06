@@ -1,8 +1,4 @@
-#include <stdlib.h>
-#include <unistd.h>
 #include "get_next_line.h"
-#include <stddef.h>
-#define BUFFER_SIZE 32
 
 // Fonction pour dupliquer une chaîne de caractères
 char    *ft_strdup(char *src)
