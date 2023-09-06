@@ -131,7 +131,7 @@ int	get_next_line(int fd, char **ligne)
 
 	if (fd < 0 || ligne == NULL || BUFFER_SIZE <= 0)
 		return (-1);
-	current = find_fd(&lst, fd);
+	current = trouver_fd(&lst, fd);
 	if (!current)
 		return (-1);
 	ligne_trouvee = 0;
