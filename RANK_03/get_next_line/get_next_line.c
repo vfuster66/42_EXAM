@@ -4,13 +4,6 @@
 #include <stddef.h>
 #define BUFFER_SIZE 32
 
-typedef struct	s_list
-{
-	char			*content;
-	int				fd;
-	struct s_list	*next;
-}				t_list;
-
 // Fonction pour dupliquer une chaîne de caractères
 char    *ft_strdup(char *src)
 {
@@ -113,11 +106,11 @@ static int	traiter_ligne(char **ligne, char **reste)
 	char	*ligne_courante;
 	int		position;
 
-	pos = ft_strchr(*reste, '\n');
+	position = ft_strchr(*reste, '\n');
 	if (position >= 0)
 	{
 		(*reste)[position] = '\0';
-		*line = ft_strdup(*reste);
+		*ligne = ft_strdup(*reste);
 		ligne_courante = ft_strdup(*reste + position + 1);
 		free(*reste);
 		*reste = ligne_courante;
@@ -125,7 +118,7 @@ static int	traiter_ligne(char **ligne, char **reste)
 	}
 	else
 	{
-		*line = ft_strdup(*reste);
+		*ligne = ft_strdup(*reste);
 		free(*reste);
 		*reste = NULL;
 		return (0);
