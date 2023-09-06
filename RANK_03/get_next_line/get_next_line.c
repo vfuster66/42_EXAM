@@ -12,187 +12,191 @@ typedef struct	s_list
 }				t_list;
 
 // Fonction pour dupliquer une chaîne de caractères
-char	*ft_strdup(const char *s)
+char    *ft_strdup(char *src)
 {
-	char	*dup;
-	size_t	len;
-	size_t	i;
+	char	*dest;
+	int	i = 0;
 
-	len = 0;
-	while (s[len])
-		len++;
-	dup = (char *)malloc(sizeof(char) * (len + 1));
-	if (!dup)
+	while (src[i])
+		i++;
+	dest = malloc(sizeof(char) * i + 1);
+	if (!dest)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (src[i])
 	{
-		dup[i] = s[i];
+		dest[i] = src[i];
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	dest[i] = '\0';
+	return (dest);
 }
 
 // Fonction pour joindre deux chaînes de caractères
-char	*ft_strjoin(const char *s1, const char *s2)
+char *ft_strjoin(const char *s1, const char *s2)
 {
-	char	*joined;
-	size_t	len1;
-	size_t	len2;
-	size_t	i;
-	size_t	j;
+    if (s1 == NULL || s2 == NULL)
+        return (NULL);
 
-	if (!s1 || !s2)
-		return (NULL);
-	len1 = 0;
-	while (s1[len1])
-		len1++;
-	len2 = 0;
-	while (s2[len2])
-		len2++;
-	joined = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!joined)
-		return (NULL);
-	i = -1;
-	while (++i < len1)
-		joined[i] = s1[i];
-	j = 0;
-	while (j < len2)
-		joined[i++] = s2[j++];
-	joined[i] = '\0';
-	return (joined);
+    size_t len_s1 = 0;
+    size_t len_s2 = 0;
+    while (s1[len_s1])
+        len_s1++;
+    while (s2[len_s2])
+        len_s2++;
+
+    char *str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
+
+    if (str == NULL)
+        return (NULL);
+
+    size_t i = 0;
+    while (i < len_s1)
+    {
+        str[i] = s1[i];
+        i++;
+    }
+
+    size_t j = 0;
+    while (j < len_s2)
+    {
+        str[i + j] = s2[j];
+        j++;
+    }
+
+    str[i + j] = '\0';
+    return (str);
 }
 
 // Fonction pour trouver la première occurrence d'un caractère dans une chaîne de caractères
-int	ft_strchr(const char *s, int c)
+char *ft_strchr(const char *s, int c)
 {
-	size_t	i;
+    char find = (char)c;
+    int i = 0;
 
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return (i);
-		i++;
-	}
-	return (-1);
+    while (s[i])
+    {
+        if (s[i] == find)
+            return ((char *)s + i);
+        i++;
+    }
+
+    if (s[i] == find)
+        return ((char *)s + i);
+
+    return NULL;
 }
 
-
-static t_list	*find_fd(t_list **lst, int fd)
+static t_list *trouver_fd(t_list **lst, int fd)
 {
-	t_list	*tmp;
+    t_list *tmp;
 
-	tmp = *lst;
-	while (tmp)
-	{
-		if (tmp->fd == fd)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	tmp = (t_list *)malloc(sizeof(t_list));
-	if (!tmp)
-		return (NULL);
-	tmp->fd = fd;
-	tmp->content = NULL;
-	tmp->next = *lst;
-	*lst = tmp;
-	return (tmp);
+    tmp = *lst;
+    while (tmp)
+    {
+        if (tmp->fd == fd)
+            return (tmp);
+        tmp = tmp->next;
+    }
+    tmp = (t_list *)malloc(sizeof(t_list));
+    if (!tmp)
+        return (NULL);
+    tmp->fd = fd;
+    tmp->content = NULL;
+    tmp->next = *lst;
+    *lst = tmp;
+    return (tmp);
 }
 
-static int		process_line(char **line, char **remainder)
+static int	traiter_ligne(char **ligne, char **reste)
 {
-	char	*tmp;
-	int		pos;
+	char	*ligne_courante;
+	int		position;
 
-	pos = ft_strchr(*remainder, '\n');
-	if (pos >= 0)
+	pos = ft_strchr(*reste, '\n');
+	if (position >= 0)
 	{
-		(*remainder)[pos] = '\0';
-		*line = ft_strdup(*remainder);
-		tmp = ft_strdup(*remainder + pos + 1);
-		free(*remainder);
-		*remainder = tmp;
+		(*reste)[position] = '\0';
+		*line = ft_strdup(*reste);
+		ligne_courante = ft_strdup(*reste + position + 1);
+		free(*reste);
+		*reste = ligne_courante;
 		return (1);
 	}
 	else
 	{
-		*line = ft_strdup(*remainder);
-		free(*remainder);
-		*remainder = NULL;
+		*line = ft_strdup(*reste);
+		free(*reste);
+		*reste = NULL;
 		return (0);
 	}
 }
 
-int				get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **ligne)
 {
 	static t_list	*lst;
-	t_list			*cur;
-	char			buf[BUFFER_SIZE + 1];
-	ssize_t			bytes_read;
-	int				line_found;
+	t_list			*current;
+	char			buffer[BUFFER_SIZE + 1];
+	ssize_t			octet_lu;
+	int				ligne_trouvee;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
+	if (fd < 0 || ligne == NULL || BUFFER_SIZE <= 0)
 		return (-1);
-	cur = find_fd(&lst, fd);
-	if (!cur)
+	current = find_fd(&lst, fd);
+	if (!current)
 		return (-1);
-	line_found = 0;
-	while (!line_found && (bytes_read = read(fd, buf, BUFFER_SIZE)) > 0)
+	ligne_trouvee = 0;
+	while (!ligne_trouvee && (octet_lu = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		buf[bytes_read] = '\0';
-		if (cur->content == NULL)
-			cur->content = ft_strdup(buf);
+		buffer[octet_lu] = '\0';
+		if (current->content == NULL)
+			current->content = ft_strdup(buffer);
 		else
-			cur->content = ft_strjoin(cur->content, buf);
-		if (ft_strchr(cur->content, '\n') >= 0)
-			line_found = process_line(line, &cur->content);
+			current->content = ft_strjoin(current->content, buffer);
+		if (ft_strchr(current->content, '\n') >= 0)
+			ligne_trouvee = traiter_ligne(ligne, &current->content);
 	}
-	if (bytes_read == -1)
+	if (octet_lu == -1)
 		return (-1);
-	if (!line_found)
+	if (!ligne_trouvee)
 	{
-		if (cur->content == NULL)
-			*line = ft_strdup("");
+		if (current->content == NULL)
+			*ligne = ft_strdup("");
 		else
 		{
-			*line = cur->content;
-			cur->content = NULL;
+			*line = current->content;
+			current->content = NULL;
 		}
 	}
-	return (line_found);
+	return (ligne_trouvee);
 }
 
 #include <stdio.h>
 #include <fcntl.h>
 #include "get_next_line.h"
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
     int fd;
     char *line;
 
-    if (argc != 2)
+    if (ac != 2)
     {
-        printf("Usage: %s <filename>\n", argv[0]);
+        printf("Usage: %s <filename>\n", av[0]);
         return 1;
     }
-
-    fd = open(argv[1], O_RDONLY);
+    fd = open(av[1], O_RDONLY);
     if (fd == -1)
     {
         perror("Error opening file");
         return 1;
     }
-
     int result;
     while ((result = get_next_line(fd, &line)) > 0)
     {
         printf("Line read: %s\n", line);
         free(line);
     }
-
     if (result == 0)
     {
         printf("End of file reached\n");
@@ -201,9 +205,7 @@ int main(int argc, char **argv)
     {
         perror("Error reading line");
     }
-
     close(fd);
-
     return 0;
 }
 
