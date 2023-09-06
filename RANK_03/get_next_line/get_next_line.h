@@ -7,9 +7,14 @@
 #  define BUFFER_SIZE 32 // Vous pouvez définir une taille de tampon par défaut si elle n'est pas définie ailleurs
 # endif
 
-int		get_next_line(int fd, char **line);
+typedef struct	s_list
+{
+  char			*content;
+	int				fd;
+	struct s_list	*next;
+}				t_list;
 
-// Ajoutez ici les prototypes de vos fonctions auxiliaires, le cas échéant
+int		get_next_line(int fd, char **line);
 
 #endif
 
