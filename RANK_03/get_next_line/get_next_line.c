@@ -28,77 +28,73 @@ char    *ft_strdup(char *src)
 // Fonction pour joindre deux chaînes de caractères
 char *ft_strjoin(const char *s1, const char *s2)
 {
-    if (s1 == NULL || s2 == NULL)
-        return (NULL);
-
-    size_t len_s1 = 0;
-    size_t len_s2 = 0;
-    while (s1[len_s1])
-        len_s1++;
-    while (s2[len_s2])
-        len_s2++;
-
-    char *str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
-
-    if (str == NULL)
-        return (NULL);
-
-    size_t i = 0;
-    while (i < len_s1)
-    {
-        str[i] = s1[i];
-        i++;
-    }
-
-    size_t j = 0;
-    while (j < len_s2)
-    {
-        str[i + j] = s2[j];
-        j++;
-    }
-
-    str[i + j] = '\0';
-    return (str);
+	size_t len_s1 = 0;
+	size_t len_s2 = 0;
+	size_t	i;
+	size_t	j;
+	char	*str;
+    
+	if (s1 == NULL || s2 == NULL)
+        	return (NULL);
+	while (s1[len_s1])
+        	len_s1++;
+    	while (s2[len_s2])
+        	len_s2++;
+	str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
+	if (str == NULL)
+        	return (NULL);
+	i = 0;
+	while (i < len_s1)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (j < len_s2)
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }
 
 // Fonction pour trouver la première occurrence d'un caractère dans une chaîne de caractères
 char *ft_strchr(const char *s, int c)
 {
-    char find = (char)c;
-    int i = 0;
+	char find = (char)c;
+	int i = 0;
 
-    while (s[i])
-    {
-        if (s[i] == find)
-            return ((char *)s + i);
-        i++;
-    }
-
-    if (s[i] == find)
-        return ((char *)s + i);
-
-    return NULL;
+	while (s[i])
+	{
+		if (s[i] == find)
+			return ((char *)s + i);
+		i++;
+	}
+	if (s[i] == find)
+		return ((char *)s + i);
+	return NULL;
 }
 
 static t_list *trouver_fd(t_list **lst, int fd)
 {
-    t_list *tmp;
+	t_list	*tmp;
 
-    tmp = *lst;
-    while (tmp)
-    {
-        if (tmp->fd == fd)
-            return (tmp);
-        tmp = tmp->next;
-    }
-    tmp = (t_list *)malloc(sizeof(t_list));
-    if (!tmp)
-        return (NULL);
-    tmp->fd = fd;
-    tmp->content = NULL;
-    tmp->next = *lst;
-    *lst = tmp;
-    return (tmp);
+	tmp = *lst;
+	while (tmp)
+	{
+		if (tmp->fd == fd)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	tmp = (t_list *)malloc(sizeof(t_list));
+	if (!tmp)
+        	return (NULL);
+	tmp->fd = fd;
+	tmp->content = NULL;
+	tmp->next = *lst;
+	*lst = tmp;
+	return (tmp);
 }
 
 static int	traiter_ligne(char **ligne, char **reste)
@@ -170,35 +166,31 @@ int	get_next_line(int fd, char **ligne)
 
 int main(int ac, char **av)
 {
-    int fd;
-    char *line;
+	int fd;
+	char *line;
+	int result;
 
-    if (ac != 2)
-    {
-        printf("Usage: %s <filename>\n", av[0]);
-        return 1;
-    }
-    fd = open(av[1], O_RDONLY);
-    if (fd == -1)
-    {
-        perror("Error opening file");
-        return 1;
-    }
-    int result;
-    while ((result = get_next_line(fd, &line)) > 0)
-    {
-        printf("Line read: %s\n", line);
-        free(line);
-    }
-    if (result == 0)
-    {
-        printf("End of file reached\n");
-    }
-    else if (result == -1)
-    {
-        perror("Error reading line");
-    }
-    close(fd);
-    return 0;
+	if (ac != 2)
+	{
+		printf("Usage: %s <filename>\n", av[0]);
+		return 1;
+	}
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		perror("Error opening file");
+		return 1;
+	}
+	while ((result = get_next_line(fd, &line)) > 0)
+	{
+		printf("Line read: %s\n", line);
+		free(line);
+	}
+	if (result == 0)
+		printf("End of file reached\n");
+	else if (result == -1)
+		perror("Error reading line");
+	close(fd);
+	return 0;
 }
 
