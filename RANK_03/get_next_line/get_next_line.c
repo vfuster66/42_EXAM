@@ -149,7 +149,7 @@ int	get_next_line(int fd, char **ligne)
 			*ligne = ft_strdup("");
 		else
 		{
-			*line = current->content;
+			*ligne = current->content;
 			current->content = NULL;
 		}
 	}
