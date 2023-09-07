@@ -30,5 +30,3 @@ lorem,ipsum$
 $>
 ```
 
-## Sujet
-
