@@ -10,3 +10,8 @@ Chaque fichier compend :
 3-Le main de test s'il s'agit d'une fonction a ecrire
 
 Pour s'entrainer : https://grademe.fr/
+
+## RANK_02
+
+- Valide 100% :
+  
