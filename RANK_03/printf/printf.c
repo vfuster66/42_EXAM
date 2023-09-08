@@ -1,43 +1,37 @@
-#include <unistd.h>
 #include <stdarg.h>
+#include <unistd.h>
 
-int	put_str(char *str)
+void	put_str(char *str, int *len)
 {
-	int	len = 0;
-
 	if (!str)
 		str = "(null)";
 	while (*str)
-		len += write(1, str++, 1);
-	return (len);
+		*len += write(1, str++, 1);
 }
 
-void put_digit(long long int number, int base, int *len) 
+void	put_digit(long long int nbr, int base, int *len)
 {
-	char *hexa = "0123456789abcdef";
+	char	*hexa = "0123456789abcdef";
 
-	if (number < 0)
+	if (nbr < 0)
 	{
-		number *= -1;
+		nbr *= -1;
 		*len += write(1, "-", 1);
 	}
-	if (number >= base)
-		put_digit(number / base, base, len);
-	*len += write(1, &hexa[number % base], 1);
+	if (nbr >= base)
+		put_digit((nbr / base), base, len);
+	*len += write(1, &hexa[nbr % base], 1);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int len = 0;
+	int			len = 0;
+	va_list		ptr;
 
-	va_list	ptr;
 	va_start(ptr, format);
-
 	while (*format)
 	{
-		if ((*format == '%') && ((*(format + 1) == 's') 
-					|| (*(format + 1) == 'd') 
-					|| (*(format + 1) == 'x')))
+		if ((*format == '%') && *(format + 1))
 		{
 			format++;
 			if (*format == 's')
