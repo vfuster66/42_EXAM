@@ -25,17 +25,17 @@ void	put_digit(long long int number, int base, int *count)
 
 int	ft_printf(const char *format, ...)
 {
-	int		count = 0;
+	int	count = 0;
 	va_list	args;
 
 	va_start(args, format);
 	while (*format)
 	{
-		if (*format== '%')
+		if (*format == '%')
 		{
 			format++;
 			if (*format == 's')
-				put_str(va_arg(args, char *), &count);
+				put_str(va_arg(args, char*), &count);
 			else if (*format == 'd')
 				put_digit((long long int)va_arg(args, int), 10, &count);
 			else if (*format == 'x')
@@ -57,31 +57,15 @@ int	ft_printf(const char *format, ...);
 
 int	main(void)
 {
-	int	size;
-
-	size = 0;
-
-	size = ft_printf("%s\n", "toto");
-	printf("%d\n", size);
-	size = printf("%s\n", "toto");
-	printf("%d\n", size);
-	size = ft_printf("Magic %s is %d\n", "number", 42);
-	printf("%d\n", size);
-	size = printf("Magic %s is %d\n", "number", 42);
-	printf("%d\n", size);
-	size = ft_printf("Hexadecimal for %d is %x\n", 42, 42);
-	printf("%d\n", size);
-	size = printf("Hexadecimal for %d is %x\n", 42, 42);
-	printf("%d\n", size);
-	size = ft_printf("%d %d %x\n", INT_MAX, INT_MIN, UINT_MAX);
-	printf("%d\n", size);
-	size = ft_printf("%d %d %x\n", INT_MAX, INT_MIN, UINT_MAX);
-	printf("%d\n", size);
-	size = ft_printf("%d, %d\n", 0, -24);
-	printf("%d\n", size);
-	size = ft_printf("%d, %d\n", 0, -24);
-	printf("%d\n", size);
-	printf("%d\n", size);
-	ft_printf("Hello world %\n");
+	ft_printf("%s\n", "toto");
+	printf("%s\n", "toto");
+	ft_printf("Magic %s is %d\n", "number", 42);
+	printf("Magic %s is %d\n", "number", 42);
+	ft_printf("Hexadecimal for %d is %x\n", 42, 42);
+	printf("Hexadecimal for %d is %x\n", 42, 42);
+	ft_printf("%d %d %x\n", INT_MAX, INT_MIN, UINT_MAX);
+	printf("%d %d %x\n", INT_MAX, INT_MIN, UINT_MAX);
+	ft_printf("%d, %d\n", 0, -24);
+	printf("%d, %d\n", 0, -24);
 	return (0);
 }*/
