@@ -1,158 +1,173 @@
-#include "get_next_line.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-// Fonction pour dupliquer une chaîne de caractères
-char    *ft_strdup(char *src)
+typedef struct s_node
 {
-	char	*dest;
-	int	i = 0;
+    char 			*line;
+    struct s_node *next;
+} t_node;
 
-	while (src[i])
-		i++;
-	dest = malloc(sizeof(char) * i + 1);
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+int ft_strlen(char *str)
+{
+    int i = 0;
+    if (!str)
+        return 0;
+    while (str[i])
+        i++;
+    return i;
 }
 
-// Fonction pour joindre deux chaînes de caractères
-char *ft_strjoin(const char *s1, const char *s2)
+bool ft_strchr(char *line)
 {
-	size_t len_s1 = 0;
-	size_t len_s2 = 0;
-	size_t	i;
-	size_t	j;
-	char	*str;
-    
-	if (s1 == NULL || s2 == NULL)
-        	return (NULL);
-	while (s1[len_s1])
-        	len_s1++;
-    	while (s2[len_s2])
-        	len_s2++;
-	str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
-	if (str == NULL)
-        	return (NULL);
-	i = 0;
-	while (i < len_s1)
+    int i = 0;
+    while (line[i])
 	{
-		str[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (j < len_s2)
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	return (str);
+        if (line[i] == '\n')
+            return (true);
+        i += 1;
+    }
+    return (false);
 }
 
-// Fonction pour trouver la première occurrence d'un caractère dans une chaîne de caractères
-char *ft_strchr(const char *s, int c)
+char *ft_strjoin(char *remains, char *buffer)
 {
-	char find = (char)c;
-	int i = 0;
+    char *array;
+    unsigned int size;
+    int i;
+    int j;
 
-	while (s[i])
+    if (!remains && !buffer)
+        return (NULL);
+    size = ft_strlen(remains) + ft_strlen(buffer);
+	array = (char *)malloc(sizeof(char) * (size + 1));
+	if (!array)
+        return (NULL);
+    i = 0;
+    j = 0;
+    if (remains)
 	{
-		if (s[i] == find)
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == find)
-		return ((char *)s + i);
-	return NULL;
+        while (remains[i])
+            array[j++] = remains[i++];
+        i = 0;
+    }
+    while (buffer[i])
+        array[j++] = buffer[i++];
+    array[size] = '\0';
+    free((void *)remains);
+    return (array);
 }
 
-static t_list *trouver_fd(t_list **lst, int fd)
+char *push_line(char *remains)
 {
-	t_list	*tmp;
+    int i = 0;
+    char *array;
 
-	tmp = *lst;
-	while (tmp)
+    while (remains[i] && remains[i] != '\n')
+        i++;
+    if (remains[i] == '\n')
+        i++;
+    if (!(array = (char *)malloc(sizeof(char) * (i + 1))))
+        return (NULL);
+    i = 0;
+    while (remains[i] && remains[i] != '\n')
 	{
-		if (tmp->fd == fd)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	tmp = (t_list *)malloc(sizeof(t_list));
-	if (!tmp)
-        	return (NULL);
-	tmp->fd = fd;
-	tmp->content = NULL;
-	tmp->next = *lst;
-	*lst = tmp;
-	return (tmp);
+        array[i] = remains[i];
+        i++;
+    }
+    if (remains[i] == '\n')
+	{
+        array[i] = '\n';
+        array[i + 1] = '\0';
+        return (array);
+    }
+    array[i] = '\0';
+    return (array);
 }
 
-static int	traiter_ligne(char **ligne, char **reste)
+char *cut_next_line(char *remains)
 {
-	char	*ligne_courante;
-	int		position;
+    int i = 0;
+    int j = 0;
+    char *array;
 
-	position = ft_strchr(*reste, '\n');
-	if (position >= 0)
+    while (remains[i] && remains[i] != '\n')
+        i++;
+    if (!remains[i])
 	{
-		(*reste)[position] = '\0';
-		*ligne = ft_strdup(*reste);
-		ligne_courante = ft_strdup(*reste + position + 1);
-		free(*reste);
-		*reste = ligne_courante;
-		return (1);
-	}
-	else
+        free(remains);
+        return (NULL);
+    }
+    if (!(array = (char *)malloc(sizeof(char) * (ft_strlen(remains) - i + 1))))
+        return (NULL);
+    i++;
+    while (remains[i])
 	{
-		*ligne = ft_strdup(*reste);
-		free(*reste);
-		*reste = NULL;
-		return (0);
-	}
+        array[j] = remains[i];
+        i++;
+        j++;
+    }
+    array[j] = '\0';
+    free(remains);
+    return (array);
 }
 
-int	get_next_line(int fd, char **ligne)
+t_node *create_node(char *line)
 {
-	static t_list	*lst;
-	t_list			*current;
-	char			buffer[BUFFER_SIZE + 1];
-	ssize_t			octet_lu;
-	int				ligne_trouvee;
+    t_node *new_node = (t_node *)malloc(sizeof(t_node));
+    if (new_node)
+	{
+        new_node->line = line;
+        new_node->next = NULL;
+    }
+    return (new_node);
+}
 
-	if (fd < 0 || ligne == NULL || BUFFER_SIZE <= 0)
-		return (-1);
-	current = trouver_fd(&lst, fd);
-	if (!current)
-		return (-1);
-	ligne_trouvee = 0;
-	while (!ligne_trouvee && (octet_lu = read(fd, buffer, BUFFER_SIZE)) > 0)
+void append_node(t_node **head, char *line)
+{
+    t_node *new_node = create_node(line);
+    if (new_node)
 	{
-		buffer[octet_lu] = '\0';
-		if (current->content == NULL)
-			current->content = ft_strdup(buffer);
-		else
-			current->content = ft_strjoin(current->content, buffer);
-		if (ft_strchr(current->content, '\n') >= 0)
-			ligne_trouvee = traiter_ligne(ligne, &current->content);
-	}
-	if (octet_lu == -1)
-		return (-1);
-	if (!ligne_trouvee)
-	{
-		if (current->content == NULL)
-			*ligne = ft_strdup("");
+        if (*head == NULL)
+		{
+            *head = new_node;
+		}
 		else
 		{
-			*ligne = current->content;
-			current->content = NULL;
-		}
-	}
-	return (ligne_trouvee);
+            t_node *current = *head;
+            while (current->next)
+			{
+                current = current->next;
+            }
+            current->next = new_node;
+        }
+    }
+}
+
+char *get_next_line(int fd)
+{
+    if (fd < 0 || read(fd, NULL, 0) < 0 || BUFFER_SIZE <= 0)
+        return (NULL);
+    char buffer[BUFFER_SIZE + 1];
+    buffer[0] = '\0';
+    static char *remains;
+    t_node *lines = NULL;
+    int count = 1;
+    while (!ft_strchr(buffer) && count != 0)
+	{
+        if ((count = read(fd, buffer, BUFFER_SIZE)) == (-1))
+            return (NULL);
+        buffer[count] = '\0';
+        remains = ft_strjoin(remains, buffer);
+    }
+    char *line = push_line(remains);
+    remains = cut_next_line(remains);
+    if (line[0] == '\0')
+	{
+        free(line);
+        return (NULL);
+    }
+    append_node(&lines, line);
+    return (line);
 }
 
