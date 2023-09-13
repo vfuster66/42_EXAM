@@ -12,7 +12,12 @@ Pour s'entrainer : https://grademe.fr/
 
 ### RANK_02
 ```
-- ✅ Valide le 06 septembre 2023
+- ✅ Valide le 06 septembre 2023 sur ft_putstr, ft_atoi, rstr_capitalizer, ft_split
+```
+
+### RANK_03
+```
+- ✅ Valide le 13 septembre 2023 sur printf
 ```
 
 ### RANK_03
