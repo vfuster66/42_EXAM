@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 		nb1 = 1;
 		nb2 = ft_atoi(av[1]);
 		if (nb2 == 0)
-			write(1, "\n", 1);
+			return (0);
 		else
 		{
 			while (nb1 <= 9)
