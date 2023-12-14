@@ -21,5 +21,16 @@ Pour s'entrainer : https://grademe.fr/
 ```
 
 ### RANK_04
-
+```
+- ✅ Valide le 06 decembre 2023
+```
   
+### RANK_05
+```
+- ✅ Valide le 
+```
+
+### RANK_06
+```
+- ✅ Valide le 
+```
