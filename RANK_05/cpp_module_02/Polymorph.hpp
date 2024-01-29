@@ -1,12 +1,14 @@
+// Polymorph.hpp
+
 #pragma once
 
 #include "ASpell.hpp"
 
 class Polymorph: public ASpell
 {
-    public:
-        Polymorph();
-        ~Polymorph();
+public:
+	Polymorph();
+	~Polymorph();
 
-        virtual ASpell *clone() const;
+	virtual ASpell *clone() const;
 };
