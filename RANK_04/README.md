@@ -1,3 +1,6 @@
+[![vfuster-'s 42 Exam Rank 04 Score](https://badge42.coday.fr/api/v2/cltpx5zqv531101p4bte37ts1/project/3439285)](https://github.com/Coday-meric/badge42)
+le 06 decembre 2023
+
 ## SUJET
 ```
 Assignment name  : microshell
