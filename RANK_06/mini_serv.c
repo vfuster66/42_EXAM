@@ -28,8 +28,8 @@ fd_set		opened_fd;
 fd_set		read_fd;
 
 char		buff_low[256];
-char		buff_recv[300000];
-char		buff_send[300100];
+char		buff_recv[800000];
+char		buff_send[800100];
 
 //########## utils ###########
 
@@ -78,8 +78,8 @@ int	accept_client()
 		return (fatal());
 	client->socket = accept(server.socket, NULL, NULL);
 	if (client->socket < 0)
-		return (free(client), 1);​
-	client->id = server.nextClientId ++;
+		return (free(client), 1);
+    client->id = server.nextClientId ++;
 	client->next = clients;
 	bzero(&buff_low, sizeof(buff_low));
 	sprintf(buff_low, "server: client %d just arrived\n", client->id);
@@ -159,7 +159,7 @@ int	process_server(int maxfd)
 		}
 	}
 	return (0);
-}​
+}
 
 int	main(int argc, char **argv)
 {
