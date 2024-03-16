@@ -28,8 +28,8 @@ fd_set		opened_fd;
 fd_set		read_fd;
 
 char		buff_low[256];
-char		buff_recv[800000];
-char		buff_send[800100];
+char		buff_recv[400000];
+char		buff_send[400100];
 
 //########## utils ###########
 
