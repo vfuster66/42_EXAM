@@ -29,7 +29,7 @@ int main(int ac, char **av)
 	int client;
 	int server;
 	int size;
-	int received_status;
+	int received_status = 1;
 	int limit = 0;
 	int max_client[MAX_CLIENT];
 
@@ -99,8 +99,6 @@ int main(int ac, char **av)
 			{
 				bzero(message, MESSAGE);
 				bzero(message_ext, MESSAGE_EXT);
-
-				received_status = 1;
 
 				while (received_status == 1 && (!message[0] || message[strlen(message) - 1] != '\n'))
 					received_status = recv(connected_id, &message[strlen(message)], 1, 0);
