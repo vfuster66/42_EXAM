@@ -1,87 +1,123 @@
 #include <string.h>
 #include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <sys/select.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <sys/socket.h>
+#include <sys/select.h>
+#include <netinet/in.h>
 
-void putstr(char *str, int fd)
+#define MAX_CLIENTS 65535
+#define BUFFER 400000
+#define BUFFER_EXT 450000
+#define IP 2130706433
+#define LISTEN_QUEUE 10
+
+
+void	fatal()
 {
-	write(fd, str, strlen(str));
+	write(2, "Fatal error\n", 12);
 	exit(1);
 }
 
-void sendall(char *buffer, int serverfd, int clienfd, int fd_size)
+void	send_all(char *message, int server, int client, int size)
 {
-	for (int i = 0; i <= fd_size; i++)
-		if (i != serverfd && i != clienfd)
-			send(i, buffer, strlen(buffer), 0);
+	for (int i = 0; i <= size; i++)
+		if (i != server && i != client)
+			send(i, message, strlen(message), 0);
 }
 
-int main(int argc, char **argv)
+int	main(int ac, char **av)
 {
-	int serverfd, clientfd, fd_size, readed, db[65535] = {0}, limit = 0;
-	struct sockaddr_in servaddr;
-	fd_set old_fd, new_fd;
-	char buffer[400000], buffer2[450000];
+	int	server;
+	int	client;
+	int	size;
+	int	received_status;
+	int	max_clients[MAX_CLIENTS] = {0};
+	int	limit = 0;
 
-	if (argc != 2)
-		putstr("Wrong number of arguments\n", 2);
-	serverfd = socket(AF_INET, SOCK_STREAM, 0); 
-	if (serverfd == -1)
-		putstr("Fatal error\n", 2);
-	bzero(&servaddr, sizeof(servaddr)); 
+	struct sockaddr_in servaddr;
+
+	fd_set old_fd;
+	fd_set new_fd;
+
+	char buffer[BUFFER];
+	char buffer_ext[BUFFER_EXT];
+
+	if (ac != 2)
+	{
+		write(2, "Wrong number of arguments\n", 26);
+		exit(1);
+	}
+
+	server = socket(AF_INET, SOCK_STREAM, 0);
+
+	if (server == -1)
+		fatal();
+
+	bzero(&servaddr, sizeof(servaddr));
+
 	servaddr.sin_family = AF_INET; 
-	servaddr.sin_addr.s_addr = htonl(2130706433);
-	servaddr.sin_port = htons(atoi(argv[1])); 
-	if ((bind(serverfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
-		putstr("Fatal error\n", 2);
-	if (listen(serverfd, 10) != 0)
-		putstr("Fatal error\n", 2);
-    FD_ZERO(&old_fd);
+	servaddr.sin_addr.s_addr = htonl(IP);
+	servaddr.sin_port = htons(atoi(av[1]));
+
+	if ((bind(server, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
+		fatal();
+
+	if (listen(server, 10) != 0)
+		fatal();
+
+	FD_ZERO(&old_fd);
 	FD_ZERO(&new_fd);
-	FD_SET(serverfd, &new_fd);
-	fd_size = serverfd;
-	while (1)
+	FD_SET(server, &new_fd);
+	size = server;
+
+	while(1)
 	{
 		old_fd = new_fd;
-		if (select(fd_size + 1, &old_fd, NULL, NULL, NULL) < 0)
-			putstr("Fatal error\n", 2);
-		for (int id = 0; id <= fd_size; id++)
+
+		if(select(size + 1, &old_fd, NULL, NULL, NULL) < 0)
+			fatal();
+
+		for (int connected_id = 0; connected_id <= size; connected_id++)
 		{
-			if (FD_ISSET(id, &old_fd) == 0)
+			if (FD_ISSET(connected_id, &old_fd) == 0)
 				continue;
-			if (id == serverfd)
+
+			if (connected_id == server)
 			{
-				if ((clientfd = accept(serverfd, NULL, NULL)) < 0)
-					putstr("Fatal error\n", 2);
-				if (clientfd > fd_size)
-					fd_size = clientfd;
-				db[clientfd] = limit++;
-				FD_SET(clientfd, &new_fd);
-				sprintf(buffer, "server: client %d just arrived\n", db[clientfd]);
-				sendall(buffer, serverfd, clientfd, fd_size);
+				if ((client = accept(server, NULL, NULL)) < 0)
+					fatal();
+
+				if (client > size)
+					size = client;
+
+				max_clients[client] = limit++;
+
+				FD_SET(client, &new_fd);
+				sprintf(buffer, "server: client %d just arrived\n", max_clients[client]);
+				send_all(buffer, server, client, size);
 			}
 			else
 			{
-                bzero(buffer, 400000);
-				bzero(buffer2, 450000);
-				readed = 1;
-				while (readed == 1 && (!buffer2[0] || buffer2[strlen(buffer2) - 1] != '\n'))
-					readed = recv(id, &buffer2[strlen(buffer2)], 1, 0);
-				if (readed <= 0)
+				bzero(buffer, BUFFER);
+				bzero(buffer_ext, BUFFER_EXT);
+
+				received_status = 1;
+				while (received_status == 1 && (!buffer_ext[0] || buffer_ext[strlen(buffer_ext) - 1] != '\n'))
+					received_status = recv(connected_id, &buffer_ext[strlen(buffer_ext)], 1, 0);
+				
+				if (received_status <= 0)
 				{
-					sprintf(buffer, "server: client %d just left\n", db[id]);
-					sendall(buffer, serverfd, id, fd_size);
-					FD_CLR(id, &new_fd);
-					close(id);
+					sprintf(buffer, "server: client %d just left\n", max_clients[client]);
+					send_all(buffer, server, client, size);
+					FD_CLR(connected_id, &new_fd);
+					close(connected_id);
 				}
 				else
 				{
-					sprintf(buffer, "client %d: %s", db[id], buffer2);
-					sendall(buffer, serverfd, id, fd_size);
+					sprintf(buffer, "client %d: %s", max_clients[connected_id], buffer_ext);
+
+					send_all(buffer, server, client, size);
 				}
 			}
 		}
