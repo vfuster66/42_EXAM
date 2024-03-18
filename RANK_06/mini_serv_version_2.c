@@ -7,8 +7,8 @@
 #include <netinet/in.h>
 
 #define MAX_CLIENT 65535
-#define MESSAGE 450000
-#define MESSAGE_EXT 400000
+#define MESSAGE 400000
+#define MESSAGE_EXT 450000
 #define IP 2130706433
 
 void fatal()
@@ -92,8 +92,8 @@ int main(int ac, char **av)
 				max_client[client] = limit++;
 
 				FD_SET(client, &new_fd);
-				sprintf(message, "server: client %d just arrived\n", max_client[client]);
-				send_all(message, server, client, size);
+				sprintf(message_ext, "server: client %d just arrived\n", max_client[client]);
+				send_all(message_ext, server, client, size);
 			}
 			else
 			{
@@ -102,20 +102,20 @@ int main(int ac, char **av)
 
 				received_status = 1;
 
-				while (received_status == 1 && (!message_ext[0] || message_ext[strlen(message_ext) - 1] != '\n'))
-					received_status = recv(connected_id, &message_ext[strlen(message_ext)], 1, 0);
+				while (received_status == 1 && (!message[0] || message[strlen(message) - 1] != '\n'))
+					received_status = recv(connected_id, &message[strlen(message)], 1, 0);
 
 				if (received_status <= 0)
 				{
-					sprintf(message, "server: client %d just left\n", max_client[client]);
-					send_all(message, server, client, size);
+					sprintf(message_ext, "server: client %d just left\n", max_client[client]);
+					send_all(message_ext, server, client, size);
 					FD_CLR(connected_id, &new_fd);
 					close(connected_id);
 				}
 				else
 				{
-					sprintf(message, "client %d: %s", max_client[connected_id], message_ext);
-					send_all(message, server, client, size);
+					sprintf(message_ext, "client %d: %s", max_client[connected_id], message);
+					send_all(message_ext, server, client, size);
 				}
 			}
 		}
