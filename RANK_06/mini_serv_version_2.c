@@ -6,10 +6,6 @@
 #include <sys/select.h>
 #include <netinet/in.h>
 
-#define MAX_CLIENT 65535
-#define MESSAGE 400000
-#define MESSAGE_EXT 450000
-
 void fatal()
 {
 	write (2, "Fatal error\n", 12);
@@ -30,15 +26,15 @@ int main(int ac, char **av)
 	int size;
 	int received_status;
 	int limit = 0;
-	int max_client[MAX_CLIENT];
+	int max_client[65535];
 
 	struct sockaddr_in servaddr;
 
 	fd_set old_fd;
 	fd_set new_fd;
 
-	char message[MESSAGE];
-	char message_ext[MESSAGE_EXT];
+	char message[400000];
+	char message_ext[410000];
 
 	if (ac != 2)
 	{
@@ -96,8 +92,8 @@ int main(int ac, char **av)
 			}
 			else
 			{
-				bzero(message, MESSAGE);
-				bzero(message_ext, MESSAGE_EXT);
+				bzero(message, 400000);
+				bzero(message_ext, 410000);
 
 				received_status = 1;
 
