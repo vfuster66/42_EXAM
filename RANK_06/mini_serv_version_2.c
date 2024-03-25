@@ -1,116 +1,89 @@
 #include <string.h>
 #include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <sys/select.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <netinet/in.h>
 
 void fatal()
 {
-	write (2, "Fatal error\n", 12);
+	write(2, "Fatal error\n", 12);
 	exit(1);
 }
 
-void send_all(char *message, int server, int client, int size)
+void sendall(char *message_ext, int server_socket, int client_socket, int max_fd)
 {
-	for (int i = 0; i <= size; i++)
-		if (i != server && i != client)
-			send(i, message, strlen(message), 0);
+	for (int fd = 0; fd <= max_fd; fd++)
+		if (fd != server_socket && fd != client_socket)
+			send(fd, message_ext, strlen(message_ext), 0);
 }
 
 int main(int ac, char **av)
 {
-	int client;
-	int server;
-	int size;
-	int received_status;
-	int limit = 0;
-	int max_client[65535];
-
+	int server_socket, client_socket, max_fd, recv_status, client_index[65535] = {0}, next_client_index = 0;
 	struct sockaddr_in servaddr;
-
-	fd_set old_fd;
-	fd_set new_fd;
-
-	char message[400000];
-	char message_ext[410000];
+	fd_set current_fd, next_fd;
+	char message_ext[500000] = {0}, message[450000] = {0};
 
 	if (ac != 2)
 	{
 		write(2, "Wrong number of arguments\n", 26);
 		exit(1);
 	}
-
-	server = socket(AF_INET, SOCK_STREAM, 0);
-
-	if (server == -1)
+	server_socket = socket(AF_INET, SOCK_STREAM, 0); 
+	if (server_socket == -1)
 		fatal();
-
-	bzero(&servaddr, sizeof(servaddr));
-
+	memset(&servaddr, 0, sizeof(servaddr)); 
 	servaddr.sin_family = AF_INET; 
-	servaddr.sin_addr.s_addr = htonl(2130706433);
-	servaddr.sin_port = htons(atoi(av[1]));
-
-	if ((bind(server, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
+	servaddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+	servaddr.sin_port = htons(atoi(av[1])); 
+	if ((bind(server_socket, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
 		fatal();
-
-	if (listen(server, 10) != 0)
+	if (listen(server_socket, 10) != 0)
 		fatal();
-
-	FD_ZERO(&old_fd);
-	FD_ZERO(&new_fd);
-	FD_SET(server, &new_fd);
-	size = server;
-
-	while(1)
+	FD_ZERO(&current_fd);
+	FD_ZERO(&next_fd);
+	FD_SET(server_socket, &next_fd);
+	max_fd = server_socket;
+	while (1)
 	{
-		old_fd = new_fd;
-
-		if (select(size + 1, &old_fd, NULL, NULL, NULL) < 0)
+		current_fd = next_fd;
+		if (select(max_fd + 1, &current_fd, NULL, NULL, NULL) < 0)
 			fatal();
-
-		for(int connected_client = 0; connected_client <= size; connected_client++)
+		for (int index = 0; index <= max_fd; index++)
 		{
-			if (FD_ISSET(connected_client, &old_fd) == 0)
+			if (FD_ISSET(index, &current_fd) == 0)
 				continue;
-			
-			if (connected_client == server)
+			if (index == server_socket)
 			{
-				if ((client = accept(server, NULL, NULL)) < 0)
+				if ((client_socket = accept(server_socket, NULL, NULL)) < 0)
 					fatal();
-				
-				if (client > size)
-					size = client;
-
-				max_client[client] = limit++;
-
-				FD_SET(client, &new_fd);
-				sprintf(message_ext, "server: client %d just arrived\n", max_client[client]);
-				send_all(message_ext, server, client, size);
+				if (client_socket > max_fd)
+					max_fd = client_socket;
+				client_index[client_socket] = next_client_index++;
+				FD_SET(client_socket, &next_fd);
+				sprintf(message_ext, "server: client %d just arrived\n", client_index[client_socket]);
+				sendall(message_ext, server_socket, client_socket, max_fd);
 			}
 			else
 			{
-				bzero(message, 400000);
-				bzero(message_ext, 410000);
-
-				received_status = 1;
-
-				while (received_status == 1 && (!message[0] || message[strlen(message) - 1] != '\n'))
-					received_status = recv(connected_client, &message[strlen(message)], 1, 0);
-
-				if (received_status <= 0)
+                memset(message_ext, 0, 500000);
+				memset(message, 0, 450000);
+				recv_status = 1;
+				while (recv_status == 1 && (!message[0] || message[strlen(message) - 1] != '\n'))
+					recv_status = recv(index, &message[strlen(message)], 1, 0);
+				if (recv_status <= 0)
 				{
-					sprintf(message_ext, "server: client %d just left\n", max_client[connected_client]);
-					send_all(message_ext, server, client, size);
-					FD_CLR(connected_client, &new_fd);
-					close(connected_client);
+					sprintf(message_ext, "server: client %d just left\n", client_index[index]);
+					sendall(message_ext, server_socket, index, max_fd);
+					FD_CLR(index, &next_fd);
+					close(index);
 				}
 				else
 				{
-					sprintf(message_ext, "client %d: %s", max_client[connected_client], message);
-					send_all(message_ext, server, client, size);
+					sprintf(message_ext, "client %d: %s", client_index[index], message);
+					sendall(message_ext, server_socket, index, max_fd);
 				}
 			}
 		}
