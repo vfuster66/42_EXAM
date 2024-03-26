@@ -68,7 +68,7 @@ int main(int ac, char **av)
 			}
 			else
 			{
-                memset(message_ext, 0, 500000);
+                		memset(message_ext, 0, 500000);
 				memset(message, 0, 450000);
 				recv_status = 1;
 				while (recv_status == 1 && (!message[0] || message[strlen(message) - 1] != '\n'))
