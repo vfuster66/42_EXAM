@@ -29,7 +29,7 @@ int main(int ac, char **av)
 
     if (ac != 2)
     {
-        write(2, "Wrong number of arguments", 26);
+        write(2, "Wrong number of arguments\n", 26);
         exit(1);
     }
 	server = socket(AF_INET, SOCK_STREAM, 0); 
