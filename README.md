@@ -32,5 +32,5 @@ Pour s'entrainer : https://grademe.fr/
 
 ### RANK_06
 ```
-- ✅ Valide le 
+- ✅ Valide le 28 mars 2024
 ```
